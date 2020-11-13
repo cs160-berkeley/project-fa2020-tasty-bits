@@ -1,0 +1,12 @@
+runtime: 
+env: 
+
+env_variables:
+  POSTGRES_URL: 
+  POSTGRES_USER: 
+  POSTGRES_PASSWORD: 
+  POSTGRES_DATABASE: 
+  INSTANCE_CONNECTION_NAME:
+
+beta_settings:
+  cloud_sql_instances:

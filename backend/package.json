@@ -1,0 +1,33 @@
+{
+  "name": "hangoutrooms-backend",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@nexus/schema": "^0.15.0",
+    "@types/node": "^14.11.1",
+    "dotenv": "^8.2.0",
+    "graphql-yoga": "^1.18.3",
+    "nexus-plugin-prisma": "^0.19.0",
+    "ts-node": "^9.0.0"
+  },
+  "scripts": {
+    "start": "yarn sync && yarn seed && yarn build && node dist/server",
+    "clean": "rm -rf dist",
+    "build": "npm -s run clean && npm -s run generate && tsc",
+    "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
+    "generate:prisma": "prisma generate",
+    "generate:nexus": "ts-node --transpile-only src/schema",
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/server",
+    "sync": "prisma migrate up --experimental",
+    "migrate": "prisma migrate save --experimental",
+    "hard-migrate": "source .env; postgresurl=$(echo $POSTGRES_URL); dbname=${postgresurl##*/}; dropdb $dbname; rm -rf prisma/migrations && prisma migrate save --experimental --name init -c && yarn sync && yarn dev-seed",
+    "deploy": "gcloud app deploy",
+    "dev-seed": "ts-node prisma/devseed",
+    "seed": "ts-node prisma/seed"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.0.0-pre.63",
+    "typescript": "^4.0.3"
+  }
+}
