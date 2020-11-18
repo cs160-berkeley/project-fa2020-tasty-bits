@@ -19,7 +19,7 @@ public class QuestionHubFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         questionHubViewModel =
                 ViewModelProviders.of(this).get(com.example.tastybits.ui.questionhub.QuestionHubViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_questionhub, container, false);
+        View root = inflater.inflate(R.layout.fragment_questionhub_ask, container, false);
         /*final TextView textView = root.findViewById(R.id.questionhub);
         questionHubViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

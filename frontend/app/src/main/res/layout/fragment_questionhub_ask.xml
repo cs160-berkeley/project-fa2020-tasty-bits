@@ -6,18 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.informationhub.InfoHubFragment">
 
+
+
     <SearchView
         android:id="@+id/searchBar"
         style="@android:style/Widget.Material.Light.SearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/searchbar"
         android:iconifiedByDefault="false"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
+        android:queryHint="Search"
+        android:queryBackground="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        app:cardCornerRadius="32dp"
+        app:cardCornerRadius="20dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +68,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView2"
@@ -86,7 +90,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        app:cardCornerRadius="32dp"
+        android:backgroundTint="#E4E4E4"
+        app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
@@ -109,12 +114,12 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="250dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/searchbar"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/button"
         android:text="Post My Question"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
