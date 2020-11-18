@@ -15,7 +15,7 @@
         android:id="@+id/questionhub"
         android:name="com.example.tastybits.ui.questionhub.QuestionHubFragment"
         android:label=""
-        tools:layout="@layout/fragment_questionhub" />
+        tools:layout="@layout/fragment_questionhub_ask" />
 
     <fragment
         android:id="@+id/chat"
