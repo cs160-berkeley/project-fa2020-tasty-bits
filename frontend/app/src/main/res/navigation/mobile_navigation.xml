@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/infohub">
+    app:startDestination="@+id/questionhub">
 
     <fragment
         android:id="@+id/infohub"
         android:name="com.example.tastybits.ui.informationhub.InfoHubFragment"
         android:label=""
-        tools:layout="@layout/fragment_questionhub" />
+        tools:layout="@layout/fragment_infohub" />
 
     <fragment
         android:id="@+id/questionhub"
         android:name="com.example.tastybits.ui.questionhub.QuestionHubFragment"
         android:label=""
-        tools:layout="@layout/fragment_infohub" />
+        tools:layout="@layout/fragment_questionhub" />
 
     <fragment
         android:id="@+id/chat"
