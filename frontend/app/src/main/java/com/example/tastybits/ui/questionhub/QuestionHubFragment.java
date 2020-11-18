@@ -23,13 +23,13 @@ public class QuestionHubFragment extends Fragment {
         questionHubViewModel =
                 ViewModelProviders.of(this).get(com.example.tastybits.ui.questionhub.QuestionHubViewModel.class);
         View root = inflater.inflate(R.layout.fragment_questionhub, container, false);
-        final TextView textView = root.findViewById(R.id.questionhub);
-        questionHubViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        final TextView textView = root.findViewById(R.id.questionhub);
+//        questionHubViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
         return root;
     }
 }
