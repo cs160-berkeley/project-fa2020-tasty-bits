@@ -34,7 +34,7 @@ public class question_activity extends AppCompatActivity {
             }
         });
 
-        final EditText question = findViewById(R.id.question);
+        final EditText question = findViewById(R.id.questionTextView);
         question.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

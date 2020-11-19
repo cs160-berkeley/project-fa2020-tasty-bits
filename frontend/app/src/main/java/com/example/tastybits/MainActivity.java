@@ -1,6 +1,9 @@
 package com.example.tastybits;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,6 +28,19 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        Button questionViewButton = findViewById(R.id.QuestionViewTest);
+        questionViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startQuestionView();
+            }
+        });
+    }
+
+    private void startQuestionView() {
+        Intent intent = new Intent(this, Questions_View.class);
+        startActivity(intent);
     }
 
 }
