@@ -7,4 +7,5 @@
     <string name="com_auth0_domain">calsurvivalguide.us.auth0.com</string>
     <string name="login">Log in</string>
     <string name="logout">Log out</string>
+    <string name="title_activity_class_planning">MainActivity</string>
 </resources>

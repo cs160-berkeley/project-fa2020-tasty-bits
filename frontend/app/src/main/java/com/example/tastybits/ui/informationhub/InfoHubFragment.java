@@ -1,5 +1,6 @@
 package com.example.tastybits.ui.informationhub;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import com.example.tastybits.R;
 
@@ -39,7 +41,8 @@ public class InfoHubFragment extends Fragment {
         ImageView housing = root.findViewById(R.id.housing_infohub);
         ImageView firstGen = root.findViewById(R.id.firtsGen_infohub);
 
-        classPlanning.setOnClickListener(handleClick);
+       // classPlanning.setOnClickListener(handleClick);
+        classPlanning.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_class_planning));
 
 
 
@@ -47,13 +50,17 @@ public class InfoHubFragment extends Fragment {
         return root;
     }
 
-    private View.OnClickListener handleClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch(v.getId()) {
-                case R.id.class_planning_infohub:
-                    System.out.println("class Planning");
-            }
-        }
-    };
+//    private View.OnClickListener handleClick = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            switch(v.getId()) {
+//                case R.id.class_planning_infohub:
+//                    //System.out.println("class Planning");
+//                    createNavigateOnClickListener
+//                    break;
+//                default:
+//                    throw new IllegalStateException("Unexpected value: " + v.getId());
+//            }
+//        }
+//    };
 }
