@@ -9,7 +9,9 @@ import android.os.Bundle;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Questions_View extends AppCompatActivity {
+public class QuestionsViewActivity extends AppCompatActivity {
+
+    private QuestionRecyclerViewAdapter qrv_adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +20,10 @@ public class Questions_View extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.QuestionsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
-        QuestionRecyclerViewAdapter qrv_adapter = setQuestionRecyclerViewAdapter();
+        qrv_adapter = setQuestionRecyclerViewAdapter();
         recyclerView.setAdapter(qrv_adapter);
+
+        NetworkRequest.getInstance().sendQuestionRequest("ckhpkonee002043nz25jc7gmd", this::sendQuestionsUpdate);
     }
 
     /**
@@ -29,5 +33,9 @@ public class Questions_View extends AppCompatActivity {
     private QuestionRecyclerViewAdapter setQuestionRecyclerViewAdapter() {
         // TODO: call backend service
         return new QuestionRecyclerViewAdapter(this, new ArrayList<QuestionItem>());
+    }
+
+    private void sendQuestionsUpdate(QuestionItem qi) {
+        this.runOnUiThread(() -> qrv_adapter.addQuestion(qi));
     }
 }

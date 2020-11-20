@@ -25,6 +25,11 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
         }
     }
 
+    public void addQuestion(QuestionItem questionItem) {
+        questionList.add(0, questionItem);
+        notifyItemInserted(0);
+    }
+
     @NonNull
     @Override
     public QuestionRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

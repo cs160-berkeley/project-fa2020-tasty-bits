@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startQuestionView() {
-        Intent intent = new Intent(this, Questions_View.class);
+        Intent intent = new Intent(this, QuestionsViewActivity.class);
         startActivity(intent);
     }
 
