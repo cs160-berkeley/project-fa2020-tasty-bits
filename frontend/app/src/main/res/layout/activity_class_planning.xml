@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id = "@+id/drawerlayout_class_planning"
     tools:context=".ui.informationhub.ClassPlanning">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/expand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="350dp"
+        android:clickable="true"
+        android:src="@drawable/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/contents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/navigation_menu">
+
+    </com.google.android.material.navigation.NavigationView>
+
+
+
 
     <ScrollView
         android:id="@+id/info_scroll"
@@ -22,8 +48,8 @@
 
             <TextView
                 android:id="@+id/id1"
-                android:layout_width="314dp"
-                android:layout_height="125dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="Click me"
                 tools:layout_editor_absoluteX="38dp"
@@ -35,8 +61,8 @@
 
             <TextView
                 android:id="@+id/hello"
-                android:layout_width="296dp"
-                android:layout_height="282dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Hello"
 
                 tools:layout_editor_absoluteX="46dp"
@@ -45,7 +71,8 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
