@@ -1,30 +1,26 @@
 package com.example.tastybits;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.auth0.android.Auth0;
-import com.auth0.android.Auth0Exception;
-import com.auth0.android.authentication.AuthenticationException;
-import com.auth0.android.provider.AuthCallback;
-import com.auth0.android.provider.VoidCallback;
-import com.auth0.android.provider.WebAuthProvider;
-import com.auth0.android.result.Credentials;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.tastybits.ui.questionhub.QuestionHubAskFragment;
+import com.example.tastybits.ui.questionhub.QuestionHubFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+public class MainActivity extends AppCompatActivity{
 
     public LoginManager loginManager;
 
@@ -103,5 +99,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }
