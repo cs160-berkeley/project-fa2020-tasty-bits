@@ -8,25 +8,6 @@
     android:backgroundTint="#FFFFFF"
     tools:context=".ui.questionhub.QuestionHubPostFragment">
 
-    <SearchView
-        android:id="@+id/searchBar"
-        style="@android:style/Widget.Material.Light.SearchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/searchbar"
-        android:iconifiedByDefault="false"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:queryHint="Search"
-        android:queryBackground="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </SearchView>
 
     <EditText
         android:id="@+id/question"
@@ -39,13 +20,43 @@
         android:backgroundTint="#E4E4E4"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="     Question title"
+        android:hint="Question title"
         android:iconifiedByDefault="false"
         android:inputType="textMultiLine"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:queryHint="Search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+
+    <ImageButton
+        android:id="@+id/minus1"
+        android:layout_width="30dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toStartOf="@+id/enrollment"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/class_planning"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:srcCompat="@drawable/frame" />
+
+    <ImageButton
+        android:id="@+id/minus2"
+        android:layout_width="30dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toStartOf="@+id/fafsa"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/enrollment"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:srcCompat="@drawable/frame" />
 
     <EditText
         android:id="@+id/description"
@@ -57,11 +68,52 @@
         android:backgroundTint="#E4E4E4"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="       Description ..."
+        android:hint="Description ..."
         android:inputType="textMultiLine"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question" />
+
+    <ImageButton
+        android:id="@+id/minus3"
+        android:layout_width="30dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toStartOf="@+id/clubs"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/fafsa"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:srcCompat="@drawable/frame" />
+
+    <ImageButton
+        android:id="@+id/fafsa"
+        android:layout_width="67dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="43dp"
+        android:background="@drawable/light_brown_image_button"
+        app:layout_constraintStart_toEndOf="@+id/enrollment"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:srcCompat="@drawable/fafsa" />
+
+    <ImageButton
+        android:id="@+id/clubs"
+        android:layout_width="67dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/light_brown_image_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/fafsa"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:srcCompat="@drawable/clubs_and_decals" />
 
     <TextView
         android:id="@+id/textView"
@@ -92,42 +144,6 @@
         app:layout_constraintTop_toBottomOf="@+id/description"
         app:srcCompat="@drawable/class_planning_q" />
 
-    <ImageButton
-        android:id="@+id/enrollment"
-        android:layout_width="67dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="43dp"
-        android:background="@drawable/light_brown_image_button"
-        app:layout_constraintStart_toEndOf="@+id/class_planning"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        app:srcCompat="@drawable/enrollemnt" />
-
-    <ImageButton
-        android:id="@+id/fafsa"
-        android:layout_width="67dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="43dp"
-        android:background="@drawable/light_brown_image_button"
-        app:layout_constraintStart_toEndOf="@+id/enrollment"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        app:srcCompat="@drawable/fafsa" />
-
-    <ImageButton
-        android:id="@+id/clubs"
-        android:layout_width="67dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="35dp"
-        android:background="@drawable/light_brown_image_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/fafsa"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        app:srcCompat="@drawable/clubs_and_decals" />
-
     <Button
         android:id="@+id/post_button"
         android:layout_width="330dp"
@@ -145,54 +161,49 @@
         />
 
     <ImageButton
-        android:id="@+id/minus1"
-        android:layout_width="30dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/enrollment"
-        app:layout_constraintHorizontal_bias="0.666"
+        android:id="@+id/enrollment"
+        android:layout_width="67dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="43dp"
+        android:background="@drawable/light_brown_image_button"
         app:layout_constraintStart_toEndOf="@+id/class_planning"
         app:layout_constraintTop_toBottomOf="@+id/description"
-        app:srcCompat="@drawable/frame" />
-
-    <ImageButton
-        android:id="@+id/minus2"
-        android:layout_width="30dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="11dp"
-        app:layout_constraintEnd_toStartOf="@+id/fafsa"
-        app:layout_constraintHorizontal_bias="0.62"
-        app:layout_constraintStart_toEndOf="@+id/enrollment"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        app:srcCompat="@drawable/frame" />
-
-    <ImageButton
-        android:id="@+id/minus3"
-        android:layout_width="30dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="9dp"
-        app:layout_constraintEnd_toStartOf="@+id/clubs"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/fafsa"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        app:srcCompat="@drawable/frame" />
+        app:srcCompat="@drawable/enrollemnt" />
 
     <ImageButton
         android:id="@+id/minus4"
         android:layout_width="30dp"
         android:layout_height="34dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="@+id/clubs"
         app:layout_constraintStart_toEndOf="@+id/clubs"
+
         app:layout_constraintTop_toBottomOf="@+id/description"
         app:srcCompat="@drawable/frame" />
+
+    <SearchView
+        android:id="@+id/searchBar"
+        style="@android:style/Widget.Material.Light.SearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/searchbar"
+        android:iconifiedByDefault="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="Search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </SearchView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
