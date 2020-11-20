@@ -1,5 +1,7 @@
-.env
 node_modules/
 build/
 dist/
-.DS_Store
+**/*.DS_Store
+app.yaml
+**/*.pem
+**/*.env

@@ -19,15 +19,52 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  RoomClickWhereUniqueInput: { // input type
+  AnswerIdUserIdCompoundUniqueInput: { // input type
+    answerId: string; // String!
+    userId: string; // String!
+  }
+  AnswerVoteWhereUniqueInput: { // input type
+    answerId_userId?: NexusGenInputs['AnswerIdUserIdCompoundUniqueInput'] | null; // AnswerIdUserIdCompoundUniqueInput
+  }
+  AnswerWhereUniqueInput: { // input type
+    content?: string | null; // String
     id?: string | null; // String
   }
-  RoomWhereUniqueInput: { // input type
+  CategoryWhereUniqueInput: { // input type
     id?: string | null; // String
+    name?: string | null; // String
+  }
+  ChatroomWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  MessageWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  QuestionClickWhereUniqueInput: { // input type
+    questionId_userId?: NexusGenInputs['QuestionIdUserIdCompoundUniqueInput'] | null; // QuestionIdUserIdCompoundUniqueInput
+  }
+  QuestionIdUserIdCompoundUniqueInput: { // input type
+    questionId: string; // String!
+    userId: string; // String!
+  }
+  QuestionVoteWhereUniqueInput: { // input type
+    questionId_userId?: NexusGenInputs['QuestionIdUserIdCompoundUniqueInput'] | null; // QuestionIdUserIdCompoundUniqueInput
+  }
+  QuestionWhereUniqueInput: { // input type
+    description?: string | null; // String
+    id?: string | null; // String
+    title?: string | null; // String
+  }
+  UserWhereUniqueInput: { // input type
+    biography?: string | null; // String
+    id?: string | null; // String
+    name?: string | null; // String
   }
 }
 
 export interface NexusGenEnums {
+  ProfileVisibility: "FULL" | "NONE"
+  StudentType: "FIRSTGEN" | "GENERAL" | "INTERNATIONAL" | "TRANSFER"
 }
 
 export interface NexusGenScalars {
@@ -40,36 +77,104 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenRootTypes {
-  Category: { // root type
-    id: string; // String!
-    name: string; // String!
-    thumbnailUrl?: string | null; // String
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-  }
-  Mutation: {};
-  Query: {};
-  Room: { // root type
+  Answer: { // root type
+    content: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     deletedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     id: string; // String!
-    roomUrl: string; // String!
-    thumbnailUrl?: string | null; // String
-    title?: string | null; // String
+    questionId: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: string; // String!
   }
-  RoomClick: { // root type
+  AnswerVote: { // root type
+    answerId: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    upDown: boolean; // Boolean!
+    userId: string; // String!
+  }
+  Category: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
+    name: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
-  RoomCredentials: { // root type
-    password: string; // String!
-    roomId: string; // String!
+  Chatroom: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  Message: { // root type
+    chatroomId?: string | null; // String
+    content: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: string; // String!
+  }
+  Mutation: {};
+  Query: {};
+  Question: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    deletedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
+    id: string; // String!
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: string; // String!
+  }
+  QuestionClick: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    questionId: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: string; // String!
+  }
+  QuestionVote: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    questionId: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    upDown: boolean; // Boolean!
+    userId: string; // String!
+  }
+  SearchResults: { // root type
+    answers: NexusGenRootTypes['Answer'][]; // [Answer!]!
+    questions: NexusGenRootTypes['Question'][]; // [Question!]!
+    users: NexusGenRootTypes['User'][]; // [User!]!
+  }
+  User: { // root type
+    biography?: string | null; // String
+    class?: string | null; // String
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    facebook?: string | null; // String
+    id: string; // String!
+    instagram?: string | null; // String
+    linkedin?: string | null; // String
+    major?: string | null; // String
+    name?: string | null; // String
+    openToHelp?: boolean | null; // Boolean
+    profileVisibility: NexusGenEnums['ProfileVisibility']; // ProfileVisibility!
+    snapchat?: string | null; // String
+    studentType: NexusGenEnums['StudentType']; // StudentType!
+    tiktok?: string | null; // String
+    twitter?: string | null; // String
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
-  RoomClickWhereUniqueInput: NexusGenInputs['RoomClickWhereUniqueInput'];
-  RoomWhereUniqueInput: NexusGenInputs['RoomWhereUniqueInput'];
+  AnswerIdUserIdCompoundUniqueInput: NexusGenInputs['AnswerIdUserIdCompoundUniqueInput'];
+  AnswerVoteWhereUniqueInput: NexusGenInputs['AnswerVoteWhereUniqueInput'];
+  AnswerWhereUniqueInput: NexusGenInputs['AnswerWhereUniqueInput'];
+  CategoryWhereUniqueInput: NexusGenInputs['CategoryWhereUniqueInput'];
+  ChatroomWhereUniqueInput: NexusGenInputs['ChatroomWhereUniqueInput'];
+  MessageWhereUniqueInput: NexusGenInputs['MessageWhereUniqueInput'];
+  QuestionClickWhereUniqueInput: NexusGenInputs['QuestionClickWhereUniqueInput'];
+  QuestionIdUserIdCompoundUniqueInput: NexusGenInputs['QuestionIdUserIdCompoundUniqueInput'];
+  QuestionVoteWhereUniqueInput: NexusGenInputs['QuestionVoteWhereUniqueInput'];
+  QuestionWhereUniqueInput: NexusGenInputs['QuestionWhereUniqueInput'];
+  UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
+  ProfileVisibility: NexusGenEnums['ProfileVisibility'];
+  StudentType: NexusGenEnums['StudentType'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
   Float: NexusGenScalars['Float'];
@@ -79,81 +184,301 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
-  Category: { // field return type
-    id: string; // String!
-    name: string; // String!
-    rooms: NexusGenRootTypes['Room'][]; // [Room!]!
-    thumbnailUrl: string | null; // String
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-  }
-  Mutation: { // field return type
-    createRoom: NexusGenRootTypes['Room'] | null; // Room
-    deleteRoom: NexusGenRootTypes['Room'] | null; // Room
-    editRoomTitle: NexusGenRootTypes['Room'] | null; // Room
-    roomClicked: NexusGenRootTypes['RoomClick'] | null; // RoomClick
-  }
-  Query: { // field return type
-    allCategories: NexusGenRootTypes['Category'][]; // [Category!]!
-    categoryRooms: NexusGenRootTypes['Room'][]; // [Room!]!
-  }
-  Room: { // field return type
-    clicks: NexusGenRootTypes['RoomClick'][]; // [RoomClick!]!
+  Answer: { // field return type
+    content: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     deletedAt: NexusGenScalars['DateTime'] | null; // DateTime
     id: string; // String!
-    roomCredentials: NexusGenRootTypes['RoomCredentials']; // RoomCredentials!
-    roomUrl: string; // String!
-    thumbnailUrl: string | null; // String
-    title: string | null; // String
+    question: NexusGenRootTypes['Question']; // Question!
+    questionId: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+    votes: NexusGenRootTypes['AnswerVote'][]; // [AnswerVote!]!
   }
-  RoomClick: { // field return type
+  AnswerVote: { // field return type
+    answer: NexusGenRootTypes['Answer']; // Answer!
+    answerId: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    upDown: boolean; // Boolean!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  Category: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
+    name: string; // String!
+    questions: NexusGenRootTypes['Question'][]; // [Question!]!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
-  RoomCredentials: { // field return type
-    password: string; // String!
-    roomId: string; // String!
+  Chatroom: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    messages: NexusGenRootTypes['Message'][]; // [Message!]!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    users: NexusGenRootTypes['User'][]; // [User!]!
+  }
+  Message: { // field return type
+    chatroom: NexusGenRootTypes['Chatroom'] | null; // Chatroom
+    chatroomId: string | null; // String
+    content: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  Mutation: { // field return type
+    createAnswer: NexusGenRootTypes['Answer'] | null; // Answer
+    createChatroom: NexusGenRootTypes['Chatroom'] | null; // Chatroom
+    createMessage: NexusGenRootTypes['Message'] | null; // Message
+    createQuestion: NexusGenRootTypes['Question'] | null; // Question
+    editAnswer: NexusGenRootTypes['Answer'] | null; // Answer
+    editQuestion: NexusGenRootTypes['Question'] | null; // Question
+    editUser: NexusGenRootTypes['User'] | null; // User
+    upsertAnswerVote: NexusGenRootTypes['AnswerVote'] | null; // AnswerVote
+    upsertQuestionClick: NexusGenRootTypes['QuestionClick'] | null; // QuestionClick
+    upsertQuestionVote: NexusGenRootTypes['QuestionVote'] | null; // QuestionVote
+    upsertUser: NexusGenRootTypes['User'] | null; // User
+  }
+  Query: { // field return type
+    getAnswers: NexusGenRootTypes['Answer'][]; // [Answer!]!
+    getCategories: NexusGenRootTypes['Category'][]; // [Category!]!
+    getChatrooms: NexusGenRootTypes['Chatroom'][]; // [Chatroom!]!
+    getMessages: NexusGenRootTypes['Message'][]; // [Message!]!
+    getQuestions: NexusGenRootTypes['Question'][]; // [Question!]!
+    getUser: NexusGenRootTypes['User'] | null; // User
+    search: NexusGenRootTypes['SearchResults']; // SearchResults!
+  }
+  Question: { // field return type
+    answers: NexusGenRootTypes['Answer'][]; // [Answer!]!
+    categories: NexusGenRootTypes['Category'][]; // [Category!]!
+    clicks: NexusGenRootTypes['QuestionClick'][]; // [QuestionClick!]!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    deletedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    description: string | null; // String
+    id: string; // String!
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+    votes: NexusGenRootTypes['QuestionVote'][]; // [QuestionVote!]!
+  }
+  QuestionClick: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    question: NexusGenRootTypes['Question']; // Question!
+    questionId: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  QuestionVote: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    question: NexusGenRootTypes['Question']; // Question!
+    questionId: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    upDown: boolean; // Boolean!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  SearchResults: { // field return type
+    answers: NexusGenRootTypes['Answer'][]; // [Answer!]!
+    questions: NexusGenRootTypes['Question'][]; // [Question!]!
+    users: NexusGenRootTypes['User'][]; // [User!]!
+  }
+  User: { // field return type
+    answers: NexusGenRootTypes['Answer'][]; // [Answer!]!
+    answerVotes: NexusGenRootTypes['AnswerVote'][]; // [AnswerVote!]!
+    biography: string | null; // String
+    chatrooms: NexusGenRootTypes['Chatroom'][]; // [Chatroom!]!
+    class: string | null; // String
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    facebook: string | null; // String
+    id: string; // String!
+    instagram: string | null; // String
+    linkedin: string | null; // String
+    major: string | null; // String
+    messages: NexusGenRootTypes['Message'][]; // [Message!]!
+    name: string | null; // String
+    openToHelp: boolean | null; // Boolean
+    profileVisibility: NexusGenEnums['ProfileVisibility']; // ProfileVisibility!
+    questionClicks: NexusGenRootTypes['QuestionClick'][]; // [QuestionClick!]!
+    questions: NexusGenRootTypes['Question'][]; // [Question!]!
+    questionVotes: NexusGenRootTypes['QuestionVote'][]; // [QuestionVote!]!
+    snapchat: string | null; // String
+    studentType: NexusGenEnums['StudentType']; // StudentType!
+    tiktok: string | null; // String
+    twitter: string | null; // String
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
 
 export interface NexusGenArgTypes {
+  Answer: {
+    votes: { // args
+      after?: NexusGenInputs['AnswerVoteWhereUniqueInput'] | null; // AnswerVoteWhereUniqueInput
+      before?: NexusGenInputs['AnswerVoteWhereUniqueInput'] | null; // AnswerVoteWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+  }
   Category: {
-    rooms: { // args
-      after?: NexusGenInputs['RoomWhereUniqueInput'] | null; // RoomWhereUniqueInput
-      before?: NexusGenInputs['RoomWhereUniqueInput'] | null; // RoomWhereUniqueInput
+    questions: { // args
+      after?: NexusGenInputs['QuestionWhereUniqueInput'] | null; // QuestionWhereUniqueInput
+      before?: NexusGenInputs['QuestionWhereUniqueInput'] | null; // QuestionWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+  }
+  Chatroom: {
+    messages: { // args
+      after?: NexusGenInputs['MessageWhereUniqueInput'] | null; // MessageWhereUniqueInput
+      before?: NexusGenInputs['MessageWhereUniqueInput'] | null; // MessageWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    users: { // args
+      after?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+      before?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
     }
   }
   Mutation: {
-    createRoom: { // args
-      categoryId: string; // ID!
-      roomLink: string; // String!
+    createAnswer: { // args
+      content: string; // String!
+      questionId: string; // ID!
+    }
+    createChatroom: { // args
+      class?: string | null; // String
+      major?: string | null; // String
+      studentType?: NexusGenEnums['StudentType'] | null; // StudentType
+    }
+    createMessage: { // args
+      chatroomId: string; // ID!
+      content: string; // String!
+    }
+    createQuestion: { // args
+      categoryIds: string[]; // [ID!]!
+      description?: string | null; // String
       title: string; // String!
     }
-    deleteRoom: { // args
-      roomId: string; // ID!
-      roomPassword: string; // String!
+    editAnswer: { // args
+      content?: string | null; // String
+      delete?: boolean | null; // Boolean
+      id: string; // ID!
     }
-    editRoomTitle: { // args
-      roomId: string; // ID!
-      roomPassword: string; // String!
-      title: string; // String!
+    editQuestion: { // args
+      delete?: boolean | null; // Boolean
+      description?: string | null; // String
+      id: string; // ID!
+      title?: string | null; // String
     }
-    roomClicked: { // args
-      roomId: string; // ID!
+    editUser: { // args
+      biography?: string | null; // String
+      class?: string | null; // String
+      facebook?: string | null; // String
+      instagram?: string | null; // String
+      linkedin?: string | null; // String
+      major?: string | null; // String
+      name?: string | null; // String
+      openToHelp?: boolean | null; // Boolean
+      profileVisibility?: NexusGenEnums['ProfileVisibility'] | null; // ProfileVisibility
+      snapchat?: string | null; // String
+      studentType?: NexusGenEnums['StudentType'] | null; // StudentType
+      tiktok?: string | null; // String
+      twitter?: string | null; // String
+    }
+    upsertAnswerVote: { // args
+      answerId: string; // ID!
+      upDown: boolean; // Boolean!
+    }
+    upsertQuestionClick: { // args
+      questionId: string; // ID!
+    }
+    upsertQuestionVote: { // args
+      questionId: string; // ID!
+      upDown: boolean; // Boolean!
     }
   }
   Query: {
-    categoryRooms: { // args
-      categoryId: string; // ID!
+    getAnswers: { // args
+      questionId: string; // ID!
+    }
+    getMessages: { // args
+      chatroomId: string; // ID!
+    }
+    search: { // args
+      query: string; // String!
     }
   }
-  Room: {
+  Question: {
+    answers: { // args
+      after?: NexusGenInputs['AnswerWhereUniqueInput'] | null; // AnswerWhereUniqueInput
+      before?: NexusGenInputs['AnswerWhereUniqueInput'] | null; // AnswerWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    categories: { // args
+      after?: NexusGenInputs['CategoryWhereUniqueInput'] | null; // CategoryWhereUniqueInput
+      before?: NexusGenInputs['CategoryWhereUniqueInput'] | null; // CategoryWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
     clicks: { // args
-      after?: NexusGenInputs['RoomClickWhereUniqueInput'] | null; // RoomClickWhereUniqueInput
-      before?: NexusGenInputs['RoomClickWhereUniqueInput'] | null; // RoomClickWhereUniqueInput
+      after?: NexusGenInputs['QuestionClickWhereUniqueInput'] | null; // QuestionClickWhereUniqueInput
+      before?: NexusGenInputs['QuestionClickWhereUniqueInput'] | null; // QuestionClickWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    votes: { // args
+      after?: NexusGenInputs['QuestionVoteWhereUniqueInput'] | null; // QuestionVoteWhereUniqueInput
+      before?: NexusGenInputs['QuestionVoteWhereUniqueInput'] | null; // QuestionVoteWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+  }
+  User: {
+    answers: { // args
+      after?: NexusGenInputs['AnswerWhereUniqueInput'] | null; // AnswerWhereUniqueInput
+      before?: NexusGenInputs['AnswerWhereUniqueInput'] | null; // AnswerWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    answerVotes: { // args
+      after?: NexusGenInputs['AnswerVoteWhereUniqueInput'] | null; // AnswerVoteWhereUniqueInput
+      before?: NexusGenInputs['AnswerVoteWhereUniqueInput'] | null; // AnswerVoteWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    chatrooms: { // args
+      after?: NexusGenInputs['ChatroomWhereUniqueInput'] | null; // ChatroomWhereUniqueInput
+      before?: NexusGenInputs['ChatroomWhereUniqueInput'] | null; // ChatroomWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    messages: { // args
+      after?: NexusGenInputs['MessageWhereUniqueInput'] | null; // MessageWhereUniqueInput
+      before?: NexusGenInputs['MessageWhereUniqueInput'] | null; // MessageWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    questionClicks: { // args
+      after?: NexusGenInputs['QuestionClickWhereUniqueInput'] | null; // QuestionClickWhereUniqueInput
+      before?: NexusGenInputs['QuestionClickWhereUniqueInput'] | null; // QuestionClickWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    questions: { // args
+      after?: NexusGenInputs['QuestionWhereUniqueInput'] | null; // QuestionWhereUniqueInput
+      before?: NexusGenInputs['QuestionWhereUniqueInput'] | null; // QuestionWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    questionVotes: { // args
+      after?: NexusGenInputs['QuestionVoteWhereUniqueInput'] | null; // QuestionVoteWhereUniqueInput
+      before?: NexusGenInputs['QuestionVoteWhereUniqueInput'] | null; // QuestionVoteWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
     }
@@ -165,11 +490,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Category" | "Mutation" | "Query" | "Room" | "RoomClick" | "RoomCredentials";
+export type NexusGenObjectNames = "Answer" | "AnswerVote" | "Category" | "Chatroom" | "Message" | "Mutation" | "Query" | "Question" | "QuestionClick" | "QuestionVote" | "SearchResults" | "User";
 
-export type NexusGenInputNames = "RoomClickWhereUniqueInput" | "RoomWhereUniqueInput";
+export type NexusGenInputNames = "AnswerIdUserIdCompoundUniqueInput" | "AnswerVoteWhereUniqueInput" | "AnswerWhereUniqueInput" | "CategoryWhereUniqueInput" | "ChatroomWhereUniqueInput" | "MessageWhereUniqueInput" | "QuestionClickWhereUniqueInput" | "QuestionIdUserIdCompoundUniqueInput" | "QuestionVoteWhereUniqueInput" | "QuestionWhereUniqueInput" | "UserWhereUniqueInput";
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = "ProfileVisibility" | "StudentType";
 
 export type NexusGenInterfaceNames = never;
 

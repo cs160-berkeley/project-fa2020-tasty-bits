@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="com_auth0_client_id">n5L9gY8zZguuc2U10GgFmprSRzhTnqw1</string>
+    <string name="com_auth0_domain">calsurvivalguide.us.auth0.com</string>
+    <string name="login">Log in</string>
+    <string name="logout">Log out</string>
 </resources>

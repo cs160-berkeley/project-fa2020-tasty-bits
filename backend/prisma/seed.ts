@@ -1,15 +1,15 @@
-require("dotenv").config();
+require('dotenv').config();
 
-import { PrismaClient } from "nexus-plugin-prisma/client";
+import { PrismaClient } from 'nexus-plugin-prisma/client';
 const prisma = new PrismaClient();
 
 const CATEGORIES = [
-  "Study Libraries",
-  "Party Games or Video Games",
-  "Meet and Hangout",
-  "Cooking or Excercise",
-  "Venting Talks",
-  "Custom Activities",
+  'classPlanning',
+  'enrollment',
+  'clubsAndDecals',
+  'financialAid',
+  'housing',
+  'jobHunting',
 ];
 
 async function main() {
