@@ -6,4 +6,7 @@
     <color name="bottom">#19647E</color>
     <color name="blue_text">#171F4B</color>
 
+    <color name="primary">#19647E</color>
+    <color name="white">#FFFF</color>
+    <color name="button">#DDA25D</color>
 </resources>
