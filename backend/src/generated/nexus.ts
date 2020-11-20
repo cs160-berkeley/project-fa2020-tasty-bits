@@ -409,6 +409,9 @@ export interface NexusGenArgTypes {
     getMessages: { // args
       chatroomId: string; // ID!
     }
+    getQuestions: { // args
+      categoryId: string; // ID!
+    }
     search: { // args
       query: string; // String!
     }

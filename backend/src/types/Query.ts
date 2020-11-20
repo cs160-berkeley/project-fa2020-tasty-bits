@@ -96,9 +96,17 @@ export const Query = queryType({
     t.list.field('getQuestions', {
       type: 'Question',
       nullable: false,
+      args: {
+        categoryId: idArg({ required: true }),
+      },
       resolve: (_, args, ctx) => {
         return ctx.prisma.question.findMany({
           where: {
+            categories: {
+              some: {
+                id: args.categoryId,
+              },
+            },
             deletedAt: {
               equals: null,
             },

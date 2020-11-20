@@ -105,7 +105,7 @@ type Query {
   getCategories: [Category!]!
   getChatrooms: [Chatroom!]!
   getMessages(chatroomId: ID!): [Message!]!
-  getQuestions: [Question!]!
+  getQuestions(categoryId: ID!): [Question!]!
   getUser: User
   search(query: String!): SearchResults!
 }
