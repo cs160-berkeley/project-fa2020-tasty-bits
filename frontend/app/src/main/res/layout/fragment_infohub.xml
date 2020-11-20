@@ -5,18 +5,115 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.questionhub.QuestionHubFragment">
-
-    <TextView
-        android:id="@+id/infohub"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+
+
+            <SearchView
+                android:id="@+id/searchBar"
+                style="@android:style/Widget.Material.Light.SearchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/searchbar"
+                android:iconifiedByDefault="false"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:queryBackground="@android:color/transparent"
+                android:queryHint="Search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </SearchView>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="345dp"
+                android:layout_height="67dp"
+                android:layout_marginTop="12dp"
+                android:text="Information Hub"
+                android:textColor="#1A1A1A"
+                android:textSize="36sp"
+                app:layout_constraintTop_toBottomOf="@+id/searchBar"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <ImageView
+                android:id="@+id/class_planning_infohub"
+                android:layout_width="374dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/infohub_class_planning"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                tools:layout_editor_absoluteX="3dp" />
+
+
+
+            <ImageView
+                android:id="@+id/enrollment_infohub"
+                android:layout_width="374dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/infohub_enrollment"
+                app:layout_constraintTop_toBottomOf="@+id/class_planning_infohub"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <ImageView
+                android:id="@+id/fafsa_infohub"
+                android:layout_width="374dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/infohub_fafsa"
+                app:layout_constraintTop_toBottomOf="@+id/enrollment_infohub"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <ImageView
+                android:id="@+id/decal_infohub"
+                android:layout_width="374dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/infohub_clubs_decals"
+                app:layout_constraintTop_toBottomOf="@+id/fafsa_infohub"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <ImageView
+                android:id="@+id/job_hunting_infohub"
+                android:layout_width="374dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/infohub_job_hunting"
+                app:layout_constraintTop_toBottomOf="@+id/decal_infohub"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <ImageView
+                android:id="@+id/housing_infohub"
+                android:layout_width="374dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp"
+
+                android:src="@drawable/infohub_housing"
+                app:layout_constraintTop_toBottomOf="@+id/job_hunting_infohub"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <ImageView
+                android:id="@+id/firtsGen_infohub"
+                android:layout_width="374dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/infohub_first_gen"
+                app:layout_constraintTop_toBottomOf="@+id/housing_infohub"
+                tools:layout_editor_absoluteX="3dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
