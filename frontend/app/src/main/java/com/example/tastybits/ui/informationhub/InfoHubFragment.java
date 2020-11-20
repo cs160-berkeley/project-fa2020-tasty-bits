@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,16 +21,39 @@ public class InfoHubFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        infoHubViewModel =
-                ViewModelProviders.of(this).get(InfoHubViewModel.class);
+        //infoHubViewModel =ViewModelProviders.of(this).get(InfoHubViewModel.class);
         View root = inflater.inflate(R.layout.fragment_infohub, container, false);
-        final TextView textView = root.findViewById(R.id.infohub);
+        /*final TextView textView = root.findViewById(R.id.infohub);
         infoHubViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });
+        });*/
+
+        ImageView classPlanning = root.findViewById(R.id.class_planning_infohub);
+        ImageView enrollement = root.findViewById(R.id.enrollment_infohub);
+        ImageView fafsa = root.findViewById(R.id.fafsa_infohub);
+        ImageView clubs = root.findViewById(R.id.decal_infohub);
+        ImageView jobHunting = root.findViewById(R.id.job_hunting_infohub);
+        ImageView housing = root.findViewById(R.id.housing_infohub);
+        ImageView firstGen = root.findViewById(R.id.firtsGen_infohub);
+
+        classPlanning.setOnClickListener(handleClick);
+
+
+
+
         return root;
     }
+
+    private View.OnClickListener handleClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()) {
+                case R.id.class_planning_infohub:
+                    System.out.println("class Planning");
+            }
+        }
+    };
 }
