@@ -25,6 +25,10 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
         }
     }
 
+    /**
+     * Needs to be executed on main UI thread
+     * @param questionItem
+     */
     public void addQuestion(QuestionItem questionItem) {
         questionList.add(0, questionItem);
         notifyItemInserted(0);
