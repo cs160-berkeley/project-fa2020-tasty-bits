@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/account"
-        android:title="My Account"/>
-    <item android:id="@+id/settings"
-        android:title="Settings"/>
-    <item android:id="@+id/mycart"
-        android:title="My Cart"/>
+    <item android:id="@+id/class_planning_transfer"
+        android:title="Transfer Student"/>
+    <item android:id="@+id/class_planning_golden_bear_advising"
+        android:title="Golden Bear Advising"/>
+    <item android:id="@+id/class_planning_major_and_career"
+        android:title="Exploring Major and Career"/>
+    <item android:id="@+id/class_planning_program_plan"
+        android:title="Creating a Program Plan"/>
 </menu>
