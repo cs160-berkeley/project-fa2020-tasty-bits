@@ -5,3 +5,4 @@ dist/
 app.yaml
 **/*.pem
 **/*.env
+yarn.lock
