@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id = "@+id/drawerlayout_class_planning"
+    tools:context=".ui.informationhub.ClassPlanningFragment">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/expand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="350dp"
+        android:clickable="true"
+        android:src="@drawable/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/class_planning_nv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        app:headerLayout="@layout/contents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/infohub_classplanning_menu">
+
+    </com.google.android.material.navigation.NavigationView>
+
+
+
+
+    <ScrollView
+        android:id="@+id/info_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="32dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/class_planning_transfer_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="Transfer Student Planning Tips"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="25sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/class_planning_transfer_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:clickable="true"
+                android:text="
+    During GBA, your intended major adviser will help guide you through which major courses you should enroll in for your first semester at Cal. Sometimes,
+students have questions about what to add to their schedule to meet the 13 units minimum.\n\n
+    First, review the L&amp;S Degree Requirements page to get a sense of all of the general education and unit requirements you will need.\n\n
+
+    If you do not have seven-course breadth satisfied, that can be a good place to start to round outyour first semester schedule. Since your Initial Transfer Credit
+Review will not yet be completed, see if there are any breadth requirements you are confident you have not yet satisfied with previous coursework (or use assist.org
+if you took California Community College coursework but did not satisfy IGETC). \n\n
+
+    If you satisfied IGETC or UC Reciprocity, you may still have the following general education requirements remaining, which could be planned into your first semester
+schedule: \n\n
+        &#8226; American History\n
+        &#8226; American Institutions\n
+        &#8226; American Cultures\n\n
+    If you have completed all general education requirements, you can work on elective units. You may wish to start making progress toward the degree requirement of needing 6 upper division units outside of your major
+For more information on all of these requirements, please see the Degree Requirements page (linked above). "
+                android:textColor="@android:color/background_dark"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/class_planning_golden_bear_advising_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Golden Bear Advising"
+                android:layout_marginBottom="8dp"
+                android:textSize="25sp"
+                tools:layout_editor_absoluteX="46dp"
+                tools:layout_editor_absoluteY="582dp"
+                android:textColor="@android:color/black"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/class_planning_golden_bear_advising_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:clickable="true"
+                android:text="
+    Golden Bear Advising(link is external) is mandatory, self-paced, online course that introduces you to academic resources and your college. Through Golden Bear Advising, you will learn how to build your first semester schedule and prepare to enroll in classes.\n\n
+
+    The course includes:\n\n
+
+    &#8226; communication with an Academic Adviser (L&amp;S College Adviser for freshmen, Undergraduate Major Adviser for transfers)\n
+    &#8226; an overview of academic resources\n
+    &#8226; graduation requirements\n\n
+
+
+    INCOMING FRESHMEN ADVISING\n\n
+    Once GBA begins for freshmen, an L&amp;S College Adviser will reach out to you in your GBA bCourse with a welcome announcement or message. Check your inbox and your announcements to learn which L&amp;S College Adviser will be working with you during GBA. It may be helpful to know that bCourses will label your GBA L&amp;S College Adviser as a teaching assistant for the course.
+You will not have an academic adviser assigned to you on CalCentral during the GBA period and will instead work directly with your GBA L&amp;S College Adviser.\n\n
+
+    INCOMING TRANSFERS ADVISING\n\n
+    Once GBA begins for transfers, you will have an opportunity to connect with your intended major's Undergraduate Major Adviser. This adviser will help you assess which courses you should take in Fall based on your progress toward the major and make sure you understand how to declare your major when you are ready.\n\n
+
+    ALL INCOMING STUDENTS\n\n
+    The academic adviser you work with during GBA is different than your Admissions Officer, who you can find through your MAP@berkeley(link is external) Admissions portal. Your L&amp;S College or Undergraduate Major Adviser will focus on your academic questions related to starting at Cal. Your Admissions Officer will answer questions about your new student checklist or questions related to your admission."
+
+                android:textColor="@android:color/background_dark"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

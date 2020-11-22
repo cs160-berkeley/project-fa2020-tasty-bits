@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id = "@+id/drawerlayout_enrollment"
+    tools:context=".ui.informationhub.EnrollmentFragment">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/expand_enrollment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="350dp"
+        android:clickable="true"
+        android:src="@drawable/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nv_enrollment"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        app:headerLayout="@layout/contents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/infohub_enrollment_menu">
+
+    </com.google.android.material.navigation.NavigationView>
+
+
+    <ScrollView
+        android:id="@+id/info_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="32dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/id2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="
+    When it comes to course registration and enrollment procedures for first-year students, students may have a nerve-racking experience. It can be a complex and overwhelming process if students do not adequately prepare ahead of time. But not to worry, there are several resources that have been created and designed to help students ease the transition to UC Berkeley, and be prepared for their first course registration. You could access these resources here:  http://registrar.berkeley.edu/how-to-enroll-in-classes\n
+    Not sure what to study? The Berkeley Guide is a great resource to start with: http://guide.berkeley.edu/\n
+    Academic advising is available from advisors in each college and department and it is highly recommend you consult with your advisor before picking your classes. Many colleges offer schedule reviews online or Skype appointments. "
+                android:textColor="@android:color/background_dark"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/cal_central_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="How Enroll in Classes in Cal Central"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/cal_central_info_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="
+    This one minute video walks you through how to enroll: https://www.youtube.com/watch?v=61yVWqCpzwU then be sure to check out another great information here: http://sis.berkeley.edu/student/enrollment"
+                android:textColor="@android:color/background_dark"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+
+            <TextView
+                android:id="@+id/terms_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="
+    What are some terms you can expect to see?\n\n
+        &#8226; Phase I - During Phase I, undergrads can sign up for 10.5 units (graduate students may sign up for 12 units). Please check with your advisor on which classes you should sign up for in Phase I and which should wait for Phase II.\n
+        &#8226; Phase II - Phase II is your first opportunity to add more classes so that you can attain a full course load.\n
+        &#8226; Appointment Periods - The Adjustment Period begins a few days after Phase II ends, allowing students to continue to make changes to their schedule through the first few weeks of classes.\n
+        &#8226; CCN – Course number\n
+        &#8226; Waiting Lists – When a class is full, students may have not yet enrolled in the class will be put on the waitlist.\n"
+                android:textColor="@android:color/background_dark"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

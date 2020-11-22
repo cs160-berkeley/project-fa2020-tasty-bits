@@ -64,7 +64,7 @@ public class JobHuntFragment extends Fragment {
             SpannableString ss = new SpannableString(line);
             ss.setSpan(new BulletSpan((int) dp(10)), 0, line.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             ss.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, size, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            ss.setSpan(new RelativeSizeSpan(1.5f), 0, size, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new RelativeSizeSpan(1.2f), 0, size, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             ssb.append(ss);
 
 

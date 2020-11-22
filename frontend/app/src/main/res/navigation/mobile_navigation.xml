@@ -44,15 +44,21 @@
 
     <fragment
         android:id="@+id/info_class_planning"
-        android:name="com.example.tastybits.ui.informationhub.ClassPlanning"
+        android:name="com.example.tastybits.ui.informationhub.ClassPlanningFragment"
         android:label="informationhub_class_planning"
-        tools:layout="@layout/activity_class_planning"/>
+        tools:layout="@layout/fragment_infohub_classplanning"/>
 
     <fragment
         android:id="@+id/info_jobhunt"
         android:name="com.example.tastybits.ui.informationhub.JobHuntFragment"
         android:label="informationhub_jobhunt"
         tools:layout="@layout/fragment_infohub_jobhunt"/>
+
+    <fragment
+        android:id="@+id/info_enrollment"
+        android:name="com.example.tastybits.ui.informationhub.EnrollmentFragment"
+        android:label="informationhub_jobhunt"
+        tools:layout="@layout/fragment_infohub_enrollment"/>
 
 
 </navigation>
