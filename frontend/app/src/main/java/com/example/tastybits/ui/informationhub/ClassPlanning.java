@@ -29,8 +29,8 @@ public class ClassPlanning extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         //infoHubViewModel =ViewModelProviders.of(this).get(InfoHubViewModel.class);
         final View root = inflater.inflate(R.layout.activity_class_planning, container, false);
-        //final TextView click = root.findViewById(R.id.id1);
-        //final TextView click1 = root.findViewById(R.id.hello);
+        final TextView click = root.findViewById(R.id.id1);
+        final TextView click1 = root.findViewById(R.id.hello);
 
         final DrawerLayout drawer = root.findViewById(R.id.drawerlayout_class_planning);
 
@@ -48,14 +48,14 @@ public class ClassPlanning extends Fragment {
             }
         });
 
-        /*click.setOnClickListener(new View.OnClickListener() {
+        click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ScrollView sv = root.findViewById(R.id.info_scroll);
                 sv.scrollTo((int) click1.getX(), (int) click1.getY());
                 System.out.println("i clicked");
             }
-        });*/
+        });
 
         /*final TextView textView = root.findViewById(R.id.infohub);
         infoHubViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

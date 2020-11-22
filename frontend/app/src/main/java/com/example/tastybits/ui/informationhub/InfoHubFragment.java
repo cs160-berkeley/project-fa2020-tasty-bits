@@ -42,7 +42,7 @@ public class InfoHubFragment extends Fragment {
         ImageView firstGen = root.findViewById(R.id.firtsGen_infohub);
 
        // classPlanning.setOnClickListener(handleClick);
-        classPlanning.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_class_planning));
+        classPlanning.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_jobhunt));
 
 
 

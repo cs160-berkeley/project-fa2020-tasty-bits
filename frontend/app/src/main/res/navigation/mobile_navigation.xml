@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/questionhub">
+    app:startDestination="@+id/infohub">
 
     <fragment
         android:id="@+id/infohub"
@@ -45,8 +45,14 @@
     <fragment
         android:id="@+id/info_class_planning"
         android:name="com.example.tastybits.ui.informationhub.ClassPlanning"
-        android:label="informationhub_post"
+        android:label="informationhub_class_planning"
         tools:layout="@layout/activity_class_planning"/>
+
+    <fragment
+        android:id="@+id/info_jobhunt"
+        android:name="com.example.tastybits.ui.informationhub.JobHuntFragment"
+        android:label="informationhub_jobhunt"
+        tools:layout="@layout/fragment_infohub_jobhunt"/>
 
 
 </navigation>

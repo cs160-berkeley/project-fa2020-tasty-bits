@@ -43,7 +43,7 @@
                 android:layout_width="345dp"
                 android:layout_height="67dp"
                 android:layout_marginTop="12dp"
-                android:text="Information Hub"
+                android:text="  Information Hub"
                 android:textColor="#1A1A1A"
                 android:textSize="36sp"
                 app:layout_constraintTop_toBottomOf="@+id/searchBar"
@@ -51,7 +51,7 @@
 
             <ImageView
                 android:id="@+id/class_planning_infohub"
-                android:layout_width="374dp"
+                android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_marginTop="2dp"
                 android:src="@drawable/infohub_class_planning"
@@ -59,10 +59,9 @@
                 tools:layout_editor_absoluteX="3dp" />
 
 
-
             <ImageView
                 android:id="@+id/enrollment_infohub"
-                android:layout_width="374dp"
+                android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/infohub_enrollment"
@@ -71,7 +70,7 @@
 
             <ImageView
                 android:id="@+id/fafsa_infohub"
-                android:layout_width="374dp"
+                android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/infohub_fafsa"
@@ -80,7 +79,7 @@
 
             <ImageView
                 android:id="@+id/decal_infohub"
-                android:layout_width="374dp"
+                android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/infohub_clubs_decals"
@@ -89,7 +88,7 @@
 
             <ImageView
                 android:id="@+id/job_hunting_infohub"
-                android:layout_width="374dp"
+                android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/infohub_job_hunting"
@@ -98,7 +97,7 @@
 
             <ImageView
                 android:id="@+id/housing_infohub"
-                android:layout_width="374dp"
+                android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_marginTop="8dp"
 
@@ -108,7 +107,7 @@
 
             <ImageView
                 android:id="@+id/firtsGen_infohub"
-                android:layout_width="374dp"
+                android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/infohub_first_gen"
