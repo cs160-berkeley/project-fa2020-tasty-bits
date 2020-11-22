@@ -1,24 +1,36 @@
-package com.example.tastybits;
-
-import androidx.appcompat.app.AppCompatActivity;
-
+package com.example.tastybits.ui.questionhub;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import com.example.tastybits.R;
 
-public class question_activity extends AppCompatActivity {
-
+public class QuestionHubPostFragment extends Fragment{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_questionhub_post);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        //questionHubViewModel = ViewModelProviders.of(this).get(com.example.tastybits.ui.questionhub.QuestionHubViewModel.class);
+        View view = inflater.inflate(R.layout.fragment_questionhub_post, container, false);
+        /*final TextView textView = root.findViewById(R.id.questionhub);
+        questionHubViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                textView.setText(s);
+            }
+        });*/
 
-        SearchView search = findViewById(R.id.searchBar);
+
+        SearchView search = view.findViewById(R.id.searchBar);
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -34,7 +46,7 @@ public class question_activity extends AppCompatActivity {
             }
         });
 
-        final EditText question = findViewById(R.id.question);
+        final EditText question = view.findViewById(R.id.question);
         question.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -52,7 +64,7 @@ public class question_activity extends AppCompatActivity {
             }
         });
 
-        final EditText description = findViewById(R.id.description);
+        final EditText description = view.findViewById(R.id.description);
         description.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -71,8 +83,8 @@ public class question_activity extends AppCompatActivity {
             }
         });
 
-        ImageButton postButton = findViewById(R.id.post_button);
-        postButton.setOnClickListener(new View.OnClickListener() {
+        Button postButton = view.findViewById(R.id.post_button);
+        /*postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println(" post it");
@@ -82,16 +94,17 @@ public class question_activity extends AppCompatActivity {
 
 
             }
-        });
+        });*/
+        postButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionhub));
 
-        final ImageButton classPlan = findViewById(R.id.class_planning);
-        final ImageButton enrollment = findViewById(R.id.enrollment);
-        final ImageButton fafsa = findViewById(R.id.fafsa);
-        final ImageButton clubs = findViewById(R.id.clubs);
-        final ImageButton minus1 = findViewById(R.id.minus1);
-        final ImageButton minus2 = findViewById(R.id.minus2);
-        final ImageButton minus3 = findViewById(R.id.minus3);
-        final ImageButton minus4 = findViewById(R.id.minus4);
+        final ImageButton classPlan = view.findViewById(R.id.class_planning);
+        final ImageButton enrollment = view.findViewById(R.id.enrollment);
+        final ImageButton fafsa = view.findViewById(R.id.fafsa);
+        final ImageButton clubs = view.findViewById(R.id.clubs);
+        final ImageButton minus1 = view.findViewById(R.id.minus1);
+        final ImageButton minus2 = view.findViewById(R.id.minus2);
+        final ImageButton minus3 = view.findViewById(R.id.minus3);
+        final ImageButton minus4 = view.findViewById(R.id.minus4);
         classPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +157,7 @@ public class question_activity extends AppCompatActivity {
         clubs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // System.out.println("Clubs and Decals");
+                // System.out.println("Clubs and Decals");
                 v.setBackground(getResources().getDrawable(R.drawable.brown_image_button));
                 classPlan.setBackground(getResources().getDrawable(R.drawable.light_brown_image_button));
                 fafsa.setBackground(getResources().getDrawable(R.drawable.light_brown_image_button));
@@ -156,13 +169,6 @@ public class question_activity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
+        return view;
     }
 }
