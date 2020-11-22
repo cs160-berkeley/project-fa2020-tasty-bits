@@ -52,6 +52,7 @@
     Not sure what to study? The Berkeley Guide is a great resource to start with: http://guide.berkeley.edu/\n
     Academic advising is available from advisors in each college and department and it is highly recommend you consult with your advisor before picking your classes. Many colleges offer schedule reviews online or Skype appointments. "
                 android:textColor="@android:color/background_dark"
+                android:textSize="15sp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"/>
@@ -83,7 +84,8 @@
                 android:textColor="@android:color/background_dark"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"/>
+                android:paddingBottom="10dp"
+                android:textSize="15sp"/>
 
 
             <TextView
@@ -100,7 +102,8 @@
                 android:textColor="@android:color/background_dark"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"/>
+                android:paddingBottom="10dp"
+                android:textSize="15sp"/>
 
             <Space
                 android:layout_width="match_parent"

@@ -87,7 +87,8 @@ For more information on all of these requirements, please see the Degree Require
                 android:textColor="@android:color/background_dark"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"/>
+                android:paddingBottom="10dp"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/class_planning_golden_bear_advising_title"
@@ -139,7 +140,8 @@ You will not have an academic adviser assigned to you on CalCentral during the G
                 android:textColor="@android:color/background_dark"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"/>
+                android:paddingBottom="10dp"
+                android:textSize="15sp"/>
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="30dp" />

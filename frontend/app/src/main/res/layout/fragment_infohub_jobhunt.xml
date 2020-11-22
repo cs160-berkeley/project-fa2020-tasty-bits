@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/expand"
+        android:id="@+id/expand_jobhunt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="350dp"
