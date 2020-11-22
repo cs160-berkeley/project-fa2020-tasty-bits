@@ -1,5 +1,40 @@
 import { idArg, queryType, stringArg } from '@nexus/schema';
 import { getUserId } from '../utils';
+import language from '@google-cloud/language';
+
+enum Sentiment {
+  VERY_HAPPY = 'VERY_HAPPY',
+  HAPPY = 'HAPPY',
+  SATISFIED = 'SATISFIED',
+  NO_OPINION = 'NO_OPINION',
+  FRUSTRATED = 'FRUSTRATED',
+  ANGRY = 'ANGRY',
+  VERY_ANGRY = 'VERY_ANGRY',
+}
+
+const determineSentiment = (score: number, magnitude: number): Sentiment => {
+  let sentiment: Sentiment = Sentiment.NO_OPINION;
+
+  if (score > 0.5) {
+    if (magnitude > 0.85) {
+      sentiment = Sentiment.VERY_HAPPY;
+    } else {
+      sentiment = Sentiment.HAPPY;
+    }
+  } else if (score > 0.1) {
+    sentiment = Sentiment.SATISFIED;
+  } else if (score < -0.1 && score >= -0.5) {
+    sentiment = Sentiment.FRUSTRATED;
+  } else if (score < -0.5) {
+    if (magnitude > 0.85) {
+      sentiment = Sentiment.VERY_ANGRY;
+    } else {
+      sentiment = Sentiment.ANGRY;
+    }
+  }
+
+  return sentiment;
+};
 
 const removeStopwords = (str: string): string => {
   //prettier-ignore
@@ -66,6 +101,33 @@ export const Query = queryType({
             id: userId,
           },
         });
+      },
+    });
+
+    t.field('getSentiment', {
+      type: 'SentimentResult',
+      nullable: false,
+      args: {
+        text: stringArg({ required: true }),
+      },
+      resolve: async (_, args, ctx) => {
+        const client = new language.LanguageServiceClient();
+
+        const document: { content: string; type: 'PLAIN_TEXT' } = {
+          content: args.text,
+          type: 'PLAIN_TEXT',
+        };
+
+        const [result] = await client.analyzeSentiment({ document: document });
+        const sentiment = result.documentSentiment;
+
+        const score = sentiment!.score!;
+        const magnitude = sentiment!.magnitude!;
+        return {
+          sentiment: determineSentiment(score, magnitude),
+          score: score,
+          magnitude: magnitude,
+        };
       },
     });
 
@@ -200,7 +262,7 @@ export const Query = queryType({
           }),
           ctx.prisma.answer.findMany({
             where: {
-              OR: [...generateContains('contents', args.query)],
+              OR: [...generateContains('content', args.query)],
             },
           }),
           ctx.prisma.user.findMany({

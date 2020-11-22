@@ -64,6 +64,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   ProfileVisibility: "FULL" | "NONE"
+  SentimentEnum: "ANGRY" | "FRUSTRATED" | "HAPPY" | "NO_OPINION" | "SATISFIED" | "VERY_ANGRY" | "VERY_HAPPY"
   StudentType: "FIRSTGEN" | "GENERAL" | "INTERNATIONAL" | "TRANSFER"
 }
 
@@ -141,6 +142,11 @@ export interface NexusGenRootTypes {
     questions: NexusGenRootTypes['Question'][]; // [Question!]!
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
+  SentimentResult: { // root type
+    magnitude: number; // Float!
+    score: number; // Float!
+    sentiment: NexusGenEnums['SentimentEnum']; // SentimentEnum!
+  }
   User: { // root type
     biography?: string | null; // String
     class?: string | null; // String
@@ -174,6 +180,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   QuestionWhereUniqueInput: NexusGenInputs['QuestionWhereUniqueInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   ProfileVisibility: NexusGenEnums['ProfileVisibility'];
+  SentimentEnum: NexusGenEnums['SentimentEnum'];
   StudentType: NexusGenEnums['StudentType'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
@@ -248,6 +255,7 @@ export interface NexusGenFieldTypes {
     getChatrooms: NexusGenRootTypes['Chatroom'][]; // [Chatroom!]!
     getMessages: NexusGenRootTypes['Message'][]; // [Message!]!
     getQuestions: NexusGenRootTypes['Question'][]; // [Question!]!
+    getSentiment: NexusGenRootTypes['SentimentResult']; // SentimentResult!
     getUser: NexusGenRootTypes['User'] | null; // User
     search: NexusGenRootTypes['SearchResults']; // SearchResults!
   }
@@ -286,6 +294,11 @@ export interface NexusGenFieldTypes {
     answers: NexusGenRootTypes['Answer'][]; // [Answer!]!
     questions: NexusGenRootTypes['Question'][]; // [Question!]!
     users: NexusGenRootTypes['User'][]; // [User!]!
+  }
+  SentimentResult: { // field return type
+    magnitude: number; // Float!
+    score: number; // Float!
+    sentiment: NexusGenEnums['SentimentEnum']; // SentimentEnum!
   }
   User: { // field return type
     answers: NexusGenRootTypes['Answer'][]; // [Answer!]!
@@ -412,6 +425,9 @@ export interface NexusGenArgTypes {
     getQuestions: { // args
       categoryId: string; // ID!
     }
+    getSentiment: { // args
+      text: string; // String!
+    }
     search: { // args
       query: string; // String!
     }
@@ -493,11 +509,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Answer" | "AnswerVote" | "Category" | "Chatroom" | "Message" | "Mutation" | "Query" | "Question" | "QuestionClick" | "QuestionVote" | "SearchResults" | "User";
+export type NexusGenObjectNames = "Answer" | "AnswerVote" | "Category" | "Chatroom" | "Message" | "Mutation" | "Query" | "Question" | "QuestionClick" | "QuestionVote" | "SearchResults" | "SentimentResult" | "User";
 
 export type NexusGenInputNames = "AnswerIdUserIdCompoundUniqueInput" | "AnswerVoteWhereUniqueInput" | "AnswerWhereUniqueInput" | "CategoryWhereUniqueInput" | "ChatroomWhereUniqueInput" | "MessageWhereUniqueInput" | "QuestionClickWhereUniqueInput" | "QuestionIdUserIdCompoundUniqueInput" | "QuestionVoteWhereUniqueInput" | "QuestionWhereUniqueInput" | "UserWhereUniqueInput";
 
-export type NexusGenEnumNames = "ProfileVisibility" | "StudentType";
+export type NexusGenEnumNames = "ProfileVisibility" | "SentimentEnum" | "StudentType";
 
 export type NexusGenInterfaceNames = never;
 
