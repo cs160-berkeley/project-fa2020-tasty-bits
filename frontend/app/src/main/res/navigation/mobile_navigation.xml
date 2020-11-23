@@ -42,6 +42,16 @@
         android:label="questionhub_post"
         tools:layout="@layout/fragment_questionhub_post"/>
 
+    <fragment
+        android:id="@+id/questionview_fragment"
+        android:name="com.example.tastybits.ui.questionview.QuestionViewFragment"
+        android:label="questionhub_post"
+        tools:layout="@layout/fragment_questions_view"/>
 
+    <fragment
+        android:id="@+id/questionpost_fragment"
+        android:name="com.example.tastybits.ui.questionview.QuestionPostFragment"
+        android:label="questionhub_post"
+        tools:layout="@layout/fragment_question_post"/>
 
 </navigation>

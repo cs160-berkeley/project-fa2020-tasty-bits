@@ -1,4 +1,4 @@
-query GetCategories($cID:ID!) {
+query GetQuestions($cID:ID!) {
     getQuestions(categoryId: $cID) {
         id
         title

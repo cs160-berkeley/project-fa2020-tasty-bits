@@ -1,6 +1,4 @@
-package com.example.tastybits;
-
-import com.example.tastybits.QuestionItem;
+package com.example.tastybits.ui.questionview;
 
 public interface AddQuestionCallback {
     public void add(QuestionItem questionItem);

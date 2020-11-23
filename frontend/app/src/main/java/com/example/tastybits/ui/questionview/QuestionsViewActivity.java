@@ -1,10 +1,13 @@
-package com.example.tastybits;
+package com.example.tastybits.ui.questionview;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
+import com.example.tastybits.NetworkRequest;
+import com.example.tastybits.R;
 
 import java.util.ArrayList;
 

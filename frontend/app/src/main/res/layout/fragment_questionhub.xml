@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,8 +7,12 @@
     tools:context=".ui.questionhub.QuestionHubFragment">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,8 +32,8 @@
                 android:iconifiedByDefault="false"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:queryHint="Search"
                 android:queryBackground="@android:color/transparent"
+                android:queryHint="Search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -45,14 +49,15 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Questions?"
-                android:textSize="50sp"
                 android:paddingLeft="20dp"
-                android:textColor="@android:color/black"/>
+                android:text="Questions?"
+                android:textColor="@android:color/black"
+                android:textSize="50sp" />
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -77,9 +82,11 @@
                     android:src="@drawable/enroll" />
 
             </LinearLayout>
+
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -104,9 +111,11 @@
                     android:src="@drawable/clubs_big" />
 
             </LinearLayout>
+
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -131,9 +140,11 @@
                     android:src="@drawable/firstgen" />
 
             </LinearLayout>
+
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -155,10 +166,11 @@
                     android:id="@+id/empty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/job"
-                    android:alpha="0"/>
+                    android:alpha="0"
+                    android:src="@drawable/job" />
 
             </LinearLayout>
+
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
@@ -166,4 +178,13 @@
         </LinearLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addQuestionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:src="@android:drawable/ic_input_add" />
+
+</RelativeLayout>

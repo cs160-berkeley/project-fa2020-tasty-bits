@@ -7,4 +7,15 @@
     <string name="com_auth0_domain">calsurvivalguide.us.auth0.com</string>
     <string name="login">Log in</string>
     <string name="logout">Log out</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="category_display_names">
+        <item>Job Hunting</item>
+        <item>Housing</item>
+        <item>Financial Aid</item>
+        <item>Clubs and Decals</item>
+        <item>Enrollment</item>
+        <item>Class Planning</item>
+    </string-array>
 </resources>

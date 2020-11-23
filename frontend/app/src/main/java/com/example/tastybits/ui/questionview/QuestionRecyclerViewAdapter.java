@@ -1,4 +1,4 @@
-package com.example.tastybits;
+package com.example.tastybits.ui.questionview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tastybits.R;
+
 import java.util.ArrayList;
 
 public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRecyclerViewAdapter.ViewHolder>{
@@ -16,12 +18,12 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
     private ArrayList<QuestionItem> questionList;
     public QuestionRecyclerViewAdapter(Context context, ArrayList<QuestionItem> questionData) {
         questionList = questionData;
-        fakeSomeData(questionList);
+        //fakeSomeData(questionList);
     }
 
     private void fakeSomeData(ArrayList<QuestionItem> qlist) {
         for (int i=0; i<100; i++) {
-            qlist.add(new QuestionItem("question " + String.valueOf(i)));
+            qlist.add(new QuestionItem(String.valueOf(i),"question " + String.valueOf(i)));
         }
     }
 
@@ -32,6 +34,7 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
     public void addQuestion(QuestionItem questionItem) {
         questionList.add(0, questionItem);
         notifyItemInserted(0);
+
     }
 
     @NonNull
