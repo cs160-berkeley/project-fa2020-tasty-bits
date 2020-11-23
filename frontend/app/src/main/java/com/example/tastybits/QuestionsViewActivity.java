@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class QuestionsViewActivity extends AppCompatActivity {
@@ -18,7 +17,7 @@ public class QuestionsViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions__view);
 
-        RecyclerView recyclerView = findViewById(R.id.QuestionsRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.QuestionsRecyclerView0);
         recyclerView.setLayoutManager(new LinearLayoutManager((this)));
         qrv_adapter = setQuestionRecyclerViewAdapter();
         recyclerView.setAdapter(qrv_adapter);
