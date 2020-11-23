@@ -2,54 +2,225 @@
 ### Do not make changes to this file directly
 
 
+type Answer {
+  content: String!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  id: String!
+  question: Question!
+  questionId: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+  votes(after: AnswerVoteWhereUniqueInput, before: AnswerVoteWhereUniqueInput, first: Int, last: Int): [AnswerVote!]!
+}
+
+input AnswerIdUserIdCompoundUniqueInput {
+  answerId: String!
+  userId: String!
+}
+
+type AnswerVote {
+  answer: Answer!
+  answerId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  upDown: Boolean!
+  user: User!
+  userId: String!
+}
+
+input AnswerVoteWhereUniqueInput {
+  answerId_userId: AnswerIdUserIdCompoundUniqueInput
+}
+
+input AnswerWhereUniqueInput {
+  content: String
+  id: String
+}
+
 type Category {
+  createdAt: DateTime!
   id: String!
   name: String!
-  rooms(after: RoomWhereUniqueInput, before: RoomWhereUniqueInput, first: Int, last: Int): [Room!]!
-  thumbnailUrl: String
+  questions(after: QuestionWhereUniqueInput, before: QuestionWhereUniqueInput, first: Int, last: Int): [Question!]!
   updatedAt: DateTime!
+}
+
+input CategoryWhereUniqueInput {
+  id: String
+  name: String
+}
+
+type Chatroom {
+  createdAt: DateTime!
+  id: String!
+  messages(after: MessageWhereUniqueInput, before: MessageWhereUniqueInput, first: Int, last: Int): [Message!]!
+  updatedAt: DateTime!
+  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
+}
+
+input ChatroomWhereUniqueInput {
+  id: String
 }
 
 scalar DateTime
 
+type Message {
+  chatroom: Chatroom
+  chatroomId: String
+  content: String!
+  createdAt: DateTime!
+  id: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+input MessageWhereUniqueInput {
+  id: String
+}
+
 type Mutation {
-  createRoom(categoryId: ID!, roomLink: String!, title: String!): Room
-  deleteRoom(roomId: ID!, roomPassword: String!): Room
-  editRoomTitle(roomId: ID!, roomPassword: String!, title: String!): Room
-  roomClicked(roomId: ID!): RoomClick
+  createAnswer(content: String!, questionId: ID!): Answer
+  createChatroom(class: String, major: String, studentType: StudentType): Chatroom
+  createMessage(chatroomId: ID!, content: String!): Message
+  createQuestion(categoryIds: [ID!]!, description: String, title: String!): Question
+  editAnswer(content: String, delete: Boolean, id: ID!): Answer
+  editQuestion(delete: Boolean, description: String, id: ID!, title: String): Question
+  editUser(biography: String, class: String, facebook: String, instagram: String, linkedin: String, major: String, name: String, openToHelp: Boolean, profileVisibility: ProfileVisibility, snapchat: String, studentType: StudentType, tiktok: String, twitter: String): User
+  upsertAnswerVote(answerId: ID!, upDown: Boolean!): AnswerVote
+  upsertQuestionClick(questionId: ID!): QuestionClick
+  upsertQuestionVote(questionId: ID!, upDown: Boolean!): QuestionVote
+  upsertUser: User
+}
+
+enum ProfileVisibility {
+  FULL
+  NONE
 }
 
 type Query {
-  allCategories: [Category!]!
-  categoryRooms(categoryId: ID!): [Room!]!
+  getAnswers(questionId: ID!): [Answer!]!
+  getCategories: [Category!]!
+  getChatrooms: [Chatroom!]!
+  getMessages(chatroomId: ID!): [Message!]!
+  getQuestions(categoryId: ID!): [Question!]!
+  getSentiment(text: String!): SentimentResult!
+  getUser: User
+  search(query: String!): SearchResults!
 }
 
-type Room {
-  clicks(after: RoomClickWhereUniqueInput, before: RoomClickWhereUniqueInput, first: Int, last: Int): [RoomClick!]!
+type Question {
+  answers(after: AnswerWhereUniqueInput, before: AnswerWhereUniqueInput, first: Int, last: Int): [Answer!]!
+  categories(after: CategoryWhereUniqueInput, before: CategoryWhereUniqueInput, first: Int, last: Int): [Category!]!
+  clicks(after: QuestionClickWhereUniqueInput, before: QuestionClickWhereUniqueInput, first: Int, last: Int): [QuestionClick!]!
   createdAt: DateTime!
   deletedAt: DateTime
+  description: String
   id: String!
-  roomCredentials: RoomCredentials!
-  roomUrl: String!
-  thumbnailUrl: String
+  title: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+  votes(after: QuestionVoteWhereUniqueInput, before: QuestionVoteWhereUniqueInput, first: Int, last: Int): [QuestionVote!]!
+}
+
+type QuestionClick {
+  createdAt: DateTime!
+  question: Question!
+  questionId: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+input QuestionClickWhereUniqueInput {
+  questionId_userId: QuestionIdUserIdCompoundUniqueInput
+}
+
+input QuestionIdUserIdCompoundUniqueInput {
+  questionId: String!
+  userId: String!
+}
+
+type QuestionVote {
+  createdAt: DateTime!
+  question: Question!
+  questionId: String!
+  updatedAt: DateTime!
+  upDown: Boolean!
+  user: User!
+  userId: String!
+}
+
+input QuestionVoteWhereUniqueInput {
+  questionId_userId: QuestionIdUserIdCompoundUniqueInput
+}
+
+input QuestionWhereUniqueInput {
+  description: String
+  id: String
   title: String
+}
+
+type SearchResults {
+  answers: [Answer!]!
+  questions: [Question!]!
+  users: [User!]!
+}
+
+enum SentimentEnum {
+  ANGRY
+  FRUSTRATED
+  HAPPY
+  NO_OPINION
+  SATISFIED
+  VERY_ANGRY
+  VERY_HAPPY
+}
+
+type SentimentResult {
+  magnitude: Float!
+  score: Float!
+  sentiment: SentimentEnum!
+}
+
+enum StudentType {
+  FIRSTGEN
+  GENERAL
+  INTERNATIONAL
+  TRANSFER
+}
+
+type User {
+  answers(after: AnswerWhereUniqueInput, before: AnswerWhereUniqueInput, first: Int, last: Int): [Answer!]!
+  answerVotes(after: AnswerVoteWhereUniqueInput, before: AnswerVoteWhereUniqueInput, first: Int, last: Int): [AnswerVote!]!
+  biography: String
+  chatrooms(after: ChatroomWhereUniqueInput, before: ChatroomWhereUniqueInput, first: Int, last: Int): [Chatroom!]!
+  class: String
+  createdAt: DateTime!
+  facebook: String
+  id: String!
+  instagram: String
+  linkedin: String
+  major: String
+  messages(after: MessageWhereUniqueInput, before: MessageWhereUniqueInput, first: Int, last: Int): [Message!]!
+  name: String
+  openToHelp: Boolean
+  profileVisibility: ProfileVisibility!
+  questionClicks(after: QuestionClickWhereUniqueInput, before: QuestionClickWhereUniqueInput, first: Int, last: Int): [QuestionClick!]!
+  questions(after: QuestionWhereUniqueInput, before: QuestionWhereUniqueInput, first: Int, last: Int): [Question!]!
+  questionVotes(after: QuestionVoteWhereUniqueInput, before: QuestionVoteWhereUniqueInput, first: Int, last: Int): [QuestionVote!]!
+  snapchat: String
+  studentType: StudentType!
+  tiktok: String
+  twitter: String
   updatedAt: DateTime!
 }
 
-type RoomClick {
-  createdAt: DateTime!
-  id: String!
-}
-
-input RoomClickWhereUniqueInput {
+input UserWhereUniqueInput {
+  biography: String
   id: String
-}
-
-type RoomCredentials {
-  password: String!
-  roomId: String!
-}
-
-input RoomWhereUniqueInput {
-  id: String
+  name: String
 }

@@ -8,24 +8,40 @@
     <fragment
         android:id="@+id/infohub"
         android:name="com.example.tastybits.ui.informationhub.InfoHubFragment"
-        android:label=""
+        android:label="infohub"
         tools:layout="@layout/fragment_infohub" />
 
     <fragment
         android:id="@+id/questionhub"
         android:name="com.example.tastybits.ui.questionhub.QuestionHubFragment"
-        android:label=""
-        tools:layout="@layout/fragment_questionhub_ask" />
+        android:label="questionhub"
+        tools:layout="@layout/fragment_questionhub"/>
+
 
     <fragment
         android:id="@+id/chat"
         android:name="com.example.tastybits.ui.chat.ChatFragment"
-        android:label=""
+        android:label="chat"
         tools:layout="@layout/fragment_chat" />
 
     <fragment
         android:id="@+id/profile"
         android:name="com.example.tastybits.ui.profile.ProfileFragment"
-        android:label=""
+        android:label="profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/questionhub_ask"
+        android:name="com.example.tastybits.ui.questionhub.QuestionHubAskFragment"
+        android:label="questionhub_ask"
+        tools:layout="@layout/fragment_questionhub_ask"/>
+
+    <fragment
+        android:id="@+id/questionhub_post"
+        android:name="com.example.tastybits.ui.questionhub.QuestionHubPostFragment"
+        android:label="questionhub_post"
+        tools:layout="@layout/fragment_questionhub_post"/>
+
+
+
 </navigation>
