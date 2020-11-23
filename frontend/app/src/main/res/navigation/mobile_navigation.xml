@@ -60,5 +60,11 @@
         android:label="informationhub_jobhunt"
         tools:layout="@layout/fragment_infohub_enrollment"/>
 
+    <fragment
+        android:id="@+id/info_housing"
+        android:name="com.example.tastybits.ui.informationhub.HousingFragment"
+        android:label="informationhub_housing"
+        tools:layout="@layout/fragment_infohub_housing"/>
+
 
 </navigation>
