@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/clubs_decals_international"
+        android:title="Picks for International Student"/>
+    <item android:id="@+id/clubs_decals_bso"
+        android:title="Berkeley Student Organization"/>
+    <item android:id="@+id/clubs_decals_decals"
+        android:title="Decals"/>
+    <!--    <item android:id="@+id/class_planning_major_and_career"-->
+    <!--        android:title="Exploring Major and Career"/>-->
+</menu>

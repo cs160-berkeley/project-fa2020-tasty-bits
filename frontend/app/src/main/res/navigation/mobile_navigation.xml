@@ -57,8 +57,14 @@
     <fragment
         android:id="@+id/info_enrollment"
         android:name="com.example.tastybits.ui.informationhub.EnrollmentFragment"
-        android:label="informationhub_jobhunt"
+        android:label="informationhub_enrollment"
         tools:layout="@layout/fragment_infohub_enrollment"/>
+
+    <fragment
+        android:id="@+id/info_clubs"
+        android:name="com.example.tastybits.ui.informationhub.ClubsDecalsFragment"
+        android:label="informationhub_clubs"
+        tools:layout="@layout/fragment_infohub_clubsdecals"/>
 
 
 </navigation>

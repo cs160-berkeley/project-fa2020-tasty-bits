@@ -45,7 +45,7 @@ public class InfoHubFragment extends Fragment {
         classPlanning.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_class_planning));
         enrollement.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_enrollment));
         jobHunting.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_jobhunt));
-
+        clubs.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_clubs));
 
 
         return root;
