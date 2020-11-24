@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/housing_resource"
+        android:title="Resources"/>
+    <item android:id="@+id/housing_price"
+        android:title="Price Range"/>
+    <item android:id="@+id/safety"
+        android:title="Safety"/>
+</menu>

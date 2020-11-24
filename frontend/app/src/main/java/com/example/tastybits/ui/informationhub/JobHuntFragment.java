@@ -50,6 +50,7 @@ public class JobHuntFragment extends Fragment {
             "It will be difficult to get a job or internship through strong grades alone. US employers value students with extracurricular activities, related hands-on experience, and leadership experience.",
             "This excerpt from the Career Center Job & Internship Guide (JIG) includes job search strategies, advice about US resumes and interviewing, permits and visas, the long distance job search, and more."
     };
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_infohub_jobhunt, container, false);
@@ -73,8 +74,9 @@ public class JobHuntFragment extends Fragment {
                 ssb.append("\n");
 
         }
-
         content1.setText(ssb);
+
+
 
         final DrawerLayout drawer = root.findViewById(R.id.drawer_jobhunt);
         FloatingActionButton expand = root.findViewById(R.id.expand_jobhunt);

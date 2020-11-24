@@ -34,14 +34,19 @@ public class InfoHubFragment extends Fragment {
         ImageView clubs = root.findViewById(R.id.decal_infohub);
         ImageView jobHunting = root.findViewById(R.id.job_hunting_infohub);
         ImageView housing = root.findViewById(R.id.housing_infohub);
-        ImageView firstGen = root.findViewById(R.id.transfer_infohub);
+        ImageView firstGen = root.findViewById(R.id.first_gen_infohub);
+        ImageView transfer = root.findViewById(R.id.transfer_infohub);
+        ImageView international = root.findViewById(R.id.international_infohub);
 
        // classPlanning.setOnClickListener(handleClick);
         classPlanning.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_class_planning));
         enrollement.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_enrollment));
         jobHunting.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_jobhunt));
         firstGen.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_transfer));
-
+        housing.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_housing));
+        clubs.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_clubs));
+        firstGen.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_firstgen));
+        transfer.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_transfer));
 
 
 

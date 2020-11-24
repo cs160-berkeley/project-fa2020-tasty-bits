@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/firstgen_scholarship"
+        android:title="Scholarships"/>
+    <item android:id="@+id/firstgen_academic_service"
+        android:title="Academic Achievement and Mentorship Services"/>
+    <item android:id="@+id/firstgen_community_service"
+        android:title="Student Life and Community Resources"/>
+</menu>

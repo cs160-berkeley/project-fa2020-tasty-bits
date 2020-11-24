@@ -138,7 +138,7 @@ public class ClassPlanningFragment extends Fragment {
         }
         class_planning_program_plan_content.setText(pp_ssb);
 
-        FloatingActionButton expand = root.findViewById(R.id.expand);
+        FloatingActionButton expand = root.findViewById(R.id.expand_classplanning);
         expand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

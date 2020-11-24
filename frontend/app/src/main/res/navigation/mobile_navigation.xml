@@ -57,13 +57,33 @@
     <fragment
         android:id="@+id/info_enrollment"
         android:name="com.example.tastybits.ui.informationhub.EnrollmentFragment"
-        android:label="informationhub_jobhunt"
+        android:label="informationhub_enrollment"
         tools:layout="@layout/fragment_infohub_enrollment"/>
     <fragment
         android:id="@+id/info_transfer"
         android:name="com.example.tastybits.ui.informationhub.TransferFragment"
         android:label="informationhub_Transfer"
         tools:layout="@layout/fragment_infohub_transfer"/>
+
+
+    <fragment
+        android:id="@+id/info_housing"
+        android:name="com.example.tastybits.ui.informationhub.HousingFragment"
+        android:label="informationhub_housing"
+        tools:layout="@layout/fragment_infohub_housing"/>
+
+    <fragment
+        android:id="@+id/info_clubs"
+        android:name="com.example.tastybits.ui.informationhub.ClubsDecalsFragment"
+        android:label="informationhub_clubs"
+        tools:layout="@layout/fragment_infohub_clubsdecals"/>
+
+    <fragment
+        android:id="@+id/info_firstgen"
+        android:name="com.example.tastybits.ui.informationhub.FirstGenFragment"
+        android:label="informationhub_firstgen"
+        tools:layout="@layout/fragment_infohub_firstgen"/>
+
 
 
 

@@ -6,17 +6,7 @@
     android:layout_height="match_parent"
     android:id = "@+id/drawerlayout_class_planning"
     tools:context=".ui.informationhub.ClassPlanningFragment">
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/expand"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginStart="350dp"
-        android:clickable="true"
-        android:src="@drawable/button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/class_planning_nv"
         android:layout_width="wrap_content"
@@ -42,6 +32,7 @@
             android:layout_height="match_parent"
             android:layout_margin="32dp"
             android:orientation="vertical">
+
 
             <TextView
                 android:id="@+id/class_planning_transfer_title"
@@ -149,5 +140,24 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/expand_classplanning"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:src="@drawable/arrow"
+            app:elevation="5dp"
+            app:backgroundTint="@color/button"
+            app:borderWidth="0dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
