@@ -74,10 +74,9 @@ public class JobHuntFragment extends Fragment {
                 ssb.append("\n");
 
         }
-
-
-
         content1.setText(ssb);
+
+
 
         final DrawerLayout drawer = root.findViewById(R.id.drawer_jobhunt);
         FloatingActionButton expand = root.findViewById(R.id.expand_jobhunt);
