@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/promptTextView"
         android:layout_width="293dp"
         android:layout_height="33dp"
         android:layout_marginStart="55dp"
@@ -62,6 +62,22 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+
+    <Button
+        android:id="@+id/sentiment_button"
+        android:layout_width="330dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/brown_image_button"
+        android:text="Get Sentiment"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/post_button"

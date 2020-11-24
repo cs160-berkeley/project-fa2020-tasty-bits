@@ -9,6 +9,7 @@ import com.apollographql.apollo.exception.ApolloException;
 import com.example.CreateQuestionMutation;
 import com.example.GetCategoriesQuery;
 import com.example.GetQuestionsQuery;
+import com.example.GetSentimentQuery;
 import com.example.tastybits.ui.questionview.AddQuestionCallback;
 import com.example.tastybits.ui.questionview.QuestionItem;
 
@@ -61,6 +62,24 @@ public class NetworkRequest {
                             question.description());
                     addQuestionCallback.add(qItem);
                 }
+                //Log.i(TAG, response.toString());
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+            }
+        });
+    }
+
+
+    public void getSentiment(String text, AsyncCallback callback) {
+        apolloClient.query(new GetSentimentQuery(text)).enqueue(new ApolloCall.Callback<GetSentimentQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<GetSentimentQuery.Data> response) {
+                GetSentimentQuery.GetSentiment sentiment = response.getData().getSentiment();
+                callback.onCompleted(sentiment.sentiment().rawValue());
+
                 //Log.i(TAG, response.toString());
             }
 

@@ -1,0 +1,8 @@
+mutation CreateAnswer($questionId:ID!, $content:String!) {
+    createAnswer(questionId:$questionId, content:$content) {
+        id
+        content
+        updatedAt
+        userId
+    }
+}

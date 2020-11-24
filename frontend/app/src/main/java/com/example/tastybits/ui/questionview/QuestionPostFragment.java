@@ -8,10 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.tastybits.AsyncCallback;
 import com.example.tastybits.Constants;
 import com.example.tastybits.NetworkRequest;
 import com.example.tastybits.R;
@@ -41,6 +43,27 @@ public class QuestionPostFragment extends Fragment {
 
         EditText questionText = view.findViewById(R.id.questionTextView);
         EditText descriptionText = view.findViewById(R.id.description);
+        TextView promptText = view.findViewById(R.id.promptTextView);
+
+        Button sentimentButton = view.findViewById(R.id.sentiment_button);
+
+        sentimentButton.setOnClickListener(button -> {
+
+            NetworkRequest.getInstance().getSentiment(questionText.getText() + ". " + descriptionText.getText(), new AsyncCallback() {
+                @Override
+                public void onCompleted(Object result) {
+                    String sentimentText = (String) result;
+                    promptText.setText("Sentiment: " + sentimentText);
+                }
+
+                @Override
+                public void onException(Exception e) {
+
+                }
+            });
+        });
+
+
 
         Spinner categoryTagsSpinner = view.findViewById(R.id.categoryTagsSpinner);
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
