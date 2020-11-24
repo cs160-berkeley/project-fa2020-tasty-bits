@@ -59,6 +59,12 @@
         android:name="com.example.tastybits.ui.informationhub.EnrollmentFragment"
         android:label="informationhub_jobhunt"
         tools:layout="@layout/fragment_infohub_enrollment"/>
+    <fragment
+        android:id="@+id/info_transfer"
+        android:name="com.example.tastybits.ui.informationhub.TransferFragment"
+        android:label="informationhub_Transfer"
+        tools:layout="@layout/fragment_infohub_transfer"/>
+
 
 
 </navigation>

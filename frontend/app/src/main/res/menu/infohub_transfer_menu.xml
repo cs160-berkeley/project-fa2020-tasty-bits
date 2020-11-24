@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/transfer_center"
+        android:title="Transfer Student Center"/>
+    <item android:id="@+id/access_to_excellence"
+        android:title="The Center of Access to Engineering Excellence"/>
+    <item android:id="@+id/EOP"
+        android:title="Educational Oppotunity Program"/>
+    <item android:id="@+id/transfer_scholarship"
+        android:title="Scholarship"/>
+    <item android:id="@+id/transfer_internship"
+        android:title="Intenship"/>
+
+</menu>

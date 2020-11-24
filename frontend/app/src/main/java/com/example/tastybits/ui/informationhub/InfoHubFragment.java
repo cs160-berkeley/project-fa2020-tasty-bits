@@ -1,18 +1,13 @@
 package com.example.tastybits.ui.informationhub;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.example.tastybits.R;
@@ -39,12 +34,14 @@ public class InfoHubFragment extends Fragment {
         ImageView clubs = root.findViewById(R.id.decal_infohub);
         ImageView jobHunting = root.findViewById(R.id.job_hunting_infohub);
         ImageView housing = root.findViewById(R.id.housing_infohub);
-        ImageView firstGen = root.findViewById(R.id.firtsGen_infohub);
+        ImageView firstGen = root.findViewById(R.id.transfer_infohub);
 
        // classPlanning.setOnClickListener(handleClick);
         classPlanning.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_class_planning));
         enrollement.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_enrollment));
         jobHunting.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_jobhunt));
+        firstGen.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_transfer));
+
 
 
 
