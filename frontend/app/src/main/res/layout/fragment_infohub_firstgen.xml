@@ -124,19 +124,21 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/expand_firstgen"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="180dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginRight="10dp"
             android:clickable="true"
             android:src="@drawable/arrow"
-            app:elevation="5dp"
-            app:backgroundTint="@color/button"
             app:borderWidth="0dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_marginBottom="300dp"/>
     </RelativeLayout>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

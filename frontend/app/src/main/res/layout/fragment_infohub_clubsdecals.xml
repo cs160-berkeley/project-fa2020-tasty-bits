@@ -5,18 +5,24 @@
     android:id="@+id/drawer_clubsdecals"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/expand_clubsdecals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="350dp"
-        android:clickable="true"
-        android:src="@drawable/button"
-        app:elevation="1dp"
-        app:backgroundTint="@android:color/transparent"
-        app:borderWidth="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/expand_decals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="180dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginRight="10dp"
+            android:clickable="true"
+            android:src="@drawable/arrow"
+            app:borderWidth="0dp"
+            android:layout_marginBottom="300dp"/>
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nv_clubsdecals"
