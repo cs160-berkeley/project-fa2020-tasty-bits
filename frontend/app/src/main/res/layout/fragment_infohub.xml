@@ -67,7 +67,7 @@
             <ImageView
                 android:id="@+id/international_infohub"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:src="@drawable/international"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
@@ -87,7 +87,7 @@
             <ImageView
                 android:id="@+id/enrollment_infohub"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/infohub_enrollment"
                 app:layout_constraintTop_toBottomOf="@+id/enrollment_infohub"
@@ -105,7 +105,7 @@
             <ImageView
                 android:id="@+id/decal_infohub"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/infohub_clubs_decals"
                 app:layout_constraintTop_toBottomOf="@+id/decal_infohub"
@@ -114,7 +114,7 @@
             <ImageView
                 android:id="@+id/job_hunting_infohub"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
 
                 android:src="@drawable/infohub_job_hunting"
@@ -124,7 +124,7 @@
             <ImageView
                 android:id="@+id/housing_infohub"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/infohub_housing"
                 app:layout_constraintTop_toBottomOf="@+id/housing_infohub"
