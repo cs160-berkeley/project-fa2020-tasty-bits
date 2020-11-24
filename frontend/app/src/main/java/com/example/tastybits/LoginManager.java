@@ -56,6 +56,7 @@ public class LoginManager {
         auth0 = new Auth0(activity.getString(R.string.com_auth0_client_id), activity.getString(R.string.com_auth0_domain));
         auth0.setOIDCConformant(true);
     }
+
     public String getAccessToken() {
         SharedPreferences preferences = activity.getSharedPreferences(TAG_APP_ID, Context.MODE_PRIVATE);
         String accessToken = preferences.getString(TAG_ACCESS_TOKEN, null);
@@ -97,8 +98,6 @@ public class LoginManager {
 
                     @Override
                     public void onSuccess(@NonNull final Credentials credentials) {
-
-
                         String token = credentials.getAccessToken();
                         long expires = credentials.getExpiresAt().getTime();
                         SharedPreferences preferences = activity.getSharedPreferences(TAG_APP_ID, Context.MODE_PRIVATE);

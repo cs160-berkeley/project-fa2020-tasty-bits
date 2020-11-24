@@ -106,6 +106,7 @@ type Query {
   getChatrooms: [Chatroom!]!
   getMessages(chatroomId: ID!): [Message!]!
   getQuestions(categoryId: ID!): [Question!]!
+  getSentiment(text: String!): SentimentResult!
   getUser: User
   search(query: String!): SearchResults!
 }
@@ -167,6 +168,22 @@ type SearchResults {
   answers: [Answer!]!
   questions: [Question!]!
   users: [User!]!
+}
+
+enum SentimentEnum {
+  ANGRY
+  FRUSTRATED
+  HAPPY
+  NO_OPINION
+  SATISFIED
+  VERY_ANGRY
+  VERY_HAPPY
+}
+
+type SentimentResult {
+  magnitude: Float!
+  score: Float!
+  sentiment: SentimentEnum!
 }
 
 enum StudentType {

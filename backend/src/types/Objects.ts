@@ -1,4 +1,4 @@
-import { objectType } from '@nexus/schema';
+import { enumType, objectType } from '@nexus/schema';
 
 export const User = objectType({
   name: 'User',
@@ -157,5 +157,27 @@ export const SearchResults = objectType({
     t.list.field('answers', { type: 'Answer' });
     t.list.field('questions', { type: 'Question' });
     t.list.field('users', { type: 'User' });
+  },
+});
+
+export const SentimentEnum = enumType({
+  name: 'SentimentEnum',
+  members: [
+    'VERY_HAPPY',
+    'HAPPY',
+    'SATISFIED',
+    'NO_OPINION',
+    'FRUSTRATED',
+    'ANGRY',
+    'VERY_ANGRY',
+  ],
+});
+
+export const SentimentResult = objectType({
+  name: 'SentimentResult',
+  definition(t) {
+    t.field('sentiment', { type: 'SentimentEnum' });
+    t.float('score');
+    t.float('magnitude');
   },
 });
