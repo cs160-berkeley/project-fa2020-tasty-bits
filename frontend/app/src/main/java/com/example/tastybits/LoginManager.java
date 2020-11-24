@@ -76,8 +76,8 @@ public class LoginManager {
         String accessToken = getAccessToken();
 
         if (accessToken != null) {
-            loginCallback.onCompleted(accessToken);
-            return;
+//            loginCallback.onCompleted(accessToken);
+//            return;
         }
 
         WebAuthProvider.login(auth0)
