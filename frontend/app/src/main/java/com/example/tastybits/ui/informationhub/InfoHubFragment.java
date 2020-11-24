@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.example.tastybits.R;
+import com.google.android.material.navigation.NavigationView;
 
 public class InfoHubFragment extends Fragment {
 
@@ -39,7 +40,7 @@ public class InfoHubFragment extends Fragment {
         ImageView clubs = root.findViewById(R.id.decal_infohub);
         ImageView jobHunting = root.findViewById(R.id.job_hunting_infohub);
         ImageView housing = root.findViewById(R.id.housing_infohub);
-        ImageView firstGen = root.findViewById(R.id.firtsGen_infohub);
+        ImageView firstGen = root.findViewById(R.id.international_infohub); // used for international for now
 
        // classPlanning.setOnClickListener(handleClick);
         classPlanning.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_class_planning));
@@ -47,7 +48,7 @@ public class InfoHubFragment extends Fragment {
         jobHunting.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_jobhunt));
         housing.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_housing));
         clubs.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_clubs));
-
+        firstGen.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_international));
 
         return root;
     }

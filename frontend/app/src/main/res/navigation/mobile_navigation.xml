@@ -72,6 +72,11 @@
         android:label="informationhub_clubs"
         tools:layout="@layout/fragment_infohub_clubsdecals"/>
 
+    <fragment
+        android:id="@+id/info_international"
+        android:name="com.example.tastybits.ui.informationhub.InternationalFragment"
+        android:label="informationhub_international"
+        tools:layout="@layout/fragment_infohub_international"/>
 
 
 </navigation>

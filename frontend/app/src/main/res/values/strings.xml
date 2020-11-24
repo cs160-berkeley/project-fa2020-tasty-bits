@@ -8,4 +8,5 @@
     <string name="login">Log in</string>
     <string name="logout">Log out</string>
     <string name="title_activity_class_planning">MainActivity</string>
+    <string name="bio_social_culture_event"><a href="https://events.berkeley.edu/index.php/calendar/sn/bio.html">BIO Social and Cultural Events</a></string>
 </resources>
