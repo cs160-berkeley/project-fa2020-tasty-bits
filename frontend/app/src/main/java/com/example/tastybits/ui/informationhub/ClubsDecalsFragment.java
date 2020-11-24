@@ -71,7 +71,7 @@ public class ClubsDecalsFragment extends Fragment {
 
 
 
-        FloatingActionButton expand = root.findViewById(R.id.expand_clubsdecals);
+        FloatingActionButton expand = root.findViewById(R.id.expand_decals);
         expand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
