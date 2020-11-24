@@ -1,6 +1,11 @@
 package com.example.tastybits.ui.informationhub;
 
-import android.os.Build;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -14,21 +19,15 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-
 import com.example.tastybits.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+public class ClubsAndDecalsFragment extends Fragment {
 
-public class JobHuntFragment extends Fragment {
     String[] titles = new String[]{
-            "Expand Your Network and Make it Work for You",
-            "Refine Your Communication and Interpersonal Skills",
+            "About The DeCal Program",
+            "International",
             "Research International Employee Friendly Employers",
             "US Style Application Documents: Resume & Cover Letter",
             "Become Confident with Interviewing",
@@ -39,7 +38,10 @@ public class JobHuntFragment extends Fragment {
             "Review the US Jobs and Internships for International Students"
     };
     String[] contents = new String[] {
-            "Networking is one of the most effective ways people find out about positions and get hired.",
+            "The DeCal Program (or just DeCal) is an aggregate of student-run courses at the University of California, Berkeley – here, students create and facilitate their own classes on a variety of subjects, many of which are not addressed in the traditional curriculum.\n" +
+                    "Each semester there are over 150 courses on topics ranging from Taiwanese Language to Simpsons and Philosophy. Around 3000-4000 UC Berkeley students take DeCals each semester. DeCals are an excellent way of meeting the University’s minimum unit requirement, developing a new or past interest, and meeting peers in a small, comfortable environment. The DeCal Program is undoubtedly one of the many unique aspects of Berkeley’s undergraduate program, and all students are encouraged to consider taking a course!\n" +
+                    "DeCal classes, in a nutshell, are legitimate university classes run by students. The responsibility of such courses rests on the department chair, faculty member, and student facilitator, who all sign a contract of understanding before the DeCal is reviewed by COCI / the Academic Senate. A faculty member sponsors a student’s course as a 98 / 198 section. That faculty member, as far as the computer systems and transcripts are concerned, is the “instructor of record.” The student that runs the course can be viewed as the delegated instructor for the faculty sponsor. At the end of the semester, the student will provide grade “recommendations” for the faculty sponsor, who will then do the actual grade inputting. Grades are only offered as Pass / No Pass, and the academic credit for each class typically range from 0.5-2 units.\n" +
+                    "Students facilitators are the go-to person if there is any question about the course (enrollment, auditing…etc). Specific contact information can be found in the course listings page. If the facilitator has chosen not to show their e-mail address on the course listing, then we cannot provide it to you (it would be against our privacy policy) but we would be happy to send them an email with your contact info. If there are any questions or concerns about FPF enrollment in DeCal course units, please contact your adviser.\n",
             "Strong English language skills, non-verbal communication skills and interpersonal skills are all crucial for international students who wish to work and succeed in the US, and right now is the best time to polish those skills.",
             "Be intentional about your job or internship search by researching which companies have hired international candidates in the past.",
             "Make sure you know how to write a US style resume and cover letter and seek feedback from native speakers of English and Career Counselors at the Career Center.",
@@ -50,7 +52,6 @@ public class JobHuntFragment extends Fragment {
             "It will be difficult to get a job or internship through strong grades alone. US employers value students with extracurricular activities, related hands-on experience, and leadership experience.",
             "This excerpt from the Career Center Job & Internship Guide (JIG) includes job search strategies, advice about US resumes and interviewing, permits and visas, the long distance job search, and more."
     };
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_infohub_jobhunt, container, false);
@@ -74,9 +75,8 @@ public class JobHuntFragment extends Fragment {
                 ssb.append("\n");
 
         }
+
         content1.setText(ssb);
-
-
 
         final DrawerLayout drawer = root.findViewById(R.id.drawer_jobhunt);
         FloatingActionButton expand = root.findViewById(R.id.expand_jobhunt);

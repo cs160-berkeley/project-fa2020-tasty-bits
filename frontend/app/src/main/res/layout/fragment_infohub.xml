@@ -48,11 +48,36 @@
                 android:textSize="36sp"
                 app:layout_constraintTop_toBottomOf="@+id/searchBar"
                 tools:layout_editor_absoluteX="16dp" />
+            <ImageView
+                android:id="@+id/first_gen_infohub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/firstgen2"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                tools:layout_editor_absoluteX="3dp" />
+            <ImageView
+                android:id="@+id/transfer_infohub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/transfer"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                tools:layout_editor_absoluteX="3dp" />
+            <ImageView
+                android:id="@+id/international_infohub"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/international"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                tools:layout_editor_absoluteX="3dp" />
+
 
             <ImageView
                 android:id="@+id/class_planning_infohub"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:src="@drawable/infohub_class_planning"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
@@ -65,16 +90,16 @@
                 android:layout_height="76dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/infohub_enrollment"
-                app:layout_constraintTop_toBottomOf="@+id/class_planning_infohub"
+                app:layout_constraintTop_toBottomOf="@+id/enrollment_infohub"
                 tools:layout_editor_absoluteX="3dp" />
 
             <ImageView
                 android:id="@+id/fafsa_infohub"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/infohub_fafsa"
-                app:layout_constraintTop_toBottomOf="@+id/enrollment_infohub"
+                app:layout_constraintTop_toBottomOf="@+id/fafsa_infohub"
                 tools:layout_editor_absoluteX="3dp" />
 
             <ImageView
@@ -83,7 +108,7 @@
                 android:layout_height="76dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/infohub_clubs_decals"
-                app:layout_constraintTop_toBottomOf="@+id/fafsa_infohub"
+                app:layout_constraintTop_toBottomOf="@+id/decal_infohub"
                 tools:layout_editor_absoluteX="3dp" />
 
             <ImageView
@@ -91,8 +116,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_marginTop="8dp"
+
                 android:src="@drawable/infohub_job_hunting"
-                app:layout_constraintTop_toBottomOf="@+id/decal_infohub"
+                app:layout_constraintTop_toBottomOf="@+id/job_hunting_infohub"
                 tools:layout_editor_absoluteX="3dp" />
 
             <ImageView
@@ -100,17 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_marginTop="8dp"
-
                 android:src="@drawable/infohub_housing"
-                app:layout_constraintTop_toBottomOf="@+id/job_hunting_infohub"
-                tools:layout_editor_absoluteX="3dp" />
-
-            <ImageView
-                android:id="@+id/international_infohub"
-                android:layout_width="match_parent"
-                android:layout_height="76dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/infohub_international"
                 app:layout_constraintTop_toBottomOf="@+id/housing_infohub"
                 tools:layout_editor_absoluteX="3dp" />
         </LinearLayout>

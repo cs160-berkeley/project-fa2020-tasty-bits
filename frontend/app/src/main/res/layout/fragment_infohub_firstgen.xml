@@ -1,50 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id = "@+id/drawerlayout_class_planning"
-    tools:context=".ui.informationhub.ClassPlanningFragment">
-    
+    android:id="@+id/drawer_firstgen"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/class_planning_nv"
+        android:id="@+id/nv_firstgen"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         app:headerLayout="@layout/contents"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/infohub_classplanning_menu">
-
-    </com.google.android.material.navigation.NavigationView>
-
-
-
+        app:menu="@menu/infohub_firstgen_menu"/>
 
     <ScrollView
-        android:id="@+id/info_scroll"
+        android:id="@+id/scroll_firstgen"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="32dp"
-            android:orientation="vertical">
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="32dp">
 
             <TextView
-                android:id="@+id/class_planning_transfer_title"
+                android:id="@+id/title1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="Transfer Student Tips"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textSize="25sp"
+                android:text="Scholarships"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"/>
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"
@@ -54,31 +46,26 @@
                 android:background="@android:color/darker_gray"/>
 
             <TextView
-                android:id="@+id/class_planning_transfer_content"
+                android:id="@+id/content1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:clickable="true"
-                android:text="TextView"
+                android:text="Content: Change me"
+                android:textSize="15sp"
                 android:textColor="@android:color/background_dark"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:textSize="15sp"/>
+                android:paddingBottom="10dp"/>
 
             <TextView
-                android:id="@+id/class_planning_golden_bear_advising_title"
+                android:id="@+id/title2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Golden Bear Advising"
-                android:layout_marginBottom="8dp"
-                android:textSize="25sp"
-                tools:layout_editor_absoluteX="46dp"
-                tools:layout_editor_absoluteY="582dp"
-                android:textColor="@android:color/black"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textStyle="bold"/>
+                android:text="Academic Achievement and Mentorship Services"
+                android:textColor="@android:color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"
@@ -88,31 +75,26 @@
                 android:background="@android:color/darker_gray"/>
 
             <TextView
-                android:id="@+id/class_planning_golden_bear_advising_content"
+                android:id="@+id/content2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:clickable="true"
-                android:text="TextView"
+                android:text="Content: Change me"
+                android:textSize="15sp"
                 android:textColor="@android:color/background_dark"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:textSize="15sp"/>
+                android:paddingBottom="10dp"/>
 
             <TextView
-                android:id="@+id/class_planning_program_plan_title"
+                android:id="@+id/title3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Creating a Program Plan"
-                android:layout_marginBottom="8dp"
-                android:textSize="25sp"
-                tools:layout_editor_absoluteX="46dp"
-                tools:layout_editor_absoluteY="582dp"
-                android:textColor="@android:color/black"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textStyle="bold"/>
+                android:text="Student Life and Community Resources"
+                android:textColor="@android:color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"
@@ -122,17 +104,15 @@
                 android:background="@android:color/darker_gray"/>
 
             <TextView
-                android:id="@+id/class_planning_program_plan_content"
+                android:id="@+id/content3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:clickable="true"
-                android:text="TextView"
+                android:text="Content: Change me"
+                android:textSize="15sp"
                 android:textColor="@android:color/background_dark"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:textSize="15sp"/>
+                android:paddingBottom="10dp"/>
 
             <Space
                 android:layout_width="match_parent"
@@ -145,7 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/expand_classplanning"
+            android:id="@+id/expand_firstgen"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:clickable="true"
@@ -158,6 +138,5 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

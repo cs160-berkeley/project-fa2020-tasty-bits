@@ -59,6 +59,12 @@
         android:name="com.example.tastybits.ui.informationhub.EnrollmentFragment"
         android:label="informationhub_enrollment"
         tools:layout="@layout/fragment_infohub_enrollment"/>
+    <fragment
+        android:id="@+id/info_transfer"
+        android:name="com.example.tastybits.ui.informationhub.TransferFragment"
+        android:label="informationhub_Transfer"
+        tools:layout="@layout/fragment_infohub_transfer"/>
+
 
     <fragment
         android:id="@+id/info_housing"
@@ -77,6 +83,14 @@
         android:name="com.example.tastybits.ui.informationhub.InternationalFragment"
         android:label="informationhub_international"
         tools:layout="@layout/fragment_infohub_international"/>
+
+    <fragment 
+        android:id="@+id/info_firstgen"
+        android:name="com.example.tastybits.ui.informationhub.FirstGenFragment"
+        android:label="informationhub_firstgen"
+        tools:layout="@layout/fragment_infohub_firstgen"/>
+
+
 
 
 </navigation>
