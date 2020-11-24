@@ -1,0 +1,7 @@
+mutation CreateQuestion($cIDs:[ID!]!, $title:String!, $description:String!) {
+    createQuestion(categoryIds:$cIDs, title:$title, description:$description) {
+        id
+        title
+        description
+    }
+}

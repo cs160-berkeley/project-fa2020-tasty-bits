@@ -9,4 +9,15 @@
     <string name="logout">Log out</string>
     <string name="title_activity_class_planning">MainActivity</string>
     <string name="bio_social_culture_event"><a href="https://events.berkeley.edu/index.php/calendar/sn/bio.html">BIO Social and Cultural Events</a></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="category_display_names">
+        <item>Job Hunting</item>
+        <item>Housing</item>
+        <item>Financial Aid</item>
+        <item>Clubs and Decals</item>
+        <item>Enrollment</item>
+        <item>Class Planning</item>
+    </string-array>
 </resources>

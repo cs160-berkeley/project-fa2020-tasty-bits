@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF"
+    tools:context=".ui.questionhub.QuestionHubPostFragment">
+
+
+    <EditText
+        android:id="@+id/questionTextView"
+        android:layout_width="334dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="39dp"
+        android:background="@drawable/top_left_right_round"
+        android:backgroundTint="#E4E4E4"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Question title"
+        android:iconifiedByDefault="false"
+        android:inputType="textMultiLine"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:queryHint="Search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="334dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="39dp"
+        android:background="@drawable/bottom_left_right_round"
+        android:backgroundTint="#E4E4E4"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Description ..."
+        android:inputType="textMultiLine"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
+
+    <TextView
+        android:id="@+id/promptTextView"
+        android:layout_width="293dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="63dp"
+        android:text="What's on your mind?"
+        android:textColor="#1A1A1A"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+
+    <Button
+        android:id="@+id/sentiment_button"
+        android:layout_width="330dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/brown_image_button"
+        android:text="Get Sentiment"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/post_button"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/button"
+        android:text="Post My Question"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <SearchView
+        android:id="@+id/searchBar"
+        style="@android:style/Widget.Material.Light.SearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/searchbar"
+        android:iconifiedByDefault="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="Search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </SearchView>
+
+    <Spinner
+        android:id="@+id/categoryTagsSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/post_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintVertical_bias="0.18" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

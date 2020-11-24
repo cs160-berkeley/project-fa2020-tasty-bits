@@ -1,0 +1,10 @@
+query GetQuestions($cID:ID!) {
+    getQuestions(categoryId: $cID) {
+        id
+        title
+        description
+        votes {
+            upDown
+        }
+    }
+}

@@ -1,4 +1,5 @@
 package com.example.tastybits.ui.questionhub;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,7 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
 import com.example.tastybits.R;
 
 public class QuestionHubPostFragment extends Fragment{
@@ -46,7 +48,7 @@ public class QuestionHubPostFragment extends Fragment{
             }
         });
 
-        final EditText question = view.findViewById(R.id.question);
+        final EditText question = view.findViewById(R.id.questionTextView);
         question.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

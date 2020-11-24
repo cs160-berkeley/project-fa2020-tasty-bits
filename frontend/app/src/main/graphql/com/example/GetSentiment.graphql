@@ -1,0 +1,7 @@
+query GetSentiment($text:String!) {
+    getSentiment(text:$text) {
+        sentiment
+        score
+        magnitude
+    }
+}

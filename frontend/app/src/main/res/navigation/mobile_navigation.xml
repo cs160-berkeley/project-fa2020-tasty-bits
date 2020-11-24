@@ -84,13 +84,23 @@
         android:label="informationhub_international"
         tools:layout="@layout/fragment_infohub_international"/>
 
-    <fragment 
+    <fragment
         android:id="@+id/info_firstgen"
         android:name="com.example.tastybits.ui.informationhub.FirstGenFragment"
         android:label="informationhub_firstgen"
         tools:layout="@layout/fragment_infohub_firstgen"/>
 
 
+    <fragment
+        android:id="@+id/questionview_fragment"
+        android:name="com.example.tastybits.ui.questionview.QuestionViewFragment"
+        android:label="questionhub_post"
+        tools:layout="@layout/fragment_questions_view"/>
 
+    <fragment
+        android:id="@+id/questionpost_fragment"
+        android:name="com.example.tastybits.ui.questionview.QuestionPostFragment"
+        android:label="questionhub_post"
+        tools:layout="@layout/fragment_question_post"/>
 
 </navigation>
