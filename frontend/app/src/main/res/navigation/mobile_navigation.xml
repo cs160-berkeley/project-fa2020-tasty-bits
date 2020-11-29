@@ -100,7 +100,7 @@
 
     <fragment
         android:id="@+id/questionhub_answer"
-        android:name="com.example.tastybits.ui.questionview.QuestionAnswerFragment"
+        android:name="com.example.tastybits.ui.answerview.QuestionAnswerFragment"
         android:label="question_answer"
         tools:layout="@layout/fragment_question_answer"/>
 

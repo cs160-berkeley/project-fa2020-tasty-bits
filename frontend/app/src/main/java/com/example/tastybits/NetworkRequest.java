@@ -6,6 +6,7 @@ import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
+import com.example.CreateAnswerMutation;
 import com.example.CreateQuestionMutation;
 import com.example.GetAnswerQuery;
 import com.example.GetCategoriesQuery;
@@ -159,6 +160,23 @@ public class NetworkRequest {
                 callback.onException(e);
             }
         });
+    }
+
+    public void mutationCreateAnswer(String questionId, String content, AsyncCallback callback) {
+        CreateAnswerMutation createAnswerMutation = new CreateAnswerMutation(questionId, content);
+        apolloClient.mutate(createAnswerMutation).enqueue(new ApolloCall.Callback<CreateAnswerMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<CreateAnswerMutation.Data> response) {
+                CreateAnswerMutation.CreateAnswer answer = response.getData().createAnswer();
+                callback.onCompleted(new AnswerItem(answer.id(), content, questionId));
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+
+            }
+        });
+
     }
 
 

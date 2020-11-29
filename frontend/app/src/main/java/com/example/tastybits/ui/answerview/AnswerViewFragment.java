@@ -38,7 +38,7 @@ public class AnswerViewFragment extends Fragment {
         ans_adapter = new AnswerRecyclerViewAdapter(getActivity(), new ArrayList<AnswerItem>());
         recyclerView.setAdapter(ans_adapter);
         String questionId = getArguments().getString(getString(R.string.question_id_key));
-        Log.i(TAG, "loading answer view fragment of " + questionId);
+//        Log.i(TAG, "loading answer view fragment of " + questionId);
         NetworkRequest.getInstance().queryAnswer(questionId, new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
@@ -52,7 +52,9 @@ public class AnswerViewFragment extends Fragment {
             }
         });
         FloatingActionButton addAnswer = baseView.findViewById(R.id.addAnswerButton);
-        addAnswer.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionhub_answer));
+        Bundle bundle = new Bundle();
+        bundle.putString("QuestionId", questionId);
+        addAnswer.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionhub_answer, bundle));
         return baseView;
     }
 
