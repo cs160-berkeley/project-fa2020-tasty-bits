@@ -15,20 +15,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class QuestionHubFragment extends Fragment {
 
-    //private com.example.tastybits.ui.questionhub.QuestionHubViewModel questionHubViewModel;
-    //private OnFragmentInteractionListener mListener;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        //questionHubViewModel = ViewModelProviders.of(this).get(com.example.tastybits.ui.questionhub.QuestionHubViewModel.class);
         View view = inflater.inflate(R.layout.fragment_questionhub, container, false);
-        /*final TextView textView = root.findViewById(R.id.questionhub);
-        questionHubViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
+
 
 
         ImageView classplan = view.findViewById(R.id.classplanning);
@@ -67,14 +59,5 @@ public class QuestionHubFragment extends Fragment {
         return view;
     }
 
-    /*@Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            mListener = (OnFragmentInteractionListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }*/
+
 }

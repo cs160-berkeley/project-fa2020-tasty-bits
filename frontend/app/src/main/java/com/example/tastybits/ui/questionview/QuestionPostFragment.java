@@ -11,7 +11,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.tastybits.AsyncCallback;
 import com.example.tastybits.Constants;
@@ -19,6 +21,7 @@ import com.example.tastybits.NetworkRequest;
 import com.example.tastybits.R;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +44,7 @@ public class QuestionPostFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_question_post, container, false);
 
-        EditText questionText = view.findViewById(R.id.questionTextView);
+        EditText titleText = view.findViewById(R.id.titleTextView);
         EditText descriptionText = view.findViewById(R.id.description);
         TextView promptText = view.findViewById(R.id.promptTextView);
 
@@ -49,7 +52,7 @@ public class QuestionPostFragment extends Fragment {
 
         sentimentButton.setOnClickListener(button -> {
 
-            NetworkRequest.getInstance().getSentiment(questionText.getText() + ". " + descriptionText.getText(), new AsyncCallback() {
+            NetworkRequest.getInstance().querySentiment(titleText.getText() + ". " + descriptionText.getText(), new AsyncCallback() {
                 @Override
                 public void onCompleted(Object result) {
                     String sentimentText = (String) result;
@@ -73,18 +76,34 @@ public class QuestionPostFragment extends Fragment {
 
         Button postButton = view.findViewById(R.id.post_button);
         postButton.setOnClickListener(view1 -> {
-            String categoryDisplayName =
-                    (String) spinnerAdapter.getItem(categoryTagsSpinner.getSelectedItemPosition());
-            QuestionItem newQuestion = new QuestionItem(questionText.getText().toString(),
-                    descriptionText.getText().toString());
+            String categoryDisplayName = (String) spinnerAdapter.getItem(categoryTagsSpinner.getSelectedItemPosition());
+            String categoryName = Constants.displayToQueryCategoryNameMap.get(categoryDisplayName);
+            List<String> categoryNames = Arrays.asList(categoryName);
+
+            //only have one category for a question (Even though api can handle multiple)
+            assert(categoryNames.size() == 1);
 
             // send the mutation request to add this question
             // must convert the selected spinner tag into the actual category name listed in the
             // backend
-            NetworkRequest.getInstance().createQuestionRequest(
-                    Arrays.asList(Constants.displayToQueryCategoryNameMap.get(categoryDisplayName)),
-                    newQuestion);
-            Navigation.findNavController(view).navigate(R.id.questionhub);
+            NetworkRequest.getInstance().mutationCreateQuestion(
+                    categoryNames,
+                    titleText.getText().toString(), descriptionText.getText().toString(), new AsyncCallback() {
+                        @Override
+                        public void onCompleted(Object result) {
+                            getActivity().runOnUiThread(() -> {
+                                Bundle args = new Bundle();
+                                args.putString(getString(R.string.category_name_key), categoryName);
+                                Navigation.findNavController(view).navigate(R.id.questionview_fragment, args);
+                            });
+                        }
+
+                        @Override
+                        public void onException(Exception e) {
+                            //do-nothing
+                        }
+                    });
+
         });
 
         return view;

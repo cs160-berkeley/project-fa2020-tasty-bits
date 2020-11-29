@@ -11,6 +11,7 @@
     <string name="bio_social_culture_event"><a href="https://events.berkeley.edu/index.php/calendar/sn/bio.html">BIO Social and Cultural Events</a></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="category_name_key">CategoryName</string>
 
     <string-array name="category_display_names">
         <item>Job Hunting</item>

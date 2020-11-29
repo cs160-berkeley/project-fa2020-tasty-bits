@@ -24,11 +24,6 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
         //fakeSomeData(questionList);
     }
 
-    private void fakeSomeData(ArrayList<QuestionItem> qlist) {
-        for (int i=0; i<100; i++) {
-            qlist.add(new QuestionItem(String.valueOf(i),"question " + String.valueOf(i)));
-        }
-    }
 
     /**
      * Needs to be executed on main UI thread
