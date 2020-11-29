@@ -48,6 +48,7 @@ public class LoginManager {
     private LoginCallback loginCallback;
     private LogoutCallback logoutCallback;
 
+    public static LoginManager loginManager = null;
     public LoginManager(Activity activity, LoginCallback loginCallback, LogoutCallback logoutCallback) {
         this.activity = activity;
         this.loginCallback = loginCallback;
@@ -57,7 +58,17 @@ public class LoginManager {
         auth0.setOIDCConformant(true);
     }
 
-    public String getAccessToken() {
+    public static void init(LoginManager initLoginManager) {
+        if (loginManager == null) {
+            loginManager = initLoginManager;
+        }
+    }
+
+    public static LoginManager getInstance() {
+        return loginManager;
+    }
+
+    private String getAccessToken() {
         SharedPreferences preferences = activity.getSharedPreferences(TAG_APP_ID, Context.MODE_PRIVATE);
         String accessToken = preferences.getString(TAG_ACCESS_TOKEN, null);
         String expiresAt = preferences.getString(TAG_EXPIRES_AT, null);
@@ -76,8 +87,8 @@ public class LoginManager {
         String accessToken = getAccessToken();
 
         if (accessToken != null) {
-//            loginCallback.onCompleted(accessToken);
-//            return;
+            loginCallback.onCompleted(accessToken);
+            return;
         }
 
         WebAuthProvider.login(auth0)

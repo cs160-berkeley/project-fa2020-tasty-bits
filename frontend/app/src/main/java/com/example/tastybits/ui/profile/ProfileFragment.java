@@ -15,17 +15,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.tastybits.LoginManager;
 import com.example.tastybits.MainActivity;
 import com.example.tastybits.R;
 
 public class ProfileFragment extends Fragment {
 
-    private ProfileViewModel profileViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        profileViewModel =
-                ViewModelProviders.of(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 //        final TextView textView = root.findViewById(R.id.profile);
 //        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -40,7 +38,7 @@ public class ProfileFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).loginManager.login();
+                LoginManager.getInstance().login();
             }
         });
 

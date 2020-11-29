@@ -10,7 +10,6 @@ import com.example.CreateQuestionMutation;
 import com.example.GetCategoriesQuery;
 import com.example.GetQuestionsQuery;
 import com.example.GetSentimentQuery;
-import com.example.tastybits.ui.questionview.AddQuestionCallback;
 import com.example.tastybits.ui.questionview.QuestionItem;
 
 import org.jetbrains.annotations.NotNull;
@@ -45,6 +44,7 @@ public class NetworkRequest {
         categoryIdMap = new HashMap<>();
     }
 
+
     public static NetworkRequest getInstance() {
         if (networkRequest == null) {
             networkRequest = new NetworkRequest();
@@ -52,15 +52,19 @@ public class NetworkRequest {
         return networkRequest;
     }
 
-    public void sendQuestionRequest(String categoryId, AddQuestionCallback addQuestionCallback) {
+    public void queryQuestions(String categoryName, AsyncCallback callback) {
+
+
+        String categoryId = categoryIdMap.get(categoryName);
+
         apolloClient.query(new GetQuestionsQuery(categoryId)).enqueue(new ApolloCall.Callback<GetQuestionsQuery.Data>() {
             @Override
             public void onResponse(@NotNull Response<GetQuestionsQuery.Data> response) {
-                List<GetQuestionsQuery.GetQuestion> q_list = response.getData().getQuestions();
-                for (GetQuestionsQuery.GetQuestion question : q_list) {
+                List<GetQuestionsQuery.GetQuestion> qList = response.getData().getQuestions();
+                for (GetQuestionsQuery.GetQuestion question : qList) {
                     QuestionItem qItem = new QuestionItem(question.id(), question.title(),
                             question.description());
-                    addQuestionCallback.add(qItem);
+                    callback.onCompleted(qItem);
                 }
                 //Log.i(TAG, response.toString());
             }
@@ -68,12 +72,13 @@ public class NetworkRequest {
             @Override
             public void onFailure(@NotNull ApolloException e) {
                 Log.e(TAG, e.toString());
+                callback.onException(e);
             }
         });
     }
 
 
-    public void getSentiment(String text, AsyncCallback callback) {
+    public void querySentiment(String text, AsyncCallback callback) {
         apolloClient.query(new GetSentimentQuery(text)).enqueue(new ApolloCall.Callback<GetSentimentQuery.Data>() {
             @Override
             public void onResponse(@NotNull Response<GetSentimentQuery.Data> response) {
@@ -86,6 +91,7 @@ public class NetworkRequest {
             @Override
             public void onFailure(@NotNull ApolloException e) {
                 Log.e(TAG, e.toString());
+                callback.onException(e);
             }
         });
     }
@@ -93,7 +99,7 @@ public class NetworkRequest {
     /**
      * Send this request early to load the category ids.
      */
-    public void sendCategoryRequest() {
+    public void queryCategories() {
         apolloClient.query(new GetCategoriesQuery()).enqueue(new ApolloCall.Callback<GetCategoriesQuery.Data>() {
             @Override
             public void onResponse(@NotNull Response<GetCategoriesQuery.Data> response) {
@@ -109,42 +115,32 @@ public class NetworkRequest {
         });
     }
 
-    /*
-    category names: jobHunting, housing, financialAid, clubsAndDecals, enrollment, classPlanning
-     */
-    public void loadCategoryQuestionsRequest(String categoryName, AddQuestionCallback addQuestionCallback) {
-        // assumes the categoryMap was already populated
-        sendQuestionRequest(categoryIdMap.get(categoryName), addQuestionCallback);
-    }
 
-    public void createQuestionRequest(List<String> categoryNames, QuestionItem questionItem,
-                                      AddQuestionCallback addQuestionCallback) {
+
+    public void mutationCreateQuestion(List<String> categoryNames, String title, String description,
+                                      AsyncCallback callback) {
 
         CreateQuestionMutation createQuestionMutation =
-                new CreateQuestionMutation(categoryNamesToIds(categoryNames), questionItem.getQuestionText(),
-                        questionItem.getDescriptionText());
+                new CreateQuestionMutation(categoryNamesToIds(categoryNames), title,
+                        description);
         apolloClient.mutate(createQuestionMutation
         ).enqueue(new ApolloCall.Callback<CreateQuestionMutation.Data>() {
             @Override
             public void onResponse(@NotNull Response<CreateQuestionMutation.Data> response) {
-                if (addQuestionCallback != null) {
-                    CreateQuestionMutation.CreateQuestion question =
-                            response.getData().createQuestion();
-                    addQuestionCallback.add(new QuestionItem(question.id(), question.title(),
-                            question.description()));
-                }
+
+                CreateQuestionMutation.CreateQuestion question =
+                        response.getData().createQuestion();
+                callback.onCompleted(new QuestionItem(question.id(), question.title(),
+                        question.description()));
             }
 
             @Override
             public void onFailure(@NotNull ApolloException e) {
-
+                callback.onException(e);
             }
         });
     }
 
-    public void createQuestionRequest(List<String> categoryNames, QuestionItem questionItem) {
-        createQuestionRequest(categoryNames, questionItem, null);
-    }
 
     private List<String> categoryNamesToIds(List<String> categoryNames) {
         List<String> cIds = new LinkedList<>();

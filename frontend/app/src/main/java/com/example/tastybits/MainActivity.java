@@ -1,8 +1,11 @@
 package com.example.tastybits;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +18,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity{
 
-    public LoginManager loginManager;
 
     public static final String EXTRA_CLEAR_CREDENTIALS = "com.auth0.CLEAR_CREDENTIALS";
     public static final String EXTRA_ACCESS_TOKEN = "com.auth0.ACCESS_TOKEN";
@@ -35,12 +37,12 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupWithNavController(navView, navController);
 
         // load the categories
-        NetworkRequest.getInstance().sendCategoryRequest();
+        NetworkRequest.getInstance().queryCategories();
         setupLoginManager();
     }
 
     public void setupLoginManager() {
-        this.loginManager = new LoginManager(this, new LoginManager.LoginCallback() {
+        LoginManager.init(new LoginManager(this, new LoginManager.LoginCallback() {
             @Override
             public void onCompleted(final String accessToken) {
                 runOnUiThread(new Runnable() {
@@ -91,7 +93,16 @@ public class MainActivity extends AppCompatActivity{
                     }
                 });
             }
-        });
+        }));
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
 
