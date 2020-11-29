@@ -7,9 +7,11 @@ import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.example.CreateQuestionMutation;
+import com.example.GetAnswerQuery;
 import com.example.GetCategoriesQuery;
 import com.example.GetQuestionsQuery;
 import com.example.GetSentimentQuery;
+import com.example.tastybits.ui.answerview.AnswerItem;
 import com.example.tastybits.ui.questionview.QuestionItem;
 
 import org.jetbrains.annotations.NotNull;
@@ -73,6 +75,24 @@ public class NetworkRequest {
             public void onFailure(@NotNull ApolloException e) {
                 Log.e(TAG, e.toString());
                 callback.onException(e);
+            }
+        });
+    }
+
+    public void queryAnswer(String questionId, AsyncCallback callback) {
+        apolloClient.query(new GetAnswerQuery(questionId)).enqueue(new ApolloCall.Callback<GetAnswerQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<GetAnswerQuery.Data> response) {
+                List<GetAnswerQuery.GetAnswer> aList = response.getData().getAnswers();
+                for (GetAnswerQuery.GetAnswer answer: aList) {
+                    AnswerItem aItem = new AnswerItem(answer.id(), answer.content(), questionId);
+                    callback.onCompleted(aItem);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+
             }
         });
     }
