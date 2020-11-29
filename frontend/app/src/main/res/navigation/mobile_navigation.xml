@@ -103,4 +103,10 @@
         android:label="questionhub_post"
         tools:layout="@layout/fragment_question_post"/>
 
+    <fragment
+        android:id="@+id/answerview_fragment"
+        android:name="com.example.tastybits.ui.answerview.AnswerViewFragment"
+        android:label="questionhub_answer_view"
+        tools:layout="@layout/fragment_answer_view"/>
+
 </navigation>
