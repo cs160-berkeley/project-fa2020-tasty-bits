@@ -2,6 +2,7 @@ package com.example.tastybits.ui.answerview;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tastybits.NetworkRequest;
+
 import com.example.tastybits.R;
-import com.example.tastybits.ui.questionview.QuestionViewViewModel;
+
 
 import java.util.ArrayList;
 
@@ -46,9 +47,8 @@ public class AnswerViewFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ans_adapter = setAnswerRecyclerViewAdapter();
         recyclerView.setAdapter(ans_adapter);
-        // TODO: getarguments? chang here
-//        String categoryName = getArguments().getString("CategoryName");
-//        //Log.i(TAG, "loading answer view fragment of " + categoryName);
+        String questionId = getArguments().getString(getString(R.string.question_id_key));
+        Log.i(TAG, "loading answer view fragment of " + questionId);
 //        NetworkRequest.getInstance().loadCategoryAnswersRequest(categoryName, this::addAnswerCallback);
 
         return baseView;
