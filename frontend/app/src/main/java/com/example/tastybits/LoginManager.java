@@ -68,7 +68,7 @@ public class LoginManager {
         return loginManager;
     }
 
-    private String getAccessToken() {
+    public String getAccessToken() {
         SharedPreferences preferences = activity.getSharedPreferences(TAG_APP_ID, Context.MODE_PRIVATE);
         String accessToken = preferences.getString(TAG_ACCESS_TOKEN, null);
         String expiresAt = preferences.getString(TAG_EXPIRES_AT, null);

@@ -5,6 +5,7 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/infohub">
 
+
     <fragment
         android:id="@+id/infohub"
         android:name="com.example.tastybits.ui.informationhub.InfoHubFragment"

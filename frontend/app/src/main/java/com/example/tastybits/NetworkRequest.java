@@ -155,7 +155,7 @@ public class NetworkRequest {
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
             Request request = chain.request().newBuilder().addHeader("Authorization",
-                    Constants.AUTH_TOKEN).build();
+                    LoginManager.getInstance().getAccessToken()).build();
             return chain.proceed(request);
         }
     }
