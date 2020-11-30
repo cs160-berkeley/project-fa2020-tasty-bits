@@ -50,7 +50,7 @@ public class QuestionHubFragment extends Fragment {
 
         ImageView jobs = view.findViewById(R.id.job);
         Bundle jobBundle = new Bundle();
-        jobBundle.putString("CategoryName", "housing");
+        jobBundle.putString("CategoryName", "jobHunting");
         jobs.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionview_fragment, jobBundle));
 
         FloatingActionButton addQuestion = view.findViewById(R.id.addQuestionButton);
