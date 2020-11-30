@@ -1,6 +1,7 @@
 package com.example.tastybits.ui.questionview;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tastybits.Constants;
@@ -17,10 +19,11 @@ import com.example.tastybits.R;
 import java.util.ArrayList;
 
 public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRecyclerViewAdapter.ViewHolder>{
-
+    private static final String TAG = "QuestionsRecyclerViewAdapter";
     private ArrayList<QuestionItem> questionList;
-    public QuestionRecyclerViewAdapter(Context context, ArrayList<QuestionItem> questionData) {
-        questionList = questionData;
+
+    public QuestionRecyclerViewAdapter(Context context, ArrayList<QuestionItem> questionData ) {
+        this.questionList = questionData;
     }
 
 
@@ -31,6 +34,10 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
     public void addQuestion(QuestionItem questionItem) {
         questionList.add(0, questionItem);
         notifyItemInserted(0);
+    }
+
+    public QuestionItem getQuestion(int position) {
+        return questionList.get(position);
     }
 
     @NonNull
@@ -44,6 +51,9 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         QuestionItem qi = questionList.get(position);
         holder.bindTo(qi, position);
+        Bundle bundle = new Bundle();
+        bundle.putString("QuestionId", qi.getId());
+        holder.itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.answerview_fragment, bundle));
     }
 
     @Override

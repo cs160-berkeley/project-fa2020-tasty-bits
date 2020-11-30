@@ -19,7 +19,7 @@ import com.example.tastybits.R;
 
 import java.util.ArrayList;
 
-public class QuestionViewFragment extends Fragment {
+public class QuestionViewFragment extends Fragment{
     private static final String TAG = "QuestionsViewFragment";
     private QuestionRecyclerViewAdapter qrv_adapter;
 
@@ -51,6 +51,5 @@ public class QuestionViewFragment extends Fragment {
 
         return baseView;
     }
-
 
 }
