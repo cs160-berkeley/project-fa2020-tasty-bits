@@ -16,6 +16,7 @@ public class QuestionItem {
     public QuestionItem(String id, String questionText) {
         this.questionText = questionText;
         this.descriptionText = "";
+        this.id = id;
         upvotes = 0;
         views = 0;
     }

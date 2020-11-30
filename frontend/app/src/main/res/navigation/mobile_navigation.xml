@@ -93,12 +93,18 @@
         android:label="questionhub_post"
         tools:layout="@layout/fragment_question_post"/>
 
+    <fragment
+        android:id="@+id/answerview_fragment"
+        android:name="com.example.tastybits.ui.answerview.AnswerViewFragment"
+        android:label="questionhub_answer_view"
+        tools:layout="@layout/fragment_answer_view"/>
 
     <fragment
         android:id="@+id/questionhub_answer"
-        android:name="com.example.tastybits.ui.questionview.QuestionAnswerFragment"
+        android:name="com.example.tastybits.ui.answerview.QuestionAnswerFragment"
         android:label="question_answer"
         tools:layout="@layout/fragment_question_answer"/>
+
 
 
 </navigation>
