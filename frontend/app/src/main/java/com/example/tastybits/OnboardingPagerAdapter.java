@@ -19,11 +19,14 @@ public class OnboardingPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
+        //render one of the 4 fragments needed for onboarding from the position
+
+        //have the login/register fragment short circuit the onboarding process and finish early
         return new ChatFragment();
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 4;
     }
 }

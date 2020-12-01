@@ -40,6 +40,7 @@ public class OnboardingFragmentActivity extends FragmentActivity {
         pagerAdapter = new OnboardingPagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
 
+
     }
 
     @Override
@@ -47,9 +48,7 @@ public class OnboardingFragmentActivity extends FragmentActivity {
         if (viewPager.getCurrentItem() == 0) {
             // If the user is currently looking at the first step, allow the system to handle the
             // Back button. This calls finish() on this activity and pops the back stack.
-//            super.onBackPressed();
-
-            //do nothing
+            super.onBackPressed();
         } else {
             // Otherwise, select the previous step.
             viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
