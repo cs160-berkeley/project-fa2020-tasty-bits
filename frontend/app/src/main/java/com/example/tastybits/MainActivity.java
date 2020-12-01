@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity{
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-        //needs to be first. Network request relies on there being an access token
+        //needs to be first
         setupLoginManager();
 
         // load the categories
         NetworkRequest.getInstance().queryCategories();
+
     }
 
     public void setupLoginManager() {
