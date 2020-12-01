@@ -2,15 +2,18 @@ package com.example.tastybits.ui.questionview;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tastybits.Constants;
 import com.example.tastybits.R;
 
 import java.util.ArrayList;
@@ -47,7 +50,7 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         QuestionItem qi = questionList.get(position);
-        holder.bindTo(qi);
+        holder.bindTo(qi, position);
         Bundle bundle = new Bundle();
         bundle.putString("QuestionId", qi.getId());
         holder.itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.answerview_fragment, bundle));
@@ -59,20 +62,24 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView questionTextView;
-        private final TextView upvotesTextView;
-        private final TextView viewsTextView;
+        private TextView questionTextView;
+        private TextView upvotesTextView;
+        private TextView viewsTextView;
+        private CardView baseCardView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             questionTextView = itemView.findViewById(R.id.questionTextView);
             upvotesTextView = itemView.findViewById(R.id.upvotesTextView);
             viewsTextView = itemView.findViewById(R.id.viewsTextView);
+            baseCardView = itemView.findViewById(R.id.base_cardview);
         }
 
-        void bindTo(QuestionItem questionItem) {
+        void bindTo(QuestionItem questionItem, int position) {
             questionTextView.setText(questionItem.getQuestionText());
+            upvotesTextView.setText(String.valueOf(questionItem.getUpvotes()));
+            viewsTextView.setText(String.valueOf(questionItem.getViews()));
+            baseCardView.setCardBackgroundColor(Color.parseColor(Constants.cycleColors[position % Constants.cycleColors.length]));
         }
     }
-
 }

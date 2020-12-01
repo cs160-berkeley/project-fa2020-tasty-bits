@@ -102,21 +102,30 @@ public class LoginManager {
 
                     @Override
                     public void onFailure(final AuthenticationException exception) {
-
-
                         loginCallback.onException(exception);
                     }
 
                     @Override
                     public void onSuccess(@NonNull final Credentials credentials) {
                         String token = credentials.getAccessToken();
+
                         long expires = credentials.getExpiresAt().getTime();
                         SharedPreferences preferences = activity.getSharedPreferences(TAG_APP_ID, Context.MODE_PRIVATE);
                         preferences.edit().putString(TAG_ACCESS_TOKEN, token).apply();
                         preferences.edit().putString(TAG_EXPIRES_AT, Long.toString(expires)).apply();
 
+                        NetworkRequest.getInstance().mutationUpsertUser(new AsyncCallback() {
+                            @Override
+                            public void onCompleted(Object result) {
+                                loginCallback.onCompleted(credentials.getAccessToken());
+                            }
 
-                        loginCallback.onCompleted(credentials.getAccessToken());
+                            @Override
+                            public void onException(Exception e) {
+                                loginCallback.onException(e);
+                            }
+                        });
+
                     }
                 });
     }
