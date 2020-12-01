@@ -3,68 +3,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/infohub">
+    app:startDestination="@+id/profile">
 
     <fragment
         android:id="@+id/infohub"
         android:name="com.example.tastybits.ui.informationhub.InfoHubFragment"
-        android:label="infohub"
+        android:label="Information Hub"
         tools:layout="@layout/fragment_infohub" />
 
     <fragment
         android:id="@+id/questionhub"
         android:name="com.example.tastybits.ui.questionhub.QuestionHubFragment"
-        android:label="questionhub"
+        android:label="Questions?"
         tools:layout="@layout/fragment_questionhub"/>
 
 
     <fragment
-        android:id="@+id/chat"
-        android:name="com.example.tastybits.ui.chat.ChatFragment"
-        android:label="chat"
-        tools:layout="@layout/fragment_chat" />
-
-    <fragment
         android:id="@+id/profile"
         android:name="com.example.tastybits.ui.profile.ProfileFragment"
-        android:label="profile"
+        android:label="My Profile"
         tools:layout="@layout/fragment_profile" />
 
 
     <fragment
         android:id="@+id/info_class_planning"
         android:name="com.example.tastybits.ui.informationhub.ClassPlanningFragment"
-        android:label="informationhub_class_planning"
+        android:label="Info: Class Planning"
         tools:layout="@layout/fragment_infohub_classplanning"/>
 
     <fragment
         android:id="@+id/info_jobhunt"
         android:name="com.example.tastybits.ui.informationhub.JobHuntFragment"
-        android:label="informationhub_jobhunt"
+        android:label="Info: Job Hunt"
         tools:layout="@layout/fragment_infohub_jobhunt"/>
 
     <fragment
         android:id="@+id/info_enrollment"
         android:name="com.example.tastybits.ui.informationhub.EnrollmentFragment"
-        android:label="informationhub_enrollment"
+        android:label="Info: Enrollment"
         tools:layout="@layout/fragment_infohub_enrollment"/>
     <fragment
         android:id="@+id/info_transfer"
         android:name="com.example.tastybits.ui.informationhub.TransferFragment"
-        android:label="informationhub_Transfer"
+        android:label="Info: Transfer Student"
         tools:layout="@layout/fragment_infohub_transfer"/>
 
 
     <fragment
         android:id="@+id/info_housing"
         android:name="com.example.tastybits.ui.informationhub.HousingFragment"
-        android:label="informationhub_housing"
+        android:label="Info: Housing"
         tools:layout="@layout/fragment_infohub_housing"/>
 
     <fragment
         android:id="@+id/info_clubs"
         android:name="com.example.tastybits.ui.informationhub.ClubsDecalsFragment"
-        android:label="informationhub_clubs"
+        android:label="Info: Clubs and Decals"
         tools:layout="@layout/fragment_infohub_clubsdecals"/>
 
     <fragment
@@ -76,32 +70,32 @@
     <fragment
         android:id="@+id/info_firstgen"
         android:name="com.example.tastybits.ui.informationhub.FirstGenFragment"
-        android:label="informationhub_firstgen"
+        android:label="Info: First Gen Student"
         tools:layout="@layout/fragment_infohub_firstgen"/>
 
 
     <fragment
         android:id="@+id/questionview_fragment"
         android:name="com.example.tastybits.ui.questionview.QuestionViewFragment"
-        android:label="questionhub_post"
+        android:label="Question"
         tools:layout="@layout/fragment_questions_view"/>
 
     <fragment
         android:id="@+id/questionpost_fragment"
         android:name="com.example.tastybits.ui.questionview.QuestionPostFragment"
-        android:label="questionhub_post"
+        android:label="Post Your Question"
         tools:layout="@layout/fragment_question_post"/>
 
     <fragment
         android:id="@+id/answerview_fragment"
         android:name="com.example.tastybits.ui.answerview.AnswerViewFragment"
-        android:label="questionhub_answer_view"
+        android:label="Answer"
         tools:layout="@layout/fragment_answer_view"/>
 
     <fragment
         android:id="@+id/questionhub_answer"
         android:name="com.example.tastybits.ui.answerview.QuestionAnswerFragment"
-        android:label="question_answer"
+        android:label="Add Your Own Question"
         tools:layout="@layout/fragment_question_answer"/>
 
 

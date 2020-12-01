@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/profile"
+        android:title="" />
 
     <item
         android:id="@+id/infohub"
         android:icon="@drawable/infohub"
-        android:title=""
-        />
+        android:title="" />
 
     <item
         android:id="@+id/questionhub"
         android:icon="@drawable/question"
         android:title="" />
 
-    <item
-        android:id="@+id/chat"
-        android:icon="@drawable/chat"
-        android:title="" />
 
-    <item
-        android:id="@+id/profile"
-        android:icon="@drawable/profile"
-        android:title="" />
 
 </menu>

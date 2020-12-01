@@ -15,39 +15,9 @@
             android:layout_height="wrap_content"
 
             android:orientation="vertical">
-
-
-
-            <SearchView
-                android:id="@+id/searchBar"
-                style="@android:style/Widget.Material.Light.SearchView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/searchbar"
-                android:iconifiedByDefault="false"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:queryBackground="@android:color/transparent"
-                android:queryHint="Search"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </SearchView>
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="345dp"
-                android:layout_height="67dp"
-                android:layout_marginTop="12dp"
-                android:text="  Information Hub"
-                android:textColor="#1A1A1A"
-                android:textSize="36sp"
-                app:layout_constraintTop_toBottomOf="@+id/searchBar"
-                tools:layout_editor_absoluteX="16dp" />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
             <ImageView
                 android:id="@+id/first_gen_infohub"
                 android:layout_width="match_parent"
@@ -129,6 +99,9 @@
                 android:src="@drawable/infohub_housing"
                 app:layout_constraintTop_toBottomOf="@+id/housing_infohub"
                 tools:layout_editor_absoluteX="3dp" />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
         </LinearLayout>
     </ScrollView>
 

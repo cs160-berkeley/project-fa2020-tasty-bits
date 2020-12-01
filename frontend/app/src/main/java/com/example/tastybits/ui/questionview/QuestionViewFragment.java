@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tastybits.AsyncCallback;
+import com.example.tastybits.Constants;
 import com.example.tastybits.NetworkRequest;
 import com.example.tastybits.R;
 
@@ -33,6 +35,9 @@ public class QuestionViewFragment extends Fragment{
 
         String categoryName = getArguments().getString(getString(R.string.category_name_key));
 
+        TextView categoryTitle = baseView.findViewById(R.id.category_title_text);
+        categoryTitle.setText(Constants.queryCategoryToDisplayNameMap.get(categoryName));
+
         NetworkRequest.getInstance().queryQuestions(categoryName, new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
@@ -41,9 +46,7 @@ public class QuestionViewFragment extends Fragment{
             }
 
             @Override
-            public void onException(Exception e) {
-
-            }
+            public void onException(Exception e) { }
         });
 
         return baseView;
