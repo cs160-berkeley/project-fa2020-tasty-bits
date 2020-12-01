@@ -12,6 +12,7 @@ import com.example.GetAnswerQuery;
 import com.example.GetCategoriesQuery;
 import com.example.GetQuestionsQuery;
 import com.example.GetSentimentQuery;
+import com.example.UpsertUserMutation;
 import com.example.tastybits.ui.answerview.AnswerItem;
 import com.example.tastybits.ui.questionview.QuestionItem;
 
@@ -93,7 +94,24 @@ public class NetworkRequest {
 
             @Override
             public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+                callback.onException(e);
+            }
+        });
+    }
 
+
+    public void mutationUpsertUser(AsyncCallback callback) {
+        apolloClient.mutate(new UpsertUserMutation()).enqueue(new ApolloCall.Callback<UpsertUserMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<UpsertUserMutation.Data> response) {
+                callback.onCompleted(response.getData().upsertUser().id());
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+                callback.onException(e);
             }
         });
     }
