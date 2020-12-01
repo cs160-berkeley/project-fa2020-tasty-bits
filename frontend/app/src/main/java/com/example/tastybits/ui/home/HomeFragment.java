@@ -1,4 +1,4 @@
-package com.example.tastybits.ui.profile;
+package com.example.tastybits.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,19 +19,11 @@ import com.example.tastybits.LoginManager;
 import com.example.tastybits.MainActivity;
 import com.example.tastybits.R;
 
-public class ProfileFragment extends Fragment {
-
+public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
-//        final TextView textView = root.findViewById(R.id.profile);
-//        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
 
 
         Button loginButton = root.findViewById(R.id.loginButton);
@@ -44,7 +36,5 @@ public class ProfileFragment extends Fragment {
 
         return root;
     }
-
-
 
 }
