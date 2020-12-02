@@ -68,7 +68,7 @@ export const User = objectType({
           });
         return questions.reduce(
           (prev, curr) =>
-            prev + +curr.votes.reduce((prev, curr) => prev + +curr.upDown, 1),
+            prev + curr.votes.reduce((prev, curr) => prev + +curr.upDown, 1),
           0
         );
       },
@@ -89,7 +89,7 @@ export const User = objectType({
           });
         return answers.reduce(
           (prev, curr) =>
-            prev + +curr.votes.reduce((prev, curr) => prev + +curr.upDown, 1),
+            prev + curr.votes.reduce((prev, curr) => prev + +curr.upDown, 1),
           0
         );
       },
@@ -130,7 +130,7 @@ export const Question = objectType({
             },
           })
           .votes();
-        return votes.reduce((prev, curr) => prev + +curr.upDown, 0);
+        return votes.reduce((prev, curr) => prev + (curr.upDown ? 1 : -1), 0);
       },
     });
 
@@ -207,7 +207,7 @@ export const Answer = objectType({
             },
           })
           .votes();
-        return votes.reduce((prev, curr) => prev + +curr.upDown, 0);
+        return votes.reduce((prev, curr) => prev + (curr.upDown ? 1 : -1), 0);
       },
     });
     t.model.user();
