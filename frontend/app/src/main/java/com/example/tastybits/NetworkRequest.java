@@ -12,6 +12,9 @@ import com.example.GetAnswerQuery;
 import com.example.GetCategoriesQuery;
 import com.example.GetQuestionsQuery;
 import com.example.GetSentimentQuery;
+import com.example.GetSuggestedQuestionsQuery;
+import com.example.GetYourAnswersQuery;
+import com.example.GetYourQuestionsQuery;
 import com.example.UpsertUserMutation;
 import com.example.tastybits.ui.answerview.AnswerItem;
 import com.example.tastybits.ui.questionview.QuestionItem;
@@ -65,11 +68,7 @@ public class NetworkRequest {
             @Override
             public void onResponse(@NotNull Response<GetQuestionsQuery.Data> response) {
                 List<GetQuestionsQuery.GetQuestion> qList = response.getData().getQuestions();
-                for (GetQuestionsQuery.GetQuestion question : qList) {
-                    QuestionItem qItem = new QuestionItem(question.id(), question.title(),
-                            question.description());
-                    callback.onCompleted(qItem);
-                }
+                callback.onCompleted(qList);
                 //Log.i(TAG, response.toString());
             }
 
@@ -86,10 +85,9 @@ public class NetworkRequest {
             @Override
             public void onResponse(@NotNull Response<GetAnswerQuery.Data> response) {
                 List<GetAnswerQuery.GetAnswer> aList = response.getData().getAnswers();
-                for (GetAnswerQuery.GetAnswer answer: aList) {
-                    AnswerItem aItem = new AnswerItem(answer.id(), answer.content(), questionId);
-                    callback.onCompleted(aItem);
-                }
+
+                callback.onCompleted(aList);
+
             }
 
             @Override
@@ -125,6 +123,55 @@ public class NetworkRequest {
                 callback.onCompleted(sentiment.sentiment().rawValue());
 
                 //Log.i(TAG, response.toString());
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+                callback.onException(e);
+            }
+        });
+    }
+
+    public void queryYourQuestions(AsyncCallback callback) {
+        apolloClient.query(new GetYourQuestionsQuery()).enqueue(new ApolloCall.Callback<GetYourQuestionsQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<GetYourQuestionsQuery.Data> response) {
+                List<GetYourQuestionsQuery.GetYourQuestion> questions = response.getData().getYourQuestions();
+                callback.onCompleted(questions);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+                callback.onException(e);
+            }
+        });
+    }
+
+    public void queryYourAnswers(AsyncCallback callback) {
+        apolloClient.query(new GetYourAnswersQuery()).enqueue(new ApolloCall.Callback<GetYourAnswersQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<GetYourAnswersQuery.Data> response) {
+                List<GetYourAnswersQuery.GetYourAnswer> answers = response.getData().getYourAnswers();
+                callback.onCompleted(answers);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+                callback.onException(e);
+            }
+        });
+    }
+
+
+    public void querySuggestedQuestions(AsyncCallback callback) {
+        apolloClient.query(new GetSuggestedQuestionsQuery()).enqueue(new ApolloCall.Callback<GetSuggestedQuestionsQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<GetSuggestedQuestionsQuery.Data> response) {
+                List<GetSuggestedQuestionsQuery.GetSuggestedQuestion> questions = response.getData().getSuggestedQuestions();
+                callback.onCompleted(questions);
             }
 
             @Override

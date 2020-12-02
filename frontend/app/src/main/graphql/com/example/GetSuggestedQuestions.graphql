@@ -1,0 +1,10 @@
+query GetSuggestedQuestions {
+    getSuggestedQuestions {
+        id
+        title
+        description
+        categories {
+            name
+        }
+    }
+}

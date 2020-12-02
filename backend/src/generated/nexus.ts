@@ -202,6 +202,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
     votes: NexusGenRootTypes['AnswerVote'][]; // [AnswerVote!]!
+    voteScore: number; // Int!
   }
   AnswerVote: { // field return type
     answer: NexusGenRootTypes['Answer']; // Answer!
@@ -256,13 +257,17 @@ export interface NexusGenFieldTypes {
     getMessages: NexusGenRootTypes['Message'][]; // [Message!]!
     getQuestions: NexusGenRootTypes['Question'][]; // [Question!]!
     getSentiment: NexusGenRootTypes['SentimentResult']; // SentimentResult!
+    getSuggestedQuestions: NexusGenRootTypes['Question'][]; // [Question!]!
     getUser: NexusGenRootTypes['User'] | null; // User
+    getYourAnswers: NexusGenRootTypes['Answer'][]; // [Answer!]!
+    getYourQuestions: NexusGenRootTypes['Question'][]; // [Question!]!
     search: NexusGenRootTypes['SearchResults']; // SearchResults!
   }
   Question: { // field return type
     answers: NexusGenRootTypes['Answer'][]; // [Answer!]!
     categories: NexusGenRootTypes['Category'][]; // [Category!]!
     clicks: NexusGenRootTypes['QuestionClick'][]; // [QuestionClick!]!
+    clickScore: number; // Int!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     deletedAt: NexusGenScalars['DateTime'] | null; // DateTime
     description: string | null; // String
@@ -272,6 +277,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
     votes: NexusGenRootTypes['QuestionVote'][]; // [QuestionVote!]!
+    voteScore: number; // Int!
   }
   QuestionClick: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -302,7 +308,9 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     answers: NexusGenRootTypes['Answer'][]; // [Answer!]!
+    answerScore: number; // Int!
     answerVotes: NexusGenRootTypes['AnswerVote'][]; // [AnswerVote!]!
+    answerVoteScore: number; // Int!
     biography: string | null; // String
     chatrooms: NexusGenRootTypes['Chatroom'][]; // [Chatroom!]!
     class: string | null; // String
@@ -318,7 +326,9 @@ export interface NexusGenFieldTypes {
     profileVisibility: NexusGenEnums['ProfileVisibility']; // ProfileVisibility!
     questionClicks: NexusGenRootTypes['QuestionClick'][]; // [QuestionClick!]!
     questions: NexusGenRootTypes['Question'][]; // [Question!]!
+    questionScore: number; // Int!
     questionVotes: NexusGenRootTypes['QuestionVote'][]; // [QuestionVote!]!
+    questionVoteScore: number; // Int!
     snapchat: string | null; // String
     studentType: NexusGenEnums['StudentType']; // StudentType!
     tiktok: string | null; // String
