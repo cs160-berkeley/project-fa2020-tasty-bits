@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/homescreen">
+    app:startDestination="@+id/loading">
+
+    <fragment
+        android:id="@+id/loading"
+        android:name="com.example.tastybits.ui.loading.LoadingFragment"
+        android:label="Loading"
+        tools:layout="@layout/fragment_loading" />
 
 
     <fragment

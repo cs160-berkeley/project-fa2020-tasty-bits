@@ -111,17 +111,8 @@ public class LoginManager {
                         preferences.edit().putString(TAG_ACCESS_TOKEN, token).apply();
                         preferences.edit().putString(TAG_EXPIRES_AT, Long.toString(expires)).apply();
 
-                        NetworkRequest.getInstance().mutationUpsertUser(new AsyncCallback() {
-                            @Override
-                            public void onCompleted(Object result) {
-                                loginCallback.onCompleted(credentials.getAccessToken());
-                            }
+                        loginCallback.onCompleted(token);
 
-                            @Override
-                            public void onException(Exception e) {
-                                loginCallback.onException(e);
-                            }
-                        });
 
                     }
                 });
