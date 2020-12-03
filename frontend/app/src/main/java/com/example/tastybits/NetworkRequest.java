@@ -192,18 +192,21 @@ public class NetworkRequest {
     /**
      * Send this request early to load the category ids.
      */
-    public void queryCategories() {
+    public void queryCategories(AsyncCallback callback) {
         apolloClient.query(new GetCategoriesQuery()).enqueue(new ApolloCall.Callback<GetCategoriesQuery.Data>() {
             @Override
             public void onResponse(@NotNull Response<GetCategoriesQuery.Data> response) {
                 for (GetCategoriesQuery.GetCategory category: response.getData().getCategories()) {
                     categoryIdMap.put(category.name(), category.id());
                 }
+                callback.onCompleted(response.getData().getCategories());
             }
 
             @Override
             public void onFailure(@NotNull ApolloException e) {
                 Log.e(TAG, e.toString());
+                callback.onException(e);
+
             }
         });
     }

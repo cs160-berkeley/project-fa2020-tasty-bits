@@ -30,7 +30,7 @@ public class LoginManager {
     private static final String TAG = "LoginManager";
 
     public interface LoginCallback {
-        void onCompleted(String id);
+        void onCompleted(String accessToken);
 
         void onDialogException(Dialog dialog);
 
@@ -45,14 +45,11 @@ public class LoginManager {
 
     private Auth0 auth0;
     private Activity activity;
-    private LoginCallback loginCallback;
-    private LogoutCallback logoutCallback;
+
 
     private static LoginManager loginManager = null;
-    public LoginManager(Activity activity, LoginCallback loginCallback, LogoutCallback logoutCallback) {
+    public LoginManager(Activity activity) {
         this.activity = activity;
-        this.loginCallback = loginCallback;
-        this.logoutCallback = logoutCallback;
 
         auth0 = new Auth0(activity.getString(R.string.com_auth0_client_id), activity.getString(R.string.com_auth0_domain));
         auth0.setOIDCConformant(true);
@@ -83,7 +80,7 @@ public class LoginManager {
         return null;
     }
 
-    public void login() {
+    public void login(LoginCallback loginCallback) {
         String accessToken = getAccessToken();
 
         if (accessToken != null) {
@@ -130,7 +127,7 @@ public class LoginManager {
                 });
     }
 
-    public void logout() {
+    public void logout(LogoutCallback logoutCallback) {
         WebAuthProvider.logout(auth0)
                 .withScheme("demo")
                 .start(activity, new VoidCallback() {
