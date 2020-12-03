@@ -13,6 +13,7 @@ import com.example.GetCategoriesQuery;
 import com.example.GetQuestionsQuery;
 import com.example.GetSentimentQuery;
 import com.example.GetSuggestedQuestionsQuery;
+import com.example.GetUserQuery;
 import com.example.GetYourAnswersQuery;
 import com.example.GetYourQuestionsQuery;
 import com.example.UpsertUserMutation;
@@ -146,6 +147,22 @@ public class NetworkRequest {
             public void onResponse(@NotNull Response<GetYourQuestionsQuery.Data> response) {
                 List<GetYourQuestionsQuery.GetYourQuestion> questions = response.getData().getYourQuestions();
                 callback.onCompleted(questions);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+                callback.onException(e);
+            }
+        });
+    }
+
+    public void queryGetUser(AsyncCallback callback) {
+        apolloClient.query(new GetUserQuery()).enqueue(new ApolloCall.Callback<GetUserQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<GetUserQuery.Data> response) {
+                GetUserQuery.GetUser user = response.getData().getUser();
+                callback.onCompleted(user);
             }
 
             @Override

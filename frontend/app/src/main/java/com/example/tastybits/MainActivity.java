@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         LoginManager.init(new LoginManager(this));
 
         //only after logged in execute the rest
@@ -78,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
                     navController.popBackStack();
                     navController.navigate(R.id.homescreen);
-
-
                 });
             }
 
@@ -97,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-
     }
 
 
