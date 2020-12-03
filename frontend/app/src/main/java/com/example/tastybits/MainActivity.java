@@ -38,9 +38,8 @@ public class MainActivity extends AppCompatActivity{
         //needs to be first
         setupLoginManager();
 
-        // load the categories
-        NetworkRequest.getInstance().queryCategories();
-
+        LoginManager.getInstance().login();
+        
     }
 
     public void setupLoginManager() {
@@ -50,6 +49,12 @@ public class MainActivity extends AppCompatActivity{
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
+                        NetworkRequest.init(new NetworkRequest(accessToken));
+
+                        // load the categories
+                        NetworkRequest.getInstance().queryCategories();
+
                         Log.i(TAG, "access token: " + accessToken);
                         Toast.makeText(MainActivity.this, "Successfully logged in with accessToken: " + accessToken, Toast.LENGTH_SHORT).show();
                     }

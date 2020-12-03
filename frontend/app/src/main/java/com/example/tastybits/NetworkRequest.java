@@ -40,7 +40,10 @@ public class NetworkRequest {
     private ApolloClient apolloClient;
     private Map<String, String> categoryIdMap;
 
-    private NetworkRequest() {
+    private String accessToken;
+
+    public NetworkRequest(String accessToken) {
+        this.accessToken = accessToken;
         apolloClient =  ApolloClient.builder()
                         .serverUrl(URL)
                         .okHttpClient(
@@ -52,10 +55,14 @@ public class NetworkRequest {
     }
 
 
-    public static NetworkRequest getInstance() {
+
+    public static void init(NetworkRequest initNetworkRequest) {
         if (networkRequest == null) {
-            networkRequest = new NetworkRequest();
+            networkRequest = initNetworkRequest;
         }
+    }
+
+    public static NetworkRequest getInstance() {
         return networkRequest;
     }
 
@@ -258,7 +265,7 @@ public class NetworkRequest {
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
             Request request = chain.request().newBuilder().addHeader("Authorization",
-                    LoginManager.getInstance().getAccessToken()).build();
+                    accessToken).build();
             return chain.proceed(request);
         }
     }

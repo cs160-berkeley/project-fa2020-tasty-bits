@@ -48,7 +48,7 @@ public class LoginManager {
     private LoginCallback loginCallback;
     private LogoutCallback logoutCallback;
 
-    public static LoginManager loginManager = null;
+    private static LoginManager loginManager = null;
     public LoginManager(Activity activity, LoginCallback loginCallback, LogoutCallback logoutCallback) {
         this.activity = activity;
         this.loginCallback = loginCallback;
