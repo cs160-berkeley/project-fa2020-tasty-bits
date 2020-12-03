@@ -15,6 +15,7 @@ import com.example.GetSentimentQuery;
 import com.example.GetSuggestedQuestionsQuery;
 import com.example.GetYourAnswersQuery;
 import com.example.GetYourQuestionsQuery;
+import com.example.UpsertQuestionVoteMutation;
 import com.example.UpsertUserMutation;
 import com.example.tastybits.ui.answerview.AnswerItem;
 import com.example.tastybits.ui.questionview.QuestionItem;
@@ -67,8 +68,6 @@ public class NetworkRequest {
     }
 
     public void queryQuestions(String categoryName, AsyncCallback callback) {
-
-
         String categoryId = categoryIdMap.get(categoryName);
 
         apolloClient.query(new GetQuestionsQuery(categoryId)).enqueue(new ApolloCall.Callback<GetQuestionsQuery.Data>() {
@@ -92,7 +91,6 @@ public class NetworkRequest {
             @Override
             public void onResponse(@NotNull Response<GetAnswerQuery.Data> response) {
                 List<GetAnswerQuery.GetAnswer> aList = response.getData().getAnswers();
-
                 callback.onCompleted(aList);
 
             }
@@ -215,7 +213,7 @@ public class NetworkRequest {
 
     public void mutationCreateQuestion(List<String> categoryNames, String title, String description,
                                       AsyncCallback callback) {
-
+        Log.i(TAG, categoryIdMap.toString());
         CreateQuestionMutation createQuestionMutation =
                 new CreateQuestionMutation(categoryNamesToIds(categoryNames), title,
                         description);
@@ -226,6 +224,7 @@ public class NetworkRequest {
 
                 CreateQuestionMutation.CreateQuestion question =
                         response.getData().createQuestion();
+                Log.i(TAG, response.toString());
                 callback.onCompleted(new QuestionItem(question.id(), question.title(),
                         question.description()));
             }
@@ -254,6 +253,23 @@ public class NetworkRequest {
 
     }
 
+    public void mutationUpsertQuestionVote(String questionId, Boolean upDown, AsyncCallback callback) {
+        UpsertQuestionVoteMutation upsertQuestionVoteMutation =
+                new UpsertQuestionVoteMutation(questionId, upDown);
+        apolloClient.mutate(upsertQuestionVoteMutation).enqueue(new ApolloCall.Callback<UpsertQuestionVoteMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<UpsertQuestionVoteMutation.Data> response) {
+                UpsertQuestionVoteMutation.UpsertQuestionVote upsertQuestionVote =
+                        response.getData().upsertQuestionVote();
+                callback.onCompleted(upsertQuestionVote);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+
+            }
+        });
+    }
 
     private List<String> categoryNamesToIds(List<String> categoryNames) {
         List<String> cIds = new LinkedList<>();
@@ -268,7 +284,7 @@ public class NetworkRequest {
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
             Request request = chain.request().newBuilder().addHeader("Authorization",
-                    accessToken).build();
+                    getInstance().accessToken).build();
             return chain.proceed(request);
         }
     }

@@ -47,7 +47,7 @@ public class QuestionViewFragment extends Fragment{
 
                 for (GetQuestionsQuery.GetQuestion question : qList) {
                     QuestionItem qItem = new QuestionItem(question.id(), question.title(),
-                            question.description());
+                            question.description(), question.voteScore(), question.clickScore());
                     getActivity().runOnUiThread(() -> qrv_adapter.addQuestion(qItem));
                 }
             }

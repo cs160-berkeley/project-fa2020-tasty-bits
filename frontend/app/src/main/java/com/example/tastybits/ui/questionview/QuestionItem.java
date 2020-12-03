@@ -13,17 +13,21 @@ public class QuestionItem {
     private int upvotes;
     private int views;
 
-    public QuestionItem(String id, String questionText) {
-        this.questionText = questionText;
-        this.descriptionText = "";
+    public QuestionItem(String id, String questionText, String descriptionText, int upvotes,
+                        int views) {
         this.id = id;
-        upvotes = 0;
-        views = 0;
+        this.questionText = questionText;
+        this.descriptionText = descriptionText;
+        this.upvotes = upvotes;
+        this.views = views;
+    }
+
+    public QuestionItem(String id, String questionText) {
+        this(id, questionText, "", 0, 0);
     }
 
     public QuestionItem(String id, String title, String description) {
-        this(id, title);
-        this.descriptionText = description;
+        this(id, title, description, 0, 0);
     }
 
     @NonNull

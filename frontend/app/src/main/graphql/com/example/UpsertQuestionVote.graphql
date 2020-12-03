@@ -1,6 +1,7 @@
 mutation UpsertQuestionVote($questionId:ID!, $upDown:Boolean!) {
     upsertQuestionVote(questionId:$questionId, upDown:$upDown) {
-        updatedAt
-        upDown
+        question{
+            voteScore
+        }
     }
 }
