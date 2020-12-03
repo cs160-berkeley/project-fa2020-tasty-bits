@@ -33,9 +33,7 @@ public class MainActivity extends AppCompatActivity{
         LoginManager.getInstance().login(new LoginManager.LoginCallback() {
             @Override
             public void onCompleted(String accessToken) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+                runOnUiThread(() -> {
 
                         NetworkRequest.init(new NetworkRequest(accessToken));
 
@@ -44,16 +42,17 @@ public class MainActivity extends AppCompatActivity{
                             @Override
                             public void onCompleted(Object result) {
 
-                                BottomNavigationView navView = findViewById(R.id.nav_view);
-                                // Passing each menu ID as a set of Ids because each
-                                // menu should be considered as top level destinations.
-                                AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                                        R.id.homescreen, R.id.infohub, R.id.questionhub)
-                                        .build();
-                                NavController navController = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment);
-                                NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, appBarConfiguration);
-                                NavigationUI.setupWithNavController(navView, navController);
-
+                                runOnUiThread(() -> {
+                                    BottomNavigationView navView = findViewById(R.id.nav_view);
+                                    // Passing each menu ID as a set of Ids because each
+                                    // menu should be considered as top level destinations.
+                                    AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                                            R.id.homescreen, R.id.infohub, R.id.questionhub)
+                                            .build();
+                                    NavController navController = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment);
+                                    NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, appBarConfiguration);
+                                    NavigationUI.setupWithNavController(navView, navController);
+                                });
                             }
 
                             @Override
@@ -64,27 +63,21 @@ public class MainActivity extends AppCompatActivity{
 
                         Log.i(TAG, "access token: " + accessToken);
                         Toast.makeText(MainActivity.this, "Successfully logged in with accessToken: " + accessToken, Toast.LENGTH_SHORT).show();
-                    }
+
                 });
             }
 
             @Override
             public void onDialogException(Dialog dialog) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.show();
-                    }
+                runOnUiThread(() -> {
+                    dialog.show();
                 });
             }
 
             @Override
             public void onException(Exception e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivity.this, "Login Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                runOnUiThread(() -> {
+                    Toast.makeText(MainActivity.this, "Login Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
             }
         });
