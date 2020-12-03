@@ -4,5 +4,6 @@ mutation CreateAnswer($questionId:ID!, $content:String!) {
         content
         updatedAt
         userId
+        voteScore
     }
 }

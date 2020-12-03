@@ -1,14 +1,21 @@
 package com.example.tastybits.ui.answerview;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.nfc.Tag;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tastybits.Constants;
 import com.example.tastybits.R;
 import com.example.tastybits.ui.questionview.QuestionItem;
 import com.example.tastybits.ui.questionview.QuestionRecyclerViewAdapter;
@@ -17,17 +24,13 @@ import java.util.ArrayList;
 
 public class AnswerRecyclerViewAdapter extends RecyclerView.Adapter<AnswerRecyclerViewAdapter.ViewHolder> {
     private ArrayList<AnswerItem> answerList;
+    private Activity activity;
 
-    public AnswerRecyclerViewAdapter(Context context, ArrayList<AnswerItem> answerData) {
-        answerList = answerData;
-        //fakeSomeData(questionList);
+    public AnswerRecyclerViewAdapter(Activity activity, ArrayList<AnswerItem> answerData) {
+        this.answerList = answerData;
+        this.activity = activity;
+    }
 
-    }
-    private void fakeSomeData(ArrayList<AnswerItem> alist) {
-        for (int i=0; i<100; i++) {
-            alist.add(new AnswerItem(String.valueOf(i),"question ", String.valueOf(i)));
-        }
-    }
     /**
      * Needs to be executed on main UI thread
      * @param answerItem
@@ -46,8 +49,8 @@ public class AnswerRecyclerViewAdapter extends RecyclerView.Adapter<AnswerRecycl
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        AnswerItem qi = answerList.get(position);
-        holder.bindTo(qi);
+        AnswerItem ai = answerList.get(position);
+        holder.bindTo(activity, ai, position);
     }
 
     @Override
@@ -58,16 +61,20 @@ public class AnswerRecyclerViewAdapter extends RecyclerView.Adapter<AnswerRecycl
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView answerTextView;
         private final TextView upvotesTextView;
-
+        private final ToggleButton upvoteButton;
+        private final CardView baseCardView;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             answerTextView = itemView.findViewById(R.id.answerTextView);
             upvotesTextView = itemView.findViewById(R.id.upvotesTextView);
-
+            upvoteButton = itemView.findViewById(R.id.upvotesButton);
+            baseCardView = itemView.findViewById(R.id.baseView);
         }
 
-        void bindTo(AnswerItem answerItem) {
+        void bindTo(Activity activity, AnswerItem answerItem, int position) {
             answerTextView.setText(answerItem.getAnswerText());
+            upvotesTextView.setText(String.valueOf(answerItem.getUpvotes()));
+            baseCardView.setCardBackgroundColor(Color.parseColor(Constants.cycleColors[position % Constants.cycleColors.length]));
         }
     }
 

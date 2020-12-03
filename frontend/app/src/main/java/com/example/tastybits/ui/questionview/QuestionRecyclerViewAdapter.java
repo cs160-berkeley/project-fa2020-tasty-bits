@@ -74,6 +74,8 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
         QuestionItem qi = questionList.get(position);
         holder.bindTo(activity, qi, position);
         Bundle bundle = new Bundle();
+        bundle.putString("QuestionTitle", qi.getQuestionText());
+        bundle.putString("QuestionDescription", qi.getDescriptionText());
         bundle.putString("QuestionId", qi.getId());
         holder.itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.answerview_fragment, bundle));
     }

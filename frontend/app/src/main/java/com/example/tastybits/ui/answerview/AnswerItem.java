@@ -9,10 +9,10 @@ public class AnswerItem {
     private String questionId;
     private int upvotes;
 
-    public AnswerItem(String id, String answerText, String questionId) {
+    public AnswerItem(String id, String answerText, int upvotes, String questionId) {
         this.answerText = answerText;
         this.questionId = questionId;
-        this.upvotes = 0;
+        this.upvotes = upvotes;
     }
 
 

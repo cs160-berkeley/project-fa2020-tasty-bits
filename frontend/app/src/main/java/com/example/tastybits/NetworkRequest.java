@@ -242,7 +242,7 @@ public class NetworkRequest {
             @Override
             public void onResponse(@NotNull Response<CreateAnswerMutation.Data> response) {
                 CreateAnswerMutation.CreateAnswer answer = response.getData().createAnswer();
-                callback.onCompleted(new AnswerItem(answer.id(), content, questionId));
+                callback.onCompleted(new AnswerItem(answer.id(), content, answer.voteScore(), questionId));
             }
 
             @Override

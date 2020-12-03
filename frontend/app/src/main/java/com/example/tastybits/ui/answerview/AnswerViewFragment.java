@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,14 +42,18 @@ public class AnswerViewFragment extends Fragment {
         ans_adapter = new AnswerRecyclerViewAdapter(getActivity(), new ArrayList<AnswerItem>());
         recyclerView.setAdapter(ans_adapter);
         String questionId = getArguments().getString(getString(R.string.question_id_key));
-//        Log.i(TAG, "loading answer view fragment of " + questionId);
+        String title = getArguments().getString(getString(R.string.question_title_key));
+        String description = getArguments().getString(getString(R.string.question_description_key));
+        TextView questionTitle = baseView.findViewById(R.id.questionTitle);
+        TextView questionDescription = baseView.findViewById(R.id.questionDescription);
+        questionTitle.setText(title);
+        questionDescription.setText(description);
         NetworkRequest.getInstance().queryAnswer(questionId, new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
                 List<GetAnswerQuery.GetAnswer> aList = (List<GetAnswerQuery.GetAnswer>) result;
-
                 for (GetAnswerQuery.GetAnswer answer: aList) {
-                    AnswerItem aItem = new AnswerItem(answer.id(), answer.content(), questionId);
+                    AnswerItem aItem = new AnswerItem(answer.id(), answer.content(), answer.voteScore(), questionId);
                     getActivity().runOnUiThread(() -> ans_adapter.addAnswer(aItem));
                 }
             }

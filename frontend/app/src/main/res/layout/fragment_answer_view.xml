@@ -33,15 +33,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/questionTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Question title"
                 android:layout_marginBottom="10dp"
+                android:textSize="22dp"
                 android:textColor="@color/white"/>
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/questionDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Question Description"
