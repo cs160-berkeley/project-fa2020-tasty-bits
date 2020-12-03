@@ -13,6 +13,7 @@ type Answer {
   user: User!
   userId: String!
   votes(after: AnswerVoteWhereUniqueInput, before: AnswerVoteWhereUniqueInput, first: Int, last: Int): [AnswerVote!]!
+  voteScore: Int!
 }
 
 input AnswerIdUserIdCompoundUniqueInput {
@@ -107,7 +108,10 @@ type Query {
   getMessages(chatroomId: ID!): [Message!]!
   getQuestions(categoryId: ID!): [Question!]!
   getSentiment(text: String!): SentimentResult!
+  getSuggestedQuestions: [Question!]!
   getUser: User
+  getYourAnswers: [Answer!]!
+  getYourQuestions: [Question!]!
   search(query: String!): SearchResults!
 }
 
@@ -115,6 +119,7 @@ type Question {
   answers(after: AnswerWhereUniqueInput, before: AnswerWhereUniqueInput, first: Int, last: Int): [Answer!]!
   categories(after: CategoryWhereUniqueInput, before: CategoryWhereUniqueInput, first: Int, last: Int): [Category!]!
   clicks(after: QuestionClickWhereUniqueInput, before: QuestionClickWhereUniqueInput, first: Int, last: Int): [QuestionClick!]!
+  clickScore: Int!
   createdAt: DateTime!
   deletedAt: DateTime
   description: String
@@ -124,6 +129,7 @@ type Question {
   user: User!
   userId: String!
   votes(after: QuestionVoteWhereUniqueInput, before: QuestionVoteWhereUniqueInput, first: Int, last: Int): [QuestionVote!]!
+  voteScore: Int!
 }
 
 type QuestionClick {
@@ -195,7 +201,9 @@ enum StudentType {
 
 type User {
   answers(after: AnswerWhereUniqueInput, before: AnswerWhereUniqueInput, first: Int, last: Int): [Answer!]!
+  answerScore: Int!
   answerVotes(after: AnswerVoteWhereUniqueInput, before: AnswerVoteWhereUniqueInput, first: Int, last: Int): [AnswerVote!]!
+  answerVoteScore: Int!
   biography: String
   chatrooms(after: ChatroomWhereUniqueInput, before: ChatroomWhereUniqueInput, first: Int, last: Int): [Chatroom!]!
   class: String
@@ -211,7 +219,9 @@ type User {
   profileVisibility: ProfileVisibility!
   questionClicks(after: QuestionClickWhereUniqueInput, before: QuestionClickWhereUniqueInput, first: Int, last: Int): [QuestionClick!]!
   questions(after: QuestionWhereUniqueInput, before: QuestionWhereUniqueInput, first: Int, last: Int): [Question!]!
+  questionScore: Int!
   questionVotes(after: QuestionVoteWhereUniqueInput, before: QuestionVoteWhereUniqueInput, first: Int, last: Int): [QuestionVote!]!
+  questionVoteScore: Int!
   snapchat: String
   studentType: StudentType!
   tiktok: String

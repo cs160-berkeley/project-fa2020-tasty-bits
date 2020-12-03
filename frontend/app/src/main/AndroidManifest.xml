@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-            android:name=".OnboardingFragmentActivity"
+            android:name=".ui.onboarding.OnboardingFragmentActivity"
             android:windowSoftInputMode="adjustPan"
             >
             <intent-filter>

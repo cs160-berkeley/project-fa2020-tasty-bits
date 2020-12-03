@@ -155,6 +155,132 @@ export const Query = queryType({
       },
     });
 
+    t.list.field('getSuggestedQuestions', {
+      type: 'Question',
+      nullable: false,
+      resolve: async (_, args, ctx) => {
+        const userId = getUserId(ctx)!;
+
+        const innerCondition = {
+          some: {
+            question: {
+              OR: [
+                {
+                  clicks: {
+                    some: {
+                      userId: userId,
+                    },
+                  },
+                },
+                {
+                  votes: {
+                    some: {
+                      userId: userId,
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        };
+
+        const outerCondition = {
+          some: {
+            user: {
+              OR: [
+                {
+                  questionClicks: innerCondition,
+                },
+                {
+                  questionVotes: innerCondition,
+                },
+              ],
+              id: {
+                not: userId,
+              },
+            },
+          },
+        };
+
+        const include = {
+          clicks: true,
+          votes: true,
+          categories: true,
+        };
+
+        const similarQuestions = await ctx.prisma.question.findMany({
+          where: {
+            deletedAt: {
+              equals: null,
+            },
+            OR: [
+              {
+                clicks: outerCondition,
+              },
+              {
+                votes: outerCondition,
+              },
+            ],
+          },
+          orderBy: {
+            id: 'desc',
+          },
+          include: include,
+          take: 20,
+        });
+
+        const newQuestions = await ctx.prisma.question.findMany({
+          orderBy: {
+            id: 'desc',
+          },
+          take: 20,
+          include: include,
+        });
+
+        return similarQuestions.concat(...newQuestions);
+      },
+    });
+
+    t.list.field('getYourQuestions', {
+      type: 'Question',
+      nullable: false,
+      resolve: async (_, args, ctx) => {
+        const userId = getUserId(ctx)!;
+
+        return ctx.prisma.question.findMany({
+          where: {
+            userId: userId,
+            deletedAt: {
+              equals: null,
+            },
+          },
+          orderBy: {
+            id: 'desc',
+          },
+        });
+      },
+    });
+
+    t.list.field('getYourAnswers', {
+      type: 'Answer',
+      nullable: false,
+      resolve: async (_, args, ctx) => {
+        const userId = getUserId(ctx)!;
+
+        return ctx.prisma.answer.findMany({
+          where: {
+            userId: userId,
+            deletedAt: {
+              equals: null,
+            },
+          },
+          orderBy: {
+            id: 'desc',
+          },
+        });
+      },
+    });
+
     t.list.field('getQuestions', {
       type: 'Question',
       nullable: false,

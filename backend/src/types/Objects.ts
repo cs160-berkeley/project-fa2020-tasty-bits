@@ -26,6 +26,74 @@ export const User = objectType({
     t.model.answerVotes();
     t.model.answers();
     t.model.messages();
+
+    t.int('questionVoteScore', {
+      resolve: async (parent, args, ctx) => {
+        const votes = await ctx.prisma.user
+          .findOne({
+            where: {
+              id: parent.id,
+            },
+          })
+          .questionVotes();
+        return votes.reduce((prev, curr) => prev + +curr.upDown, 0);
+      },
+    });
+
+    t.int('answerVoteScore', {
+      resolve: async (parent, args, ctx) => {
+        const votes = await ctx.prisma.user
+          .findOne({
+            where: {
+              id: parent.id,
+            },
+          })
+          .answerVotes();
+        return votes.reduce((prev, curr) => prev + +curr.upDown, 0);
+      },
+    });
+
+    t.int('questionScore', {
+      resolve: async (parent, args, ctx) => {
+        const questions = await ctx.prisma.user
+          .findOne({
+            where: {
+              id: parent.id,
+            },
+          })
+          .questions({
+            include: {
+              votes: true,
+            },
+          });
+        return questions.reduce(
+          (prev, curr) =>
+            prev + curr.votes.reduce((prev, curr) => prev + +curr.upDown, 1),
+          0
+        );
+      },
+    });
+
+    t.int('answerScore', {
+      resolve: async (parent, args, ctx) => {
+        const answers = await ctx.prisma.user
+          .findOne({
+            where: {
+              id: parent.id,
+            },
+          })
+          .answers({
+            include: {
+              votes: true,
+            },
+          });
+        return answers.reduce(
+          (prev, curr) =>
+            prev + curr.votes.reduce((prev, curr) => prev + +curr.upDown, 1),
+          0
+        );
+      },
+    });
   },
 });
 
@@ -52,6 +120,32 @@ export const Question = objectType({
     t.model.clicks();
     t.model.answers();
     t.model.deletedAt();
+
+    t.int('voteScore', {
+      resolve: async (parent, args, ctx) => {
+        const votes = await ctx.prisma.question
+          .findOne({
+            where: {
+              id: parent.id,
+            },
+          })
+          .votes();
+        return votes.reduce((prev, curr) => prev + (curr.upDown ? 1 : -1), 0);
+      },
+    });
+
+    t.int('clickScore', {
+      resolve: async (parent, args, ctx) => {
+        const clicks = await ctx.prisma.question
+          .findOne({
+            where: {
+              id: parent.id,
+            },
+          })
+          .clicks();
+        return clicks.length;
+      },
+    });
 
     t.model.user();
     t.model.userId();
@@ -104,6 +198,18 @@ export const Answer = objectType({
 
     t.model.deletedAt();
 
+    t.int('voteScore', {
+      resolve: async (parent, args, ctx) => {
+        const votes = await ctx.prisma.answer
+          .findOne({
+            where: {
+              id: parent.id,
+            },
+          })
+          .votes();
+        return votes.reduce((prev, curr) => prev + (curr.upDown ? 1 : -1), 0);
+      },
+    });
     t.model.user();
     t.model.userId();
   },

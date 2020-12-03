@@ -1,4 +1,4 @@
-package com.example.tastybits;
+package com.example.tastybits.ui.onboarding;
 
 import android.app.Activity;
 import android.content.Intent;

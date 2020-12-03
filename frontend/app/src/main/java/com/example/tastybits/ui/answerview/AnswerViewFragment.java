@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.GetAnswerQuery;
+import com.example.GetQuestionsQuery;
 import com.example.tastybits.AsyncCallback;
 import com.example.tastybits.NetworkRequest;
 import com.example.tastybits.R;
@@ -23,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AnswerViewFragment extends Fragment {
     private static final String TAG = "AnswerViewFragment";
@@ -42,8 +45,12 @@ public class AnswerViewFragment extends Fragment {
         NetworkRequest.getInstance().queryAnswer(questionId, new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
-                AnswerItem ai = (AnswerItem) result;
-                getActivity().runOnUiThread(() -> ans_adapter.addAnswer(ai));
+                List<GetAnswerQuery.GetAnswer> aList = (List<GetAnswerQuery.GetAnswer>) result;
+
+                for (GetAnswerQuery.GetAnswer answer: aList) {
+                    AnswerItem aItem = new AnswerItem(answer.id(), answer.content(), questionId);
+                    getActivity().runOnUiThread(() -> ans_adapter.addAnswer(aItem));
+                }
             }
 
             @Override

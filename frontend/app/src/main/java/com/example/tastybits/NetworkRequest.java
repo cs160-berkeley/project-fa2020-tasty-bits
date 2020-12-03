@@ -12,6 +12,9 @@ import com.example.GetAnswerQuery;
 import com.example.GetCategoriesQuery;
 import com.example.GetQuestionsQuery;
 import com.example.GetSentimentQuery;
+import com.example.GetSuggestedQuestionsQuery;
+import com.example.GetYourAnswersQuery;
+import com.example.GetYourQuestionsQuery;
 import com.example.UpsertUserMutation;
 import com.example.tastybits.ui.answerview.AnswerItem;
 import com.example.tastybits.ui.questionview.QuestionItem;
@@ -37,7 +40,10 @@ public class NetworkRequest {
     private ApolloClient apolloClient;
     private Map<String, String> categoryIdMap;
 
-    private NetworkRequest() {
+    private String accessToken;
+
+    public NetworkRequest(String accessToken) {
+        this.accessToken = accessToken;
         apolloClient =  ApolloClient.builder()
                         .serverUrl(URL)
                         .okHttpClient(
@@ -49,10 +55,14 @@ public class NetworkRequest {
     }
 
 
-    public static NetworkRequest getInstance() {
+
+    public static void init(NetworkRequest initNetworkRequest) {
         if (networkRequest == null) {
-            networkRequest = new NetworkRequest();
+            networkRequest = initNetworkRequest;
         }
+    }
+
+    public static NetworkRequest getInstance() {
         return networkRequest;
     }
 
@@ -65,11 +75,7 @@ public class NetworkRequest {
             @Override
             public void onResponse(@NotNull Response<GetQuestionsQuery.Data> response) {
                 List<GetQuestionsQuery.GetQuestion> qList = response.getData().getQuestions();
-                for (GetQuestionsQuery.GetQuestion question : qList) {
-                    QuestionItem qItem = new QuestionItem(question.id(), question.title(),
-                            question.description());
-                    callback.onCompleted(qItem);
-                }
+                callback.onCompleted(qList);
                 //Log.i(TAG, response.toString());
             }
 
@@ -86,10 +92,9 @@ public class NetworkRequest {
             @Override
             public void onResponse(@NotNull Response<GetAnswerQuery.Data> response) {
                 List<GetAnswerQuery.GetAnswer> aList = response.getData().getAnswers();
-                for (GetAnswerQuery.GetAnswer answer: aList) {
-                    AnswerItem aItem = new AnswerItem(answer.id(), answer.content(), questionId);
-                    callback.onCompleted(aItem);
-                }
+
+                callback.onCompleted(aList);
+
             }
 
             @Override
@@ -135,21 +140,73 @@ public class NetworkRequest {
         });
     }
 
+    public void queryYourQuestions(AsyncCallback callback) {
+        apolloClient.query(new GetYourQuestionsQuery()).enqueue(new ApolloCall.Callback<GetYourQuestionsQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<GetYourQuestionsQuery.Data> response) {
+                List<GetYourQuestionsQuery.GetYourQuestion> questions = response.getData().getYourQuestions();
+                callback.onCompleted(questions);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+                callback.onException(e);
+            }
+        });
+    }
+
+    public void queryYourAnswers(AsyncCallback callback) {
+        apolloClient.query(new GetYourAnswersQuery()).enqueue(new ApolloCall.Callback<GetYourAnswersQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<GetYourAnswersQuery.Data> response) {
+                List<GetYourAnswersQuery.GetYourAnswer> answers = response.getData().getYourAnswers();
+                callback.onCompleted(answers);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+                callback.onException(e);
+            }
+        });
+    }
+
+
+    public void querySuggestedQuestions(AsyncCallback callback) {
+        apolloClient.query(new GetSuggestedQuestionsQuery()).enqueue(new ApolloCall.Callback<GetSuggestedQuestionsQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<GetSuggestedQuestionsQuery.Data> response) {
+                List<GetSuggestedQuestionsQuery.GetSuggestedQuestion> questions = response.getData().getSuggestedQuestions();
+                callback.onCompleted(questions);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+                callback.onException(e);
+            }
+        });
+    }
+
     /**
      * Send this request early to load the category ids.
      */
-    public void queryCategories() {
+    public void queryCategories(AsyncCallback callback) {
         apolloClient.query(new GetCategoriesQuery()).enqueue(new ApolloCall.Callback<GetCategoriesQuery.Data>() {
             @Override
             public void onResponse(@NotNull Response<GetCategoriesQuery.Data> response) {
                 for (GetCategoriesQuery.GetCategory category: response.getData().getCategories()) {
                     categoryIdMap.put(category.name(), category.id());
                 }
+                callback.onCompleted(response.getData().getCategories());
             }
 
             @Override
             public void onFailure(@NotNull ApolloException e) {
                 Log.e(TAG, e.toString());
+                callback.onException(e);
+
             }
         });
     }
@@ -211,7 +268,7 @@ public class NetworkRequest {
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
             Request request = chain.request().newBuilder().addHeader("Authorization",
-                    LoginManager.getInstance().getAccessToken()).build();
+                    accessToken).build();
             return chain.proceed(request);
         }
     }

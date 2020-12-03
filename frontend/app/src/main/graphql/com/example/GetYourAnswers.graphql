@@ -1,0 +1,13 @@
+query GetYourAnswers {
+    getYourAnswers {
+        id
+        content
+        question {
+            title
+            description
+            categories {
+                name
+            }
+        }
+    }
+}

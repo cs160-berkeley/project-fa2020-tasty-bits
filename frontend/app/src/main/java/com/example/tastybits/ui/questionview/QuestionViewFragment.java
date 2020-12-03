@@ -12,12 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.GetQuestionsQuery;
 import com.example.tastybits.AsyncCallback;
 import com.example.tastybits.Constants;
 import com.example.tastybits.NetworkRequest;
 import com.example.tastybits.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionViewFragment extends Fragment{
     private static final String TAG = "QuestionsViewFragment";
@@ -41,8 +43,13 @@ public class QuestionViewFragment extends Fragment{
         NetworkRequest.getInstance().queryQuestions(categoryName, new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
-                QuestionItem qi = (QuestionItem) result;
-                getActivity().runOnUiThread(() -> qrv_adapter.addQuestion(qi));
+                List<GetQuestionsQuery.GetQuestion> qList = (List<GetQuestionsQuery.GetQuestion>) result;
+
+                for (GetQuestionsQuery.GetQuestion question : qList) {
+                    QuestionItem qItem = new QuestionItem(question.id(), question.title(),
+                            question.description());
+                    getActivity().runOnUiThread(() -> qrv_adapter.addQuestion(qItem));
+                }
             }
 
             @Override

@@ -1,0 +1,11 @@
+query GetUser {
+    getUser {
+        id
+        name
+        studentType
+        questionScore
+        questionVoteScore
+        answerScore
+        answerVoteScore
+    }
+}

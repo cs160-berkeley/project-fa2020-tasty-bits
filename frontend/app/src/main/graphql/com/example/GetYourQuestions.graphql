@@ -1,0 +1,10 @@
+query GetYourQuestions {
+    getYourQuestions {
+        id
+        title
+        description
+        categories {
+            name
+        }
+    }
+}
