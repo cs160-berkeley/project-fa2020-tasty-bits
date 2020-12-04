@@ -11,6 +11,7 @@
         android:label="Loading"
         tools:layout="@layout/fragment_loading" />
 
+
     <fragment
         android:id="@+id/infohub"
         android:name="com.example.tastybits.ui.informationhub.InfoHubFragment"
