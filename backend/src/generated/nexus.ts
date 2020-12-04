@@ -200,6 +200,7 @@ export interface NexusGenFieldTypes {
     questionId: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
+    userDidVote: boolean; // Boolean!
     userId: string; // String!
     votes: NexusGenRootTypes['AnswerVote'][]; // [AnswerVote!]!
     voteScore: number; // Int!
@@ -275,6 +276,8 @@ export interface NexusGenFieldTypes {
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
+    userDidClick: boolean; // Boolean!
+    userDidVote: boolean; // Boolean!
     userId: string; // String!
     votes: NexusGenRootTypes['QuestionVote'][]; // [QuestionVote!]!
     voteScore: number; // Int!

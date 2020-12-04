@@ -40,18 +40,52 @@ public class MainActivity extends AppCompatActivity {
         LoginManager.getInstance().login(new LoginManager.LoginCallback() {
             @Override
             public void onCompleted(String accessToken) {
-                runOnUiThread(() -> {
 
                     NetworkRequest.init(new NetworkRequest(accessToken));
 
-                    NetworkRequest.getInstance().mutationUpsertUser(new AsyncCallback() {
+                    final boolean[] completedUserMutation = {false};
+                    final boolean[] completedCategoryQuery = {false};
+
+                    AsyncCallback checkCompletion = new AsyncCallback() {
                         @Override
                         public void onCompleted(Object result) {
-                            //probably a race condition but should be fine (I don't wanna stack them and slow app down)
+
+                            if (completedCategoryQuery[0] == true && completedUserMutation[0] == true) {
+
+                                runOnUiThread(() -> {
+                                    //continue with setting up taskbar and finally navigate to home screen because managers now initialized
+                                    BottomNavigationView navView = findViewById(R.id.nav_view);
+
+                                    AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                                            R.id.homescreen, R.id.infohub, R.id.questionhub)
+                                            .build();
+                                    NavController navController = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment);
+                                    NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, appBarConfiguration);
+                                    NavigationUI.setupWithNavController(navView, navController);
+
+                                    navController.popBackStack();
+                                    navController.navigate(R.id.homescreen);
+                                });
+
+                            }
                         }
 
                         @Override
                         public void onException(Exception e) {
+
+                        }
+                    };
+
+                    NetworkRequest.getInstance().mutationUpsertUser(new AsyncCallback() {
+                        @Override
+                        public void onCompleted(Object result) {
+                            completedUserMutation[0] = true;
+                            checkCompletion.onCompleted(result);
+                        }
+
+                        @Override
+                        public void onException(Exception e) {
+                            checkCompletion.onException(e);
                         }
                     });
 
@@ -59,28 +93,16 @@ public class MainActivity extends AppCompatActivity {
                     NetworkRequest.getInstance().queryCategories(new AsyncCallback() {
                         @Override
                         public void onCompleted(Object result) {
-                            //probably a race condition but should be fine (I don't wanna stack them and slow app down)
+                            completedCategoryQuery[0] = true;
+                            checkCompletion.onCompleted(result);
                         }
 
                         @Override
                         public void onException(Exception e) {
-
+                            checkCompletion.onException(e);
                         }
                     });
 
-                    BottomNavigationView navView = findViewById(R.id.nav_view);
-                    // Passing each menu ID as a set of Ids because each
-                    // menu should be considered as top level destinations.
-                    AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                            R.id.homescreen, R.id.infohub, R.id.questionhub)
-                            .build();
-                    NavController navController = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment);
-                    NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, appBarConfiguration);
-                    NavigationUI.setupWithNavController(navView, navController);
-
-                    navController.popBackStack();
-                    navController.navigate(R.id.homescreen);
-                });
             }
 
             @Override

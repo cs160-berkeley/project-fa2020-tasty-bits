@@ -6,7 +6,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="category_name_key">CategoryName</string>
     <string name="question_id_key">QuestionId</string>
-
+    <string name="question_title_key">QuestionTitle</string>
+    <string name="question_description_key">QuestionDescription</string>
     <string-array name="category_display_names">
         <item>Job Hunting</item>
         <item>Housing</item>

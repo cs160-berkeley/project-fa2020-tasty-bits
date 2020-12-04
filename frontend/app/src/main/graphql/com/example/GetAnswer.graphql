@@ -6,5 +6,6 @@ query GetAnswer($qID:ID!) {
     updatedAt
   	questionId
   	voteScore
+  	userDidVote
   }
 }

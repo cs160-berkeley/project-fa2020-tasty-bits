@@ -2,6 +2,9 @@ query GetYourAnswers {
     getYourAnswers {
         id
         content
+        voteScore
+        userDidVote
+        questionId
         question {
             title
             description

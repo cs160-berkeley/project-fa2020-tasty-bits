@@ -1,4 +1,5 @@
 import { enumType, objectType } from '@nexus/schema';
+import { getUserId } from '../utils';
 
 export const User = objectType({
   name: 'User',
@@ -130,7 +131,22 @@ export const Question = objectType({
             },
           })
           .votes();
-        return votes.reduce((prev, curr) => prev + (curr.upDown ? 1 : -1), 0);
+        return votes.reduce((prev, curr) => prev + +curr.upDown, 0);
+      },
+    });
+
+    t.boolean('userDidVote', {
+      resolve: async (parent, args, ctx) => {
+        const userId = getUserId(ctx)!;
+
+        const votes = await ctx.prisma.question
+          .findOne({
+            where: {
+              id: parent.id,
+            },
+          })
+          .votes();
+        return votes.some((v) => v.userId === userId);
       },
     });
 
@@ -144,6 +160,21 @@ export const Question = objectType({
           })
           .clicks();
         return clicks.length;
+      },
+    });
+
+    t.boolean('userDidClick', {
+      resolve: async (parent, args, ctx) => {
+        const userId = getUserId(ctx)!;
+
+        const clicks = await ctx.prisma.question
+          .findOne({
+            where: {
+              id: parent.id,
+            },
+          })
+          .clicks();
+        return clicks.some((c) => c.userId === userId);
       },
     });
 
@@ -207,9 +238,25 @@ export const Answer = objectType({
             },
           })
           .votes();
-        return votes.reduce((prev, curr) => prev + (curr.upDown ? 1 : -1), 0);
+        return votes.reduce((prev, curr) => prev + +curr.upDown, 0);
       },
     });
+
+    t.boolean('userDidVote', {
+      resolve: async (parent, args, ctx) => {
+        const userId = getUserId(ctx)!;
+
+        const votes = await ctx.prisma.answer
+          .findOne({
+            where: {
+              id: parent.id,
+            },
+          })
+          .votes();
+        return votes.some((v) => v.userId === userId);
+      },
+    });
+
     t.model.user();
     t.model.userId();
   },

@@ -11,6 +11,7 @@ type Answer {
   questionId: String!
   updatedAt: DateTime!
   user: User!
+  userDidVote: Boolean!
   userId: String!
   votes(after: AnswerVoteWhereUniqueInput, before: AnswerVoteWhereUniqueInput, first: Int, last: Int): [AnswerVote!]!
   voteScore: Int!
@@ -127,6 +128,8 @@ type Question {
   title: String!
   updatedAt: DateTime!
   user: User!
+  userDidClick: Boolean!
+  userDidVote: Boolean!
   userId: String!
   votes(after: QuestionVoteWhereUniqueInput, before: QuestionVoteWhereUniqueInput, first: Int, last: Int): [QuestionVote!]!
   voteScore: Int!
