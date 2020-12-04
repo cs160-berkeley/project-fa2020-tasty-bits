@@ -64,6 +64,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/coinCardView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -163,6 +164,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:clickable="true"
+
             android:gravity="center"
             android:padding="8dp"
 
@@ -174,6 +177,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
             android:text="Your Answers"

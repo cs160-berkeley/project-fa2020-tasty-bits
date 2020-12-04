@@ -19,5 +19,6 @@
     <color name="light_gray">#EEEEEEEE</color>
     <color name="light_brown">#A5978E</color>
     <color name="medium_brown">#8D5B4C</color>
+    <color name="tab_indicator_text">#808080</color>
 
 </resources>

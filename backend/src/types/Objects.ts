@@ -130,7 +130,7 @@ export const Question = objectType({
             },
           })
           .votes();
-        return votes.reduce((prev, curr) => prev + (curr.upDown ? 1 : -1), 0);
+        return votes.reduce((prev, curr) => prev + +curr.upDown, 0);
       },
     });
 
@@ -207,7 +207,7 @@ export const Answer = objectType({
             },
           })
           .votes();
-        return votes.reduce((prev, curr) => prev + (curr.upDown ? 1 : -1), 0);
+        return votes.reduce((prev, curr) => prev + +curr.upDown, 0);
       },
     });
     t.model.user();
