@@ -10,6 +10,7 @@ public class AnswerItem {
     private int upvotes;
 
     public AnswerItem(String id, String answerText, int upvotes, String questionId) {
+        this.id = id;
         this.answerText = answerText;
         this.questionId = questionId;
         this.upvotes = upvotes;

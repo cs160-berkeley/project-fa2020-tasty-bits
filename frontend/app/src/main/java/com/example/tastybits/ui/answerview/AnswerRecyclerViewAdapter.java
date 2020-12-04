@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -15,12 +16,17 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.UpsertAnswerVoteMutation;
+import com.example.tastybits.AsyncCallback;
 import com.example.tastybits.Constants;
+import com.example.tastybits.NetworkRequest;
 import com.example.tastybits.R;
 import com.example.tastybits.ui.questionview.QuestionItem;
 import com.example.tastybits.ui.questionview.QuestionRecyclerViewAdapter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class AnswerRecyclerViewAdapter extends RecyclerView.Adapter<AnswerRecyclerViewAdapter.ViewHolder> {
     private ArrayList<AnswerItem> answerList;
@@ -40,6 +46,10 @@ public class AnswerRecyclerViewAdapter extends RecyclerView.Adapter<AnswerRecycl
         notifyItemInserted(0);
     }
 
+    public void sortAnswerByUpvotes() {
+        Collections.sort(answerList, (a1, a2) -> a2.getUpvotes() - a1.getUpvotes());
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public AnswerRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -67,7 +77,7 @@ public class AnswerRecyclerViewAdapter extends RecyclerView.Adapter<AnswerRecycl
             super(itemView);
             answerTextView = itemView.findViewById(R.id.answerTextView);
             upvotesTextView = itemView.findViewById(R.id.upvotesTextView);
-            upvoteButton = itemView.findViewById(R.id.upvotesButton);
+            upvoteButton = itemView.findViewById(R.id.answerUpvoteButton);
             baseCardView = itemView.findViewById(R.id.baseView);
         }
 
@@ -75,6 +85,29 @@ public class AnswerRecyclerViewAdapter extends RecyclerView.Adapter<AnswerRecycl
             answerTextView.setText(answerItem.getAnswerText());
             upvotesTextView.setText(String.valueOf(answerItem.getUpvotes()));
             baseCardView.setCardBackgroundColor(Color.parseColor(Constants.cycleColors[position % Constants.cycleColors.length]));
+            upvoteButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                    NetworkRequest.getInstance().mutationUpsertAnswerVote(answerItem.getId(),
+                            isChecked, new AsyncCallback() {
+                                @Override
+                                public void onCompleted(Object result) {
+                                    UpsertAnswerVoteMutation.UpsertAnswerVote upsertAnswerVote = (UpsertAnswerVoteMutation.UpsertAnswerVote) result;
+                                    answerItem.setUpvotes(upsertAnswerVote.answer().voteScore());
+                                    activity.runOnUiThread(()->{
+                                        upvotesTextView.setText(String.valueOf(upsertAnswerVote.answer().voteScore()));
+                                        sortAnswerByUpvotes();
+                                    });
+                                }
+
+                                @Override
+                                public void onException(Exception e) {
+
+                                }
+                            });
+
+                }
+            });
         }
     }
 

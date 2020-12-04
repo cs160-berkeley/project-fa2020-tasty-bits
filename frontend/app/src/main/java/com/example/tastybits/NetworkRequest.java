@@ -15,6 +15,7 @@ import com.example.GetSentimentQuery;
 import com.example.GetSuggestedQuestionsQuery;
 import com.example.GetYourAnswersQuery;
 import com.example.GetYourQuestionsQuery;
+import com.example.UpsertAnswerVoteMutation;
 import com.example.UpsertQuestionVoteMutation;
 import com.example.UpsertUserMutation;
 import com.example.tastybits.ui.answerview.AnswerItem;
@@ -271,6 +272,23 @@ public class NetworkRequest {
         });
     }
 
+    public void mutationUpsertAnswerVote(String answerId, Boolean upDown, AsyncCallback callback) {
+        UpsertAnswerVoteMutation upsertAnswerVoteMutation =
+                new UpsertAnswerVoteMutation(answerId, upDown);
+        apolloClient.mutate(upsertAnswerVoteMutation).enqueue(new ApolloCall.Callback<UpsertAnswerVoteMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<UpsertAnswerVoteMutation.Data> response) {
+                UpsertAnswerVoteMutation.UpsertAnswerVote upsertAnswerVote =
+                        response.getData().upsertAnswerVote();
+                callback.onCompleted(upsertAnswerVote);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+
+            }
+        });
+    }
     private List<String> categoryNamesToIds(List<String> categoryNames) {
         List<String> cIds = new LinkedList<>();
         categoryNames.forEach((name) -> cIds.add(categoryIdMap.get(name)));
