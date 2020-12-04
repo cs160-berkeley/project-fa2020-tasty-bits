@@ -3,6 +3,8 @@ query GetSuggestedQuestions {
         id
         title
         description
+        userDidVote
+        userDidClick
         categories {
             name
         }

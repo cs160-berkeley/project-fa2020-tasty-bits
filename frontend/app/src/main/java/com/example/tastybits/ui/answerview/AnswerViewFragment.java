@@ -53,7 +53,7 @@ public class AnswerViewFragment extends Fragment {
             public void onCompleted(Object result) {
                 List<GetAnswerQuery.GetAnswer> aList = (List<GetAnswerQuery.GetAnswer>) result;
                 for (GetAnswerQuery.GetAnswer answer: aList) {
-                    AnswerItem aItem = new AnswerItem(answer.id(), answer.content(), answer.voteScore(), questionId);
+                    AnswerItem aItem = new AnswerItem(answer.id(), answer.content(), answer.voteScore(), questionId, answer.userDidVote());
                     getActivity().runOnUiThread(() -> ans_adapter.addAnswer(aItem));
                 }
             }

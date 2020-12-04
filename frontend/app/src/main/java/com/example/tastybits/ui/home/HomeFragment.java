@@ -22,9 +22,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.GetAnswerQuery;
 import com.example.GetQuestionsQuery;
 import com.example.GetSuggestedQuestionsQuery;
 import com.example.GetUserQuery;
+import com.example.GetYourAnswersQuery;
 import com.example.GetYourQuestionsQuery;
 import com.example.tastybits.AsyncCallback;
 import com.example.tastybits.Constants;
@@ -182,6 +184,24 @@ public class HomeFragment extends Fragment {
         });
 
 
+        NetworkRequest.getInstance().querySuggestedQuestions(new AsyncCallback() {
+            @Override
+            public void onCompleted(Object result) {
+                List<GetSuggestedQuestionsQuery.GetSuggestedQuestion> qList = (List<GetSuggestedQuestionsQuery.GetSuggestedQuestion>) result;
+
+                for (GetSuggestedQuestionsQuery.GetSuggestedQuestion question : qList) {
+                    QuestionItem qItem = new QuestionItem(question.id(), question.title(),
+                            question.description());
+                    getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addQuestion(qItem));
+                }
+            }
+
+            @Override
+            public void onException(Exception e) {
+
+            }
+        });
+
         NetworkRequest.getInstance().queryYourQuestions(new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
@@ -200,15 +220,17 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        NetworkRequest.getInstance().querySuggestedQuestions(new AsyncCallback() {
+
+
+        NetworkRequest.getInstance().queryYourAnswers(new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
-                List<GetSuggestedQuestionsQuery.GetSuggestedQuestion> qList = (List<GetSuggestedQuestionsQuery.GetSuggestedQuestion>) result;
+                List<GetYourAnswersQuery.GetYourAnswer> aList = (List<GetYourAnswersQuery.GetYourAnswer>) result;
 
-                for (GetSuggestedQuestionsQuery.GetSuggestedQuestion question : qList) {
-                    QuestionItem qItem = new QuestionItem(question.id(), question.title(),
-                            question.description());
-                    getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addQuestion(qItem));
+                for (GetYourAnswersQuery.GetYourAnswer answer : aList) {
+                    AnswerItem aItem = new AnswerItem(answer.id(),
+                            answer.content(), answer.voteScore(), answer.questionId(), answer.userDidVote());
+                    getActivity().runOnUiThread(() -> yourAnswersAdapter.addAnswer(aItem));
                 }
             }
 

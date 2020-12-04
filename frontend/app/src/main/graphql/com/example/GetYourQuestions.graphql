@@ -3,6 +3,8 @@ query GetYourQuestions {
         id
         title
         description
+        userDidVote
+        userDidClick
         categories {
             name
         }

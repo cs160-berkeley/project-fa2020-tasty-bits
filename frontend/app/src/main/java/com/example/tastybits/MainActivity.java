@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         LoginManager.getInstance().login(new LoginManager.LoginCallback() {
             @Override
             public void onCompleted(String accessToken) {
-                runOnUiThread(() -> {
 
                     NetworkRequest.init(new NetworkRequest(accessToken));
 
@@ -101,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
-                });
             }
 
             @Override

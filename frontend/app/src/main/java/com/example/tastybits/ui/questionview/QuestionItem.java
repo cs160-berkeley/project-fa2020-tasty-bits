@@ -12,28 +12,39 @@ public class QuestionItem {
     private String descriptionText;
     private int upvotes;
     private int views;
+    private boolean userDidVote;
+
 
     public QuestionItem(String id, String questionText, String descriptionText, int upvotes,
-                        int views) {
+                        int views, boolean userDidVote) {
         this.id = id;
         this.questionText = questionText;
         this.descriptionText = descriptionText;
         this.upvotes = upvotes;
         this.views = views;
+        this.userDidVote = userDidVote;
+
     }
 
+
     public QuestionItem(String id, String questionText) {
-        this(id, questionText, "", 0, 0);
+        this(id, questionText, "", 0, 0, false);
     }
 
     public QuestionItem(String id, String title, String description) {
-        this(id, title, description, 0, 0);
+        this(id, title, description, 0, 0, false);
     }
 
     @NonNull
     @Override
     public String toString() {
         return questionText + ", " + descriptionText;
+    }
+
+    public boolean getUserDidVote() { return userDidVote; }
+
+    public void setUserDidVote(boolean userDidVote) {
+        this.userDidVote = userDidVote;
     }
 
     public String getId() {

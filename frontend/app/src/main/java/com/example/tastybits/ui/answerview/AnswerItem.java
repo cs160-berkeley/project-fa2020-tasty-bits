@@ -8,15 +8,24 @@ public class AnswerItem {
     private String answerText;
     private String questionId;
     private int upvotes;
+    private boolean userDidVote;
 
-    public AnswerItem(String id, String answerText, int upvotes, String questionId) {
+    public AnswerItem(String id, String answerText, int upvotes, String questionId, boolean userDidVote) {
         this.id = id;
         this.answerText = answerText;
         this.questionId = questionId;
         this.upvotes = upvotes;
+        this.userDidVote = userDidVote;
     }
 
 
+    public boolean getUserDidVote() {
+        return userDidVote;
+    }
+
+    public void setUserDidVote(boolean userDidVote) {
+        this.userDidVote = userDidVote;
+    }
 
     public String getId() {
         return id;
