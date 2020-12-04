@@ -11,15 +11,20 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tastybits.R;
 
-public class OnBoardFragment1 extends Fragment {
+public class OnBoardFragment3 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.fragment_onboard_1, container, false);
-        ImageView text = root.findViewById(R.id.onboard1_text);
-        text.setBackgroundResource(R.drawable.onboard1_text);
+        final View root = inflater.inflate(R.layout.fragment_onboard_3, container, false);
+
+        ImageView text = root.findViewById(R.id.onboard3_text1);
+        text.setBackgroundResource(R.drawable.onboard3_text1);
+
+        ImageView text2 = root.findViewById(R.id.onboard3_text2);
+            text2.setBackgroundResource(R.drawable.onboarding3_text2);
 
         ImageView dot = root.findViewById(R.id.dot);
-        dot.setBackgroundResource(R.drawable.dot1);
+        dot.setBackgroundResource(R.drawable.dot3);
+
         return root;
     }
 }
