@@ -1,5 +1,7 @@
 mutation UpsertQuestionClick($questionId:ID!) {
     upsertQuestionClick(questionId:$questionId) {
-        updatedAt
+        question {
+            clickScore
+        }
     }
 }

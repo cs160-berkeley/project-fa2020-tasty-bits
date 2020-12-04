@@ -27,10 +27,6 @@ import com.example.tastybits.LoginManager;
 import com.example.tastybits.MainActivity;
 import com.example.tastybits.NetworkRequest;
 import com.example.tastybits.R;
-import com.example.tastybits.ui.answerview.AnswerItem;
-import com.example.tastybits.ui.answerview.AnswerRecyclerViewAdapter;
-import com.example.tastybits.ui.questionview.QuestionItem;
-import com.example.tastybits.ui.questionview.QuestionRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

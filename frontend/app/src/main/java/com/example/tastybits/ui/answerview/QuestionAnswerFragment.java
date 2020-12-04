@@ -32,7 +32,7 @@ public class QuestionAnswerFragment extends Fragment{
                 NetworkRequest.getInstance().mutationCreateAnswer(questionId, content, new AsyncCallback() {
                     @Override
                     public void onCompleted(Object result) {
-                        AnswerItem ai = (AnswerItem) result;
+//                        AnswerItem ai = (AnswerItem) result;
                         // TODO : navigate back to question hub
                         // Navigation.findNavController(view).navigate(R.id.questionhub);
                     }

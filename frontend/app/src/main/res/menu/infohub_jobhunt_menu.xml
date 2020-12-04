@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/jobhunt_international"
-        android:title="International"/>
-    <item android:id="@+id/jobhunt_handshake"
-        android:title="Handshake"/>
-    <item android:id="@+id/jobhunt_linkedin"
-        android:title="LinkedIn"/>
-    <item android:id="@+id/jobhunt_indeed"
-        android:title="Indeed"/>
-    <item android:id="@+id/jobhunt_glassdoor"
-        android:title="Glassdoor"/>
+
 </menu>

@@ -17,7 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/medium_brown"
+            android:background="@color/primary"
             android:paddingBottom="32dp">
 
             <TextView
@@ -130,7 +130,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/descriptionText"
+        android:id="@+id/explanationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -188,32 +188,35 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/suggestedQuestionsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+        app:layout_constraintTop_toBottomOf="@+id/explanationText" />
 
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/yourQuestionsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+        app:layout_constraintTop_toBottomOf="@+id/explanationText" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/yourAnswersRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+        app:layout_constraintTop_toBottomOf="@+id/explanationText" />
 
 
 

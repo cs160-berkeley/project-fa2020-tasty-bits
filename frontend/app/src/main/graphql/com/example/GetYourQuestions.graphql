@@ -3,9 +3,14 @@ query GetYourQuestions {
         id
         title
         description
+        voteScore
+        clickScore
         userDidVote
         userDidClick
         categories {
+            name
+        }
+        user {
             name
         }
     }

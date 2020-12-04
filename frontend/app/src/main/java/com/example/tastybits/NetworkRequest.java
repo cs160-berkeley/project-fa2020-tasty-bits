@@ -17,11 +17,9 @@ import com.example.GetUserQuery;
 import com.example.GetYourAnswersQuery;
 import com.example.GetYourQuestionsQuery;
 import com.example.UpsertAnswerVoteMutation;
+import com.example.UpsertQuestionClickMutation;
 import com.example.UpsertQuestionVoteMutation;
 import com.example.UpsertUserMutation;
-import com.example.tastybits.ui.answerview.AnswerItem;
-import com.example.tastybits.ui.questionview.QuestionItem;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -243,8 +241,7 @@ public class NetworkRequest {
                 CreateQuestionMutation.CreateQuestion question =
                         response.getData().createQuestion();
                 Log.i(TAG, response.toString());
-                callback.onCompleted(new QuestionItem(question.id(), question.title(),
-                        question.description()));
+                callback.onCompleted(question);
             }
 
             @Override
@@ -260,7 +257,7 @@ public class NetworkRequest {
             @Override
             public void onResponse(@NotNull Response<CreateAnswerMutation.Data> response) {
                 CreateAnswerMutation.CreateAnswer answer = response.getData().createAnswer();
-                callback.onCompleted(new AnswerItem(answer.id(), content, answer.voteScore(), questionId, answer.userDidVote()));
+                callback.onCompleted(answer);
             }
 
             @Override
@@ -280,6 +277,23 @@ public class NetworkRequest {
                 UpsertQuestionVoteMutation.UpsertQuestionVote upsertQuestionVote =
                         response.getData().upsertQuestionVote();
                 callback.onCompleted(upsertQuestionVote);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+
+            }
+        });
+    }
+
+    public void mutationUpsertQuestionClick(String questionId, AsyncCallback callback) {
+        UpsertQuestionClickMutation upsertQuestionClickMutation =
+                new UpsertQuestionClickMutation(questionId);
+        apolloClient.mutate(upsertQuestionClickMutation).enqueue(new ApolloCall.Callback<UpsertQuestionClickMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<UpsertQuestionClickMutation.Data> response) {
+                UpsertQuestionClickMutation.UpsertQuestionClick upsertQuestionClick = response.getData().upsertQuestionClick();
+                callback.onCompleted(upsertQuestionClick);
             }
 
             @Override

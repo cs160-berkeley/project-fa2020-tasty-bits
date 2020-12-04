@@ -4,10 +4,19 @@
     <string name="com_auth0_domain">calsurvivalguide.us.auth0.com</string>
     <string name="bio_social_culture_event"><a href="https://events.berkeley.edu/index.php/calendar/sn/bio.html">BIO Social and Cultural Events</a></string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="category_name_key">CategoryName</string>
-    <string name="question_id_key">QuestionId</string>
-    <string name="question_title_key">QuestionTitle</string>
-    <string name="question_description_key">QuestionDescription</string>
+    <string name="question_qa_type">question_qa_type</string>
+    <string name="question_id_key">question_id_key</string>
+    <string name="category_name_key">category_name_key</string>
+    <string name="question_category_name_key">question_category_name_key</string>
+    <string name="question_title_key">question_title_key</string>
+    <string name="question_name_key">question_name_key</string>
+    <string name="question_vote_score_key">question_vote_score_key</string>
+    <string name="question_click_score_key">question_click_score_key</string>
+    <string name="question_user_did_vote_key">question_user_did_vote_key</string>
+    <string name="question_user_did_click_key">question_user_did_click_key</string>
+
+
+
     <string-array name="category_display_names">
         <item>Job Hunting</item>
         <item>Housing</item>

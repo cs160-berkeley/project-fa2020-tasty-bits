@@ -10,6 +10,9 @@ const CATEGORIES = [
   'financialAid',
   'housing',
   'jobHunting',
+  'internationalResources',
+  'firstGenResources',
+  'transferResources',
 ];
 
 async function main() {

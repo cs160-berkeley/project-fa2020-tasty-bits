@@ -4,7 +4,6 @@ import java.util.Map;
 
 public class Constants {
 
-    public static final String[] cycleColors;
     public static final Map<String, String> displayToQueryCategoryNameMap;
     public static final Map<String, String> queryCategoryToDisplayNameMap;
 
@@ -15,7 +14,11 @@ public class Constants {
                 "Financial Aid", "financialAid",
                 "Clubs and Decals", "clubsAndDecals",
                 "Enrollment", "enrollment",
-                "Class Planning", "classPlanning"
+                "Class Planning", "classPlanning",
+                "International Student Resources", "internationalResources",
+                "First Generation Student Resources", "firstGenResources",
+                "Transfer Student Resources", "transferResources"
+
                 );
 
         queryCategoryToDisplayNameMap = Map.of(
@@ -24,10 +27,13 @@ public class Constants {
                 "financialAid", "Financial Aid",
                 "clubsAndDecals", "Clubs and Decals",
                 "enrollment", "Enrollment",
-                "classPlanning", "Class Planning"
-                );
+                "classPlanning", "Class Planning",
+                "internationalResources", "International Student Resources",
+                "firstGenResources", "First Generation Student Resources",
+                "transferResources", "Transfer Student Resources"
 
-        cycleColors = new String[]{"#A5978E", "#8D5B4C", "#503F3E"};
+        );
+
     }
 
 

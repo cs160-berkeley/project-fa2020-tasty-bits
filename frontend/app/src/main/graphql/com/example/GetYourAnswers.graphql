@@ -12,5 +12,8 @@ query GetYourAnswers {
                 name
             }
         }
+        user {
+            name
+        }
     }
 }

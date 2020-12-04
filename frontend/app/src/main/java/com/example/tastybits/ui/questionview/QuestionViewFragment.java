@@ -16,6 +16,8 @@ import com.example.GetQuestionsQuery;
 import com.example.tastybits.AsyncCallback;
 import com.example.tastybits.Constants;
 import com.example.tastybits.NetworkRequest;
+import com.example.tastybits.QAItem;
+import com.example.tastybits.QARecyclerViewAdapter;
 import com.example.tastybits.R;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ import java.util.List;
 
 public class QuestionViewFragment extends Fragment{
     private static final String TAG = "QuestionsViewFragment";
-    private QuestionRecyclerViewAdapter qrv_adapter;
+    private QARecyclerViewAdapter qrv_adapter;
 
 
     @Override
@@ -32,7 +34,7 @@ public class QuestionViewFragment extends Fragment{
         View baseView = inflater.inflate(R.layout.fragment_questions_view, container, false);
         RecyclerView recyclerView = baseView.findViewById(R.id.QuestionsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        qrv_adapter =  new QuestionRecyclerViewAdapter(getActivity(), new ArrayList<QuestionItem>());
+        qrv_adapter =  new QARecyclerViewAdapter(getActivity(), new ArrayList<QAItem>());
         recyclerView.setAdapter(qrv_adapter);
 
         String categoryName = getArguments().getString(getString(R.string.category_name_key));
@@ -46,9 +48,9 @@ public class QuestionViewFragment extends Fragment{
                 List<GetQuestionsQuery.GetQuestion> qList = (List<GetQuestionsQuery.GetQuestion>) result;
 
                 for (GetQuestionsQuery.GetQuestion question : qList) {
-                    QuestionItem qItem = new QuestionItem(question.id(), question.title(),
-                            question.description(), question.voteScore(), question.clickScore(), question.userDidVote());
-                    getActivity().runOnUiThread(() -> qrv_adapter.addQuestion(qItem));
+                    String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
+                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick());
+                    getActivity().runOnUiThread(() -> qrv_adapter.addItem(qaItem));
                 }
             }
 

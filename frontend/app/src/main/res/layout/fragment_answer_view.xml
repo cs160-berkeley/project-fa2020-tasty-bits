@@ -1,82 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+    <Button
         android:id="@+id/addAnswerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="0dp"
-        android:clickable="true"
-        android:src="@android:drawable/ic_input_add"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="Add your &#10;own question"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <include
+        android:id="@+id/questionCardView"
+        layout="@layout/cardview_qa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AnswersRecyclerView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="30dp"
-    tools:context=".ui.answerview.AnswerViewFragment">
-
-<!--    <TextView-->
-<!--    android:id="@+id/question_title"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:layout_margin="10dp"-->
-<!--    android:background="@drawable/question_title_background"-->
-<!--    android:padding="10dp"-->
-<!--    android:text="TextView"-->
-<!--    android:textAlignment="center"-->
-<!--    android:textColor="#FFFFFF"-->
-<!--    android:textSize="30sp" />-->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/answerQuestionCard"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginBottom="30dp"
-        app:cardBackgroundColor="@color/bottom"
-        app:cardCornerRadius="10dp">
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="15dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/questionTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Question title"
-                android:layout_marginBottom="10dp"
-                android:textSize="22dp"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/questionDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Question Description"
-            android:textColor="@color/white"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/AnswersRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/questionCardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionCardView" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

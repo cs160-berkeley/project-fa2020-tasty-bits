@@ -7,5 +7,15 @@ query GetAnswer($qID:ID!) {
   	questionId
   	voteScore
   	userDidVote
+  	question {
+  	    title
+        description
+        categories {
+            name
+        }
+  	}
+  	user {
+  	    name
+  	}
   }
 }

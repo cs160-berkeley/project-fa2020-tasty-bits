@@ -33,20 +33,19 @@ import com.example.tastybits.Constants;
 import com.example.tastybits.LoginManager;
 import com.example.tastybits.MainActivity;
 import com.example.tastybits.NetworkRequest;
+import com.example.tastybits.QAItem;
+import com.example.tastybits.QARecyclerViewAdapter;
 import com.example.tastybits.R;
-import com.example.tastybits.ui.answerview.AnswerItem;
-import com.example.tastybits.ui.answerview.AnswerRecyclerViewAdapter;
-import com.example.tastybits.ui.questionview.QuestionItem;
-import com.example.tastybits.ui.questionview.QuestionRecyclerViewAdapter;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
-    private QuestionRecyclerViewAdapter suggestedQuestionsAdapter;
-    private QuestionRecyclerViewAdapter yourQuestionsAdapter;
-    private AnswerRecyclerViewAdapter yourAnswersAdapter;
+    private QARecyclerViewAdapter suggestedQuestionsAdapter;
+    private QARecyclerViewAdapter yourQuestionsAdapter;
+    private QARecyclerViewAdapter yourAnswersAdapter;
 
 
     private RecyclerView suggestedQuestionsRecyclerView;
@@ -106,19 +105,19 @@ public class HomeFragment extends Fragment {
 
         suggestedQuestionsRecyclerView = baseView.findViewById(R.id.suggestedQuestionsRecyclerView);
         suggestedQuestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        suggestedQuestionsAdapter = new QuestionRecyclerViewAdapter(getActivity(), new ArrayList<QuestionItem>());
+        suggestedQuestionsAdapter = new QARecyclerViewAdapter(getActivity(), new ArrayList<QAItem>());
         suggestedQuestionsRecyclerView.setAdapter(suggestedQuestionsAdapter);
 
 
         yourQuestionsRecyclerView = baseView.findViewById(R.id.yourQuestionsRecyclerView);
         yourQuestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        yourQuestionsAdapter = new QuestionRecyclerViewAdapter(getActivity(), new ArrayList<QuestionItem>());
+        yourQuestionsAdapter = new QARecyclerViewAdapter(getActivity(), new ArrayList<QAItem>());
         yourQuestionsRecyclerView.setAdapter(yourQuestionsAdapter);
 
 
         yourAnswersRecyclerView = baseView.findViewById(R.id.yourAnswersRecyclerView);
         yourAnswersRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        yourAnswersAdapter = new AnswerRecyclerViewAdapter(getActivity(), new ArrayList<AnswerItem>());
+        yourAnswersAdapter = new QARecyclerViewAdapter(getActivity(), new ArrayList<QAItem>());
         yourAnswersRecyclerView.setAdapter(yourAnswersAdapter);
 
         CardView coinsCardView = baseView.findViewById(R.id.coinCardView);
@@ -154,7 +153,7 @@ public class HomeFragment extends Fragment {
                     GetUserQuery.GetUser user = (GetUserQuery.GetUser) result;
 
                     TextView coinsValue = baseView.findViewById(R.id.coinsValue);
-                    coinsValue.setText(Integer.toString(user.answerScore() + user.answerVoteScore() + user.questionVoteScore() + user.questionScore()));
+                    coinsValue.setText(String.valueOf(user.answerScore() + user.answerVoteScore() + user.questionVoteScore() + user.questionScore()));
 
                     TextView name = baseView.findViewById(R.id.nameText);
 
@@ -190,9 +189,9 @@ public class HomeFragment extends Fragment {
                 List<GetSuggestedQuestionsQuery.GetSuggestedQuestion> qList = (List<GetSuggestedQuestionsQuery.GetSuggestedQuestion>) result;
 
                 for (GetSuggestedQuestionsQuery.GetSuggestedQuestion question : qList) {
-                    QuestionItem qItem = new QuestionItem(question.id(), question.title(),
-                            question.description());
-                    getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addQuestion(qItem));
+                    String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
+                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick());
+                    getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
                 }
             }
 
@@ -208,9 +207,9 @@ public class HomeFragment extends Fragment {
                 List<GetYourQuestionsQuery.GetYourQuestion> qList = (List<GetYourQuestionsQuery.GetYourQuestion>) result;
 
                 for (GetYourQuestionsQuery.GetYourQuestion question : qList) {
-                    QuestionItem qItem = new QuestionItem(question.id(), question.title(),
-                            question.description());
-                    getActivity().runOnUiThread(() -> yourQuestionsAdapter.addQuestion(qItem));
+                    String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
+                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick());
+                    getActivity().runOnUiThread(() -> yourQuestionsAdapter.addItem(qaItem));
                 }
             }
 
@@ -228,9 +227,9 @@ public class HomeFragment extends Fragment {
                 List<GetYourAnswersQuery.GetYourAnswer> aList = (List<GetYourAnswersQuery.GetYourAnswer>) result;
 
                 for (GetYourAnswersQuery.GetYourAnswer answer : aList) {
-                    AnswerItem aItem = new AnswerItem(answer.id(),
-                            answer.content(), answer.voteScore(), answer.questionId(), answer.userDidVote());
-                    getActivity().runOnUiThread(() -> yourAnswersAdapter.addAnswer(aItem));
+                    String categoryName = answer.question().categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(answer.question().categories().get(0).name()): "";
+                    QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, answer.id(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false);
+                    getActivity().runOnUiThread(() -> yourAnswersAdapter.addItem(qaItem));
                 }
             }
 

@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/info_jobhunt"
-        android:name="com.example.tastybits.ui.informationhub.JobHuntFragment"
+        android:name="com.example.tastybits.ui.informationhub.InfoHubDetailsFragment"
         android:label="Info: Job Hunt"
         tools:layout="@layout/fragment_infohub_jobhunt"/>
 
@@ -71,7 +71,7 @@
     <fragment
         android:id="@+id/info_international"
         android:name="com.example.tastybits.ui.informationhub.InternationalFragment"
-        android:label="informationhub_international"
+        android:label="Info: International Student"
         tools:layout="@layout/fragment_infohub_international"/>
 
     <fragment
