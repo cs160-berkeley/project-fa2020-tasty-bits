@@ -18,7 +18,15 @@ public class OnboardingPagerAdapter extends FragmentStateAdapter {
         //render one of the 4 fragments needed for onboarding from the position
 
         //have the login/register fragment short circuit the onboarding process and finish early
-        return new OnBoardFragment1();
+        switch (position) {
+            case 1:
+                return new OnBoardFragment1();
+            case 2:
+                return new OnBoardFragment2();
+            default:
+                return new OnBoardFragment1();
+        }
+
     }
 
     @Override
