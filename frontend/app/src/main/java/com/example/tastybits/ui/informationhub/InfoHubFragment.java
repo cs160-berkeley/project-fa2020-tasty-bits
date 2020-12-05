@@ -21,15 +21,8 @@ public class InfoHubFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        //infoHubViewModel =ViewModelProviders.of(this).get(InfoHubViewModel.class);
         View root = inflater.inflate(R.layout.fragment_infohub, container, false);
-        /*final TextView textView = root.findViewById(R.id.infohub);
-        infoHubViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
+
 
         ImageView classPlanning = root.findViewById(R.id.class_planning_infohub);
         ImageView enrollement = root.findViewById(R.id.enrollment_infohub);
@@ -42,10 +35,12 @@ public class InfoHubFragment extends Fragment {
         ImageView international = root.findViewById(R.id.international_infohub);
 
 
-       // classPlanning.setOnClickListener(handleClick);
+        Bundle bundle = new Bundle();
+        bundle.putString(getString(R.string.infohub_category_name_key), "jobHunting");
+        jobHunting.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_jobhunt, bundle));
+
         classPlanning.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_class_planning));
         enrollement.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_enrollment));
-        jobHunting.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_jobhunt));
         firstGen.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_transfer));
         housing.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_housing));
         clubs.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_clubs));
@@ -57,17 +52,4 @@ public class InfoHubFragment extends Fragment {
         return root;
     }
 
-//    private View.OnClickListener handleClick = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            switch(v.getId()) {
-//                case R.id.class_planning_infohub:
-//                    //System.out.println("class Planning");
-//                    createNavigateOnClickListener
-//                    break;
-//                default:
-//                    throw new IllegalStateException("Unexpected value: " + v.getId());
-//            }
-//        }
-//    };
 }

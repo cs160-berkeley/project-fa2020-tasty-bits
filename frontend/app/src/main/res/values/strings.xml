@@ -6,6 +6,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="question_qa_type">question_qa_type</string>
     <string name="question_id_key">question_id_key</string>
+    <string name="infohub_category_name_key">infohub_category_name_key</string>
     <string name="category_name_key">category_name_key</string>
     <string name="question_category_name_key">question_category_name_key</string>
     <string name="question_title_key">question_title_key</string>
