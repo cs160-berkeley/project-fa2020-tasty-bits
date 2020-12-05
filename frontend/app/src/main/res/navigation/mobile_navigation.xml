@@ -39,10 +39,10 @@
         tools:layout="@layout/fragment_infohub_classplanning"/>
 
     <fragment
-        android:id="@+id/info_jobhunt"
+        android:id="@+id/infohub_details"
         android:name="com.example.tastybits.ui.informationhub.InfoHubDetailsFragment"
-        android:label="Info: Job Hunt"
-        tools:layout="@layout/fragment_infohub_jobhunt"/>
+        android:label="Article"
+        tools:layout="@layout/fragment_infohub_details"/>
 
     <fragment
         android:id="@+id/info_enrollment"

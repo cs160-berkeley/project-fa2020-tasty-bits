@@ -25,32 +25,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class TransferFragment extends Fragment {
 
-    String[] titles = new String[]{
-            "Transfer Student Center",
-            "International",
-            "Research International Employee Friendly Employers",
-            "US Style Application Documents: Resume & Cover Letter",
-            "Become Confident with Interviewing",
-            "Review these international student-specific job search resources",
-            "Have a Plan B",
-            "Understand Your Off-Campus Work Authorization and Employment Visa Options",
-            "Get Involved",
-            "Review the US Jobs and Internships for International Students"
-    };
-    String[] contents = new String[] {
-            "TThe Transfer Student Center provides services to assist students who transfer to Cal from other colleges and universities with navigating the academic and cultural landscape of this research university. Our programs and services focus on supporting a successful transition, helping transfers build connections and community, and assisting students as they explore and pursue their academic and career goals. The center plays a key role in campus outreach and recruitment through yield events and participation in programs involving California Community Colleges. We are located in 100 Cesar Chavez Student Building.\n" +
-                    "\n" +
-                    "For more information ---> https://transfers.berkeley.edu/\n",
-            "Strong English language skills, non-verbal communication skills and interpersonal skills are all crucial for international students who wish to work and succeed in the US, and right now is the best time to polish those skills.",
-            "Be intentional about your job or internship search by researching which companies have hired international candidates in the past.",
-            "Make sure you know how to write a US style resume and cover letter and seek feedback from native speakers of English and Career Counselors at the Career Center.",
-            "Review the Interviewing for a US employer page to explore Career Center resources on interviewing and specific tips for international students.",
-            "http://www.internationalstudent.com/jobsearch/\nUNIWORLD: Directories of American Firms Operating in Foreign Countries and Foreign Firms Operating in the U.S.\nH1 Base: Free job search tips",
-            "Expand your pool of opportunities by applying for positions in the US and in your home country (or perhaps a third country too). Explore where your education and experiences are in demand and be open to options you previously hadn’t considered!",
-            "Tt is essential for international students to understand when and how they can start working off campus. Students need to be able to articulate their student visa work authorization options and their employment visa options to employers, as not all U.S. employers are experienced in hiring international candidates. If you have detailed questions on student visa work authorization options, please consult with a Berkeley International Office (BIO) advisor during drop-in advising hours.",
-            "It will be difficult to get a job or internship through strong grades alone. US employers value students with extracurricular activities, related hands-on experience, and leadership experience.",
-            "This excerpt from the Career Center Job & Internship Guide (JIG) includes job search strategies, advice about US resumes and interviewing, permits and visas, the long distance job search, and more."
-    };
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_infohub_transfer, container, false);

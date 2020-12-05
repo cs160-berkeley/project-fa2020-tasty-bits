@@ -35,18 +35,26 @@ public class InfoHubFragment extends Fragment {
         ImageView international = root.findViewById(R.id.international_infohub);
 
 
-        Bundle bundle = new Bundle();
-        bundle.putString(getString(R.string.infohub_category_name_key), "jobHunting");
-        jobHunting.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_jobhunt, bundle));
+        Bundle jobHuntBundle = new Bundle();
+        jobHuntBundle.putString(getString(R.string.infohub_category_name_key), "jobHunting");
+        jobHunting.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, jobHuntBundle));
 
-        classPlanning.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_class_planning));
+        Bundle firstGenBundle = new Bundle();
+        firstGenBundle.putString(getString(R.string.infohub_category_name_key), "firstGenResources");
+        firstGen.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, firstGenBundle));
+
+        Bundle transferBundle = new Bundle();
+        transferBundle.putString(getString(R.string.infohub_category_name_key), "transferResources");
+        transfer.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, transferBundle));
+
+        Bundle classPlanningBundle = new Bundle();
+        classPlanningBundle.putString(getString(R.string.infohub_category_name_key), "classPlanning");
+        classPlanning.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, classPlanningBundle));
+
         enrollement.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_enrollment));
-        firstGen.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_transfer));
         housing.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_housing));
         clubs.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_clubs));
         international.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_international));
-        firstGen.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_firstgen));
-        transfer.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.info_transfer));
 
 
         return root;
