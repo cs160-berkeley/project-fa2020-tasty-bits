@@ -1,14 +1,17 @@
 package com.example.tastybits;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +29,8 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
     private final TextView clicksTextView;
     private final ToggleButton clicksToggleButton;
     private final ConstraintLayout baseView;
+    private final ImageView nameIcon;
+    private final ImageView categoryIcon;
 
     public QAViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -37,6 +42,9 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
         voteToggleButton = itemView.findViewById(R.id.voteToggleButton);
         clicksTextView = itemView.findViewById(R.id.clickScoreValue);
         clicksToggleButton = itemView.findViewById(R.id.clickImageView);
+        nameIcon = itemView.findViewById(R.id.nameIcon);
+        categoryIcon = itemView.findViewById(R.id.categoryIcon);
+
         baseView = itemView.findViewById(R.id.baseView);
     }
 
@@ -138,13 +146,16 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
         votesTextView.setText(String.valueOf(item.getVoteScore()));
         voteToggleButton.setChecked(item.isUserDidVote());
 
+        Integer categoryLeftInt = Constants.queryCategoryToIconInteger.get(Constants.displayToQueryCategoryNameMap.get(item.getCategoryName()));
+        Drawable categoryIconDrawable = ResourcesCompat.getDrawable(activity.getResources(), categoryLeftInt, null);
 
-        conditionalSetTextView(titleTextView, item.getTitleText());
-        conditionalSetTextView(descriptionTextView, item.getDescriptionText());
-        conditionalSetTextView(nameTextView, item.getNameText());
-        conditionalSetTextView(categoryTextView, item.getCategoryName());
+        Drawable profileIconDrawable = ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_person_circle_outline, null);
 
 
+        conditionalSetTextView(titleTextView, item.getTitleText(), null, null);
+        conditionalSetTextView(descriptionTextView, item.getDescriptionText(), null, null);
+        conditionalSetTextView(nameTextView, item.getNameText(), nameIcon, profileIconDrawable);
+        conditionalSetTextView(categoryTextView, item.getCategoryName(), categoryIcon, categoryIconDrawable);
     }
     public void prepareSingleCard(Activity activity) {
         baseView.setBackgroundColor(activity.getColor(R.color.primary));
@@ -160,11 +171,19 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
         bindTo(activity, item, position, isSingleCard, null);
     }
 
-    private void conditionalSetTextView(TextView textView, String s) {
-        if (s != null && !s.equals("")) {
+    private void conditionalSetTextView(TextView textView, String s, ImageView imageView, Drawable img) {
+
+
+        if (s != null && !s.trim().equals("")) {
             textView.setText(s);
+            if (img != null && imageView != null) {
+                imageView.setImageDrawable(img);
+            }
         } else {
             textView.setVisibility(View.GONE);
+            if (img != null && imageView != null) {
+                imageView.setVisibility(View.GONE);
+            }
         }
     }
 }

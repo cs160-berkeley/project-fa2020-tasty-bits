@@ -7,6 +7,7 @@ public class Constants {
     public static final Map<String, String> displayToQueryCategoryNameMap;
     public static final Map<String, String> queryCategoryToDisplayNameMap;
     public static final Map<String, String> queryCategoryToMarkdownArticle;
+    public static final Map<String, Integer> queryCategoryToIconInteger;
 
     static {
         displayToQueryCategoryNameMap = Map.of(
@@ -32,6 +33,18 @@ public class Constants {
                 "internationalResources", "International Student Resources",
                 "firstGenResources", "First Generation Student Resources",
                 "transferResources", "Transfer Student Resources"
+        );
+
+        queryCategoryToIconInteger = Map.of(
+                "jobHunting", R.drawable.job_hunting_icon,
+                "housing", R.drawable.housing_icon,
+                "clubsAndDecals", R.drawable.clubs_and_decals_icon,
+                "financialAid", R.drawable.financial_aid_icon,
+                "enrollment", R.drawable.enrollment_icon,
+                "classPlanning", R.drawable.class_planning_icon,
+                "internationalResources", R.drawable.international_icon,
+                "transferResources", R.drawable.transfer_icon,
+                "firstGenResources", R.drawable.first_gen_icon
         );
 
 

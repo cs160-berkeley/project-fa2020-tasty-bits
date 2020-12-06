@@ -33,7 +33,7 @@ public class AnswerPostFragment extends Fragment{
         EditText contentText = baseView.findViewById(R.id.contentText);
         Button postAnswerButton = baseView.findViewById(R.id.answerConfirmPostButton);
         postAnswerButton.setOnClickListener((view) -> {
-            if (contentText.getText().toString().equals("")) {
+            if (contentText.getText().toString().trim().equals("")) {
                 Toast.makeText(getActivity(), "Please fill out the answer field.", Toast.LENGTH_LONG).show();
                 return;
             }

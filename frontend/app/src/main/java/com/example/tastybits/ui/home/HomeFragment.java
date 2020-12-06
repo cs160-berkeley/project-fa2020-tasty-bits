@@ -128,7 +128,7 @@ public class HomeFragment extends Fragment {
 
     public void editName() {
         String name = nameEditText.getText().toString();
-        if (name.equals("")) {
+        if (name.trim().equals("")) {
             nameEditText.setText("Your Name");
             Toast.makeText(getActivity(), "Please fill out the name field.", Toast.LENGTH_LONG).show();
             return;

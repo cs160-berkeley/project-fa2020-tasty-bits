@@ -21,15 +21,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class QuestionHubFragment extends Fragment {
 
 
-    private void setupCard(CardView v, int drawable, String categoryName, boolean lightBrown) {
+    private void setupCard(CardView v,  String categoryName, boolean lightBrown) {
 
         TextView categoryNameText = (TextView) v.findViewById(R.id.squareCategoryCardName);
         ImageView categoryNameImage = (ImageView) v.findViewById(R.id.squareCategoryCardIcon);
 
         v.setCardBackgroundColor(getActivity().getColor(lightBrown ? R.color.light_brown: R.color.light_brown_shade));
         categoryNameText.setText(Constants.queryCategoryToDisplayNameMap.get(categoryName));
-        categoryNameImage.setImageDrawable(ContextCompat.getDrawable(getActivity(), drawable));
+        categoryNameImage.setImageDrawable(ContextCompat.getDrawable(getActivity(), Constants.queryCategoryToIconInteger.get(categoryName)));
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -39,60 +40,60 @@ public class QuestionHubFragment extends Fragment {
 
 
         CardView firstGen = view.findViewById(R.id.first_gen_questionhub);
-        setupCard(firstGen, R.drawable.first_gen_icon, "firstGenResources", true);
+        setupCard(firstGen, "firstGenResources", true);
         Bundle firstGenBundle = new Bundle();
         firstGenBundle.putString(getString(R.string.category_name_key), "firstGenResources");
         firstGen.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionview_fragment, firstGenBundle));
 
 
         CardView transfer = view.findViewById(R.id.transfer_questionhub);
-        setupCard(transfer, R.drawable.transfer_icon, "transferResources", false);
+        setupCard(transfer,  "transferResources", false);
         Bundle transferBundle = new Bundle();
         transferBundle.putString(getString(R.string.category_name_key), "transferResources");
         transfer.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionview_fragment, transferBundle));
 
         CardView international = view.findViewById(R.id.international_questionhub);
-        setupCard(international, R.drawable.international_icon, "internationalResources", false);
+        setupCard(international,  "internationalResources", false);
         Bundle internationalBundle = new Bundle();
         internationalBundle.putString(getString(R.string.category_name_key), "internationalResources");
         international.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionview_fragment, internationalBundle));
 
 
         CardView classplan = view.findViewById(R.id.class_planning_questionhub);
-        setupCard(classplan, R.drawable.class_planning_icon, "classPlanning", true);
+        setupCard(classplan, "classPlanning", true);
         Bundle classBundle = new Bundle();
         classBundle.putString(getString(R.string.category_name_key), "classPlanning");
         classplan.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionview_fragment, classBundle));
 
         CardView enrollment = view.findViewById(R.id.enrollment_questionhub);
-        setupCard(enrollment, R.drawable.enrollment_icon, "enrollment", true);
+        setupCard(enrollment, "enrollment", true);
         Bundle enrollmentBundle = new Bundle();
         enrollmentBundle.putString(getString(R.string.category_name_key), "enrollment");
         enrollment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionview_fragment, enrollmentBundle));
 
         CardView financialAid = view.findViewById(R.id.financial_aid_questionhub);
-        setupCard(financialAid, R.drawable.financial_aid_icon, "financialAid", false);
+        setupCard(financialAid,"financialAid", false);
         Bundle financialBundle = new Bundle();
         financialBundle.putString(getString(R.string.category_name_key), "financialAid");
         financialAid.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionview_fragment, financialBundle));
 
 
         CardView clubsAndDecals = view.findViewById(R.id.clubs_and_decals_questionhub);
-        setupCard(clubsAndDecals, R.drawable.clubs_and_decals_icon, "clubsAndDecals", false);
+        setupCard(clubsAndDecals, "clubsAndDecals", false);
         Bundle clubsBundle = new Bundle();
         clubsBundle.putString(getString(R.string.category_name_key), "clubsAndDecals");
         clubsAndDecals.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionview_fragment, clubsBundle));
 
 
         CardView housing = view.findViewById(R.id.housing_questionhub);
-        setupCard(housing, R.drawable.housing_icon, "housing", true);
+        setupCard(housing,"housing", true);
         Bundle housingBundle = new Bundle();
         housingBundle.putString(getString(R.string.category_name_key), "housing");
         housing.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionview_fragment, housingBundle));
 
 
         CardView jobs = view.findViewById(R.id.job_hunting_questionhub);
-        setupCard(housing, R.drawable.job_hunting_icon, "jobHunting", true);
+        setupCard(housing, "jobHunting", true);
         Bundle jobBundle = new Bundle();
         jobBundle.putString(getString(R.string.category_name_key), "jobHunting");
         jobs.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionview_fragment, jobBundle));

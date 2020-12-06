@@ -85,7 +85,7 @@ public class QuestionPostFragment extends Fragment {
             //only have one category for a question (Even though api can handle multiple)
             assert(categoryNames.size() == 1);
 
-            if (titleText.getText().toString().equals("")) {
+            if (titleText.getText().toString().trim().equals("")) {
                 Toast.makeText(getActivity(), "Please fill out the title for your question.", Toast.LENGTH_LONG).show();
                 return;
             }
