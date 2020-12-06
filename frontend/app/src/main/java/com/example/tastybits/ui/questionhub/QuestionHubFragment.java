@@ -93,7 +93,7 @@ public class QuestionHubFragment extends Fragment {
 
 
         CardView jobs = view.findViewById(R.id.job_hunting_questionhub);
-        setupCard(housing, "jobHunting", true);
+        setupCard(jobs, "jobHunting", true);
         Bundle jobBundle = new Bundle();
         jobBundle.putString(getString(R.string.category_name_key), "jobHunting");
         jobs.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionview_fragment, jobBundle));

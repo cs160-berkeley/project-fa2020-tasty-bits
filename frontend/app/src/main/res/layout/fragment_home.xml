@@ -44,6 +44,7 @@
                 android:drawablePadding="8dip"
                 android:drawableRight="@drawable/ic_pencil"
                 android:textSize="28sp"
+                android:inputType="text"
                 app:layout_constraintStart_toStartOf="@+id/welcomeText"
                 app:layout_constraintTop_toBottomOf="@+id/welcomeText"  />
 
