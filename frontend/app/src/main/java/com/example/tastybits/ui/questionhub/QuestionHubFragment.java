@@ -23,8 +23,8 @@ public class QuestionHubFragment extends Fragment {
 
     private void setupCard(CardView v, int drawable, String categoryName, boolean lightBrown) {
 
-        TextView categoryNameText = (TextView) v.findViewById(R.id.questionhubCategoryName);
-        ImageView categoryNameImage = (ImageView) v.findViewById(R.id.questionhubCategoryIcon);
+        TextView categoryNameText = (TextView) v.findViewById(R.id.squareCategoryCardName);
+        ImageView categoryNameImage = (ImageView) v.findViewById(R.id.squareCategoryCardIcon);
 
         v.setCardBackgroundColor(getActivity().getColor(lightBrown ? R.color.light_brown: R.color.light_brown_shade));
         categoryNameText.setText(Constants.queryCategoryToDisplayNameMap.get(categoryName));

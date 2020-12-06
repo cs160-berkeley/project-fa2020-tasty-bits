@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +44,13 @@ public class QuestionViewFragment extends Fragment{
         TextView categoryTitle = baseView.findViewById(R.id.category_title_text);
         categoryTitle.setText(Constants.queryCategoryToDisplayNameMap.get(categoryName));
 
+
+        Button addQuestion = baseView.findViewById(R.id.addQuestionButtonWithinCategory);
+        Bundle args = new Bundle();
+        args.putString(getString(R.string.category_name_key), categoryName);
+        addQuestion.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionpost_fragment, args));
+
+
         NetworkRequest.getInstance().queryQuestions(categoryName, new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
@@ -51,6 +60,10 @@ public class QuestionViewFragment extends Fragment{
                     String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
                     QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick());
                     getActivity().runOnUiThread(() -> qrv_adapter.addItem(qaItem));
+                }
+
+                if (qList.size() == 0) {
+                    getActivity().runOnUiThread(() -> baseView.findViewById(R.id.noQuestionsTextView).setVisibility(View.VISIBLE));
                 }
             }
 

@@ -38,7 +38,8 @@ public class QARecyclerViewAdapter extends RecyclerView.Adapter<QAViewHolder> {
      */
     public void addItem(QAItem qaItem) {
         qaList.add(0, qaItem);
-        notifyItemInserted(0);
+        sortByUpvote();
+        notifyDataSetChanged();
     }
 
     public void sortByUpvote() {
@@ -55,7 +56,20 @@ public class QARecyclerViewAdapter extends RecyclerView.Adapter<QAViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull QAViewHolder holder, int position) {
         QAItem qaItem = qaList.get(position);
-        holder.bindTo(activity, qaItem, position, false);
+        holder.bindTo(activity, qaItem, position, false, new AsyncCallback() {
+            @Override
+            public void onCompleted(Object result) {
+                String command = (String) result;
+                if (command.equals("sort")) {
+                    sortByUpvote();
+                }
+            }
+
+            @Override
+            public void onException(Exception e) {
+
+            }
+        });
     }
 
     @Override

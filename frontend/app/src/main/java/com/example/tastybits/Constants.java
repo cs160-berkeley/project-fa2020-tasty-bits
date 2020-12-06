@@ -35,7 +35,6 @@ public class Constants {
         );
 
 
-
         queryCategoryToMarkdownArticle = Map.of(
                 "jobHunting", "![Job Hunting Banner](https://berkeleysquareit.com/wp-content/uploads/2019/06/people-shaking-hands-640x350.jpg)\n" +
                         "\n" +

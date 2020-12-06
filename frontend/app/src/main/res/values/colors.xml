@@ -4,15 +4,18 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="bottom">#19647E</color>
     <color name="blue_text">#0000EE</color>
+    <color name="black_text">#1A1A1A</color>
 
     <color name="primary">#19647E</color>
     <color name="button">#DDA25D</color>
+    <color name="green">#10B982</color>
 
     <color name="white">#FFFFFFFF</color>
+    <color name="orange">#FB8A23</color>
     <color name="light_gray">#EEEEEEEE</color>
     <color name="light_brown">#A5978E</color>
     <color name="light_brown_shade">#928277</color>
-
+    <color name="gray_background">#E4E4E4</color>
     <color name="medium_brown">#8D5B4C</color>
     <color name="tab_indicator_text">#808080</color>
 

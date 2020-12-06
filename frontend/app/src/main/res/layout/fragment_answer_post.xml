@@ -17,37 +17,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/titleTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="36dp"
-        android:background="@drawable/top_left_right_round"
-        android:backgroundTint="@color/gray_background"
-        android:gravity="start|top"
-        android:hint="Question Title..."
-        android:iconifiedByDefault="false"
-        android:inputType="textMultiLine"
-        android:padding="20dp"
-        android:minHeight="100dp"
-        android:textSize="22sp"
-        android:queryHint="Search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/promptTextView" />
-
             <EditText
-                android:id="@+id/description"
+                android:id="@+id/contentText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="36dp"
-                android:background="@drawable/bottom_left_right_round"
+                android:background="@drawable/rounded_corners"
                 android:backgroundTint="@color/gray_background"
                 android:gravity="start|top"
-                android:hint="Description ..."
+                android:hint="Your answer ..."
                 android:inputType="textMultiLine"
                 android:minHeight="160dp"
                 android:paddingLeft="20dp"
@@ -55,7 +35,8 @@
                 android:paddingRight="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/promptTextView" />
+
 
             <TextView
                 android:id="@+id/promptTextView"
@@ -64,7 +45,7 @@
                 android:layout_marginStart="36dp"
                 android:layout_marginTop="36dp"
                 android:layout_marginEnd="36dp"
-                android:text="What's on your mind?"
+                android:text="Thanks for answering&#33;"
                 android:textColor="@color/black_text"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -72,36 +53,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
-            <Spinner
-                android:id="@+id/categoryTagsSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="20dp"
-                android:layout_marginStart="36dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="36dp"
-                app:layout_constraintEnd_toEndOf="@+id/description"
-                app:layout_constraintStart_toStartOf="@+id/description"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="36dp"
-                android:layout_marginTop="36dp"
-                android:text="What category does your question belong in?"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description" />
-
             <Button
-                android:id="@+id/questionConfirmPostButton"
+                android:id="@+id/answerConfirmPostButton"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="36dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="36dp"
                 android:layout_marginEnd="36dp"
                 android:layout_marginBottom="36dp"
                 android:background="@drawable/rounded_corners"
@@ -109,12 +66,12 @@
                 android:drawableLeft="@drawable/ic_create_outline"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="20dp"
-                android:text="Post My Question"
+                android:text="Post My Answer"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/categoryTagsSpinner" />
+                app:layout_constraintTop_toBottomOf="@+id/contentText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

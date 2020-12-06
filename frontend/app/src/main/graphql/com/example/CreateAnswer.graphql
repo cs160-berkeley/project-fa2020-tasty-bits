@@ -6,5 +6,11 @@ mutation CreateAnswer($questionId:ID!, $content:String!) {
         userId
         voteScore
         userDidVote
+        questionId
+        question {
+            categories {
+                name
+            }
+        }
     }
 }

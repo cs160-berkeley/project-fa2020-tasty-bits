@@ -50,6 +50,12 @@ public class AnswerViewFragment extends Fragment {
         String questionId = getArguments().getString(getString(R.string.question_id_key));
         String categoryName = getArguments().getString(getString(R.string.question_category_name_key));
 
+
+
+
+        QAViewHolder vh = new QAViewHolder(baseView.findViewById(R.id.respondToQuestionCardView));
+        vh.prepareSingleCard(getActivity());
+
         NetworkRequest.getInstance().queryQuestions(categoryName, new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
@@ -57,7 +63,6 @@ public class AnswerViewFragment extends Fragment {
                 for (GetQuestionsQuery.GetQuestion question: qList) {
                     if (question.id().equals(questionId)) {
                         getActivity().runOnUiThread(() -> {
-                            QAViewHolder vh = new QAViewHolder(baseView.findViewById(R.id.questionCardView));
                             String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
                             QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick());
                             vh.bindTo(getActivity(), qaItem, 0, true);
@@ -81,6 +86,12 @@ public class AnswerViewFragment extends Fragment {
                     String categoryName = answer.question().categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(answer.question().categories().get(0).name()): "";
                     QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, answer.id(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false);
                     getActivity().runOnUiThread(() -> ans_adapter.addItem(qaItem));
+
+
+                }
+
+                if (aList.size() == 0) {
+                    getActivity().runOnUiThread(() -> baseView.findViewById(R.id.noAnswersTextView).setVisibility(View.VISIBLE));
                 }
             }
 
@@ -91,8 +102,8 @@ public class AnswerViewFragment extends Fragment {
         });
         Button addAnswer = baseView.findViewById(R.id.addAnswerButton);
         Bundle bundle = new Bundle();
-        bundle.putString("QuestionId", questionId);
-        addAnswer.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.questionhub_answer, bundle));
+        bundle.putString(getString(R.string.question_id_key), questionId);
+        addAnswer.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.answerpost_fragment, bundle));
         return baseView;
     }
 

@@ -12,12 +12,17 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Add your &#10;own question"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/orange"
+        android:drawableLeft="@drawable/ic_create_outline"
+        android:textColor="@color/white"
+        android:padding="20dp"
+        android:text="Add your &#10;own answer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <include
-        android:id="@+id/questionCardView"
+        android:id="@+id/respondToQuestionCardView"
         layout="@layout/cardview_qa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,8 +42,23 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/questionCardView"
+        app:layout_constraintEnd_toEndOf="@+id/respondToQuestionCardView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/respondToQuestionCardView" />
+
+    <TextView
+        android:id="@+id/noAnswersTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="No answers at the moment. Please consider adding one!"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/respondToQuestionCardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

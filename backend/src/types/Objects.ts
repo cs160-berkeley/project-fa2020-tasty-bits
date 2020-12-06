@@ -146,7 +146,7 @@ export const Question = objectType({
             },
           })
           .votes();
-        return votes.some((v) => v.userId === userId);
+        return votes.some((v) => v.upDown && v.userId === userId);
       },
     });
 
@@ -253,7 +253,7 @@ export const Answer = objectType({
             },
           })
           .votes();
-        return votes.some((v) => v.userId === userId);
+        return votes.some((v) => v.upDown && v.userId === userId);
       },
     });
 

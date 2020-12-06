@@ -55,6 +55,12 @@ public class HomeFragment extends Fragment {
     private TextView suggestedButton;
     private TextView yourQuestionsButton;
     private TextView yourAnswersButton;
+    private TextView explanationText;
+
+    private boolean noSuggestedQuestions = false;
+    private boolean noYourQuestions = false;
+    private boolean noYourAnswers = false;
+
 
     private enum ViewState {
         SUGGESTED,
@@ -79,21 +85,37 @@ public class HomeFragment extends Fragment {
 
     private void setState(ViewState state) {
 
+
         switch (state) {
             case SUGGESTED:
                 toggleViewOn(suggestedQuestionsRecyclerView, suggestedButton);
                 toggleViewOff(yourQuestionsRecyclerView, yourQuestionsButton);
                 toggleViewOff(yourAnswersRecyclerView, yourAnswersButton);
+                if (noSuggestedQuestions) {
+                    explanationText.setText("No suggested questions to display.");
+                } else {
+                    explanationText.setText("Questions that you could help answer or might interest you.");
+                }
                 break;
             case YOUR_QUESTIONS:
                 toggleViewOff(suggestedQuestionsRecyclerView, suggestedButton);
                 toggleViewOn(yourQuestionsRecyclerView, yourQuestionsButton);
                 toggleViewOff(yourAnswersRecyclerView, yourAnswersButton);
+                if (noYourQuestions) {
+                    explanationText.setText("You haven't asked anything yet.");
+                } else {
+                    explanationText.setText("Here are the questions you've posted.");
+                }
                 break;
             case YOUR_ANSWERS:
                 toggleViewOff(suggestedQuestionsRecyclerView, suggestedButton);
                 toggleViewOff(yourQuestionsRecyclerView, yourQuestionsButton);
                 toggleViewOn(yourAnswersRecyclerView, yourAnswersButton);
+                if (noYourAnswers) {
+                    explanationText.setText("You haven't answered any questions yet.");
+                } else {
+                    explanationText.setText("Here are answers that you've contributed to the community.");
+                }
                 break;
         }
     }
@@ -119,6 +141,8 @@ public class HomeFragment extends Fragment {
         yourAnswersRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         yourAnswersAdapter = new QARecyclerViewAdapter(getActivity(), new ArrayList<QAItem>());
         yourAnswersRecyclerView.setAdapter(yourAnswersAdapter);
+
+        explanationText = baseView.findViewById(R.id.explanationText);
 
         CardView coinsCardView = baseView.findViewById(R.id.coinCardView);
 
@@ -193,6 +217,9 @@ public class HomeFragment extends Fragment {
                     QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick());
                     getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
                 }
+                if (qList.size() == 0) {
+                    noSuggestedQuestions = true;
+                }
             }
 
             @Override
@@ -210,6 +237,9 @@ public class HomeFragment extends Fragment {
                     String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
                     QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick());
                     getActivity().runOnUiThread(() -> yourQuestionsAdapter.addItem(qaItem));
+                }
+                if (qList.size() == 0) {
+                    noYourQuestions = true;
                 }
             }
 
@@ -230,6 +260,9 @@ public class HomeFragment extends Fragment {
                     String categoryName = answer.question().categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(answer.question().categories().get(0).name()): "";
                     QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, answer.id(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false);
                     getActivity().runOnUiThread(() -> yourAnswersAdapter.addItem(qaItem));
+                }
+                if (aList.size() == 0) {
+                    noYourAnswers = true;
                 }
             }
 

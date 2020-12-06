@@ -19,11 +19,14 @@
 
 
     <string-array name="category_display_names">
-        <item>Job Hunting</item>
-        <item>Housing</item>
+        <item>First Generation Student Resources</item>
+        <item>Transfer Student Resources</item>
+        <item>International Student Resources</item>
+        <item>Class Planning</item>
+        <item>Enrollment</item>
         <item>Financial Aid</item>
         <item>Clubs and Decals</item>
-        <item>Enrollment</item>
-        <item>Class Planning</item>
+        <item>Job Hunting</item>
+        <item>Housing</item>
     </string-array>
 </resources>

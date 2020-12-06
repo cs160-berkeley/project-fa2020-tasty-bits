@@ -2,6 +2,7 @@ mutation UpsertQuestionClick($questionId:ID!) {
     upsertQuestionClick(questionId:$questionId) {
         question {
             clickScore
+            userDidClick
         }
     }
 }

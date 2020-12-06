@@ -96,14 +96,14 @@
     <fragment
         android:id="@+id/answerview_fragment"
         android:name="com.example.tastybits.ui.answerview.AnswerViewFragment"
-        android:label="Answer"
+        android:label="Answers"
         tools:layout="@layout/fragment_answer_view"/>
 
     <fragment
-        android:id="@+id/questionhub_answer"
-        android:name="com.example.tastybits.ui.answerview.QuestionAnswerFragment"
+        android:id="@+id/answerpost_fragment"
+        android:name="com.example.tastybits.ui.answerview.AnswerPostFragment"
         android:label="Add Your Own Question"
-        tools:layout="@layout/fragment_question_answer"/>
+        tools:layout="@layout/fragment_answer_post"/>
 
 
 

@@ -7,7 +7,8 @@
     android:layout_margin="10dp"
     app:cardBackgroundColor="@color/light_brown"
     app:cardCornerRadius="20dp"
-    app:cardPreventCornerOverlap="false">
+    app:cardPreventCornerOverlap="false"
+  >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/baseView"
@@ -17,7 +18,7 @@
 
 
         <TextView
-            android:id="@+id/questionhubCategoryName"
+            android:id="@+id/squareCategoryCardName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -27,10 +28,10 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/questionhubCategoryIcon" />
+            app:layout_constraintTop_toBottomOf="@+id/squareCategoryCardIcon" />
 
         <ImageView
-            android:id="@+id/questionhubCategoryIcon"
+            android:id="@+id/squareCategoryCardIcon"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:scaleType="fitCenter"

@@ -40,13 +40,15 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
         baseView = itemView.findViewById(R.id.baseView);
     }
 
-    public void bindTo(Activity activity, QAItem item, int position, boolean isSingleCard) {
+    public void bindTo(Activity activity, QAItem item, int position, boolean isSingleCard, AsyncCallback callback) {
+
+      
 
         if (item.getQaType() == QAItem.QAType.QUESTION) {
 
             clicksTextView.setText(String.valueOf(item.getClickScore()));
-            //don't use if the user did see it, its just kind of confusing
-            clicksToggleButton.setChecked(true);
+
+            clicksToggleButton.setChecked(item.isUserDidClick());
 
             if (!isSingleCard) {
                 baseView.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +62,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                                         item.setClickScore(upsertQuestionClick.question().clickScore());
                                         activity.runOnUiThread(()->{
                                             clicksTextView.setText(String.valueOf(upsertQuestionClick.question().clickScore()));
+                                            clicksToggleButton.setChecked(upsertQuestionClick.question().userDidClick());
                                         });
                                     }
 
@@ -70,10 +73,8 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                                 });
 
                         Bundle bundle = new Bundle();
-
                         bundle.putString(activity.getString(R.string.question_id_key), item.getId());
                         bundle.putString(activity.getString(R.string.question_category_name_key), Constants.displayToQueryCategoryNameMap.get(item.getCategoryName()));
-
                         Navigation.createNavigateOnClickListener(R.id.answerview_fragment, bundle).onClick(v);
                     }
                 });
@@ -90,7 +91,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                                     item.setVoteScore(upsertQuestionVote.question().voteScore());
                                     activity.runOnUiThread(()->{
                                         votesTextView.setText(String.valueOf(upsertQuestionVote.question().voteScore()));
-//                                            sortAnswerByUpvotes();
+
                                     });
                                 }
 
@@ -119,7 +120,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                                     item.setVoteScore(upsertAnswerVote.answer().voteScore());
                                     activity.runOnUiThread(()->{
                                         votesTextView.setText(String.valueOf(upsertAnswerVote.answer().voteScore()));
-//                                            sortAnswerByUpvotes();
+
                                     });
                                 }
 
@@ -143,17 +144,20 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
         conditionalSetTextView(nameTextView, item.getNameText());
         conditionalSetTextView(categoryTextView, item.getCategoryName());
 
-        if (isSingleCard) {
-            baseView.setBackgroundColor(activity.getColor(R.color.primary));
-            titleTextView.setTextColor(activity.getColor(R.color.white));
-            descriptionTextView.setTextColor(activity.getColor(R.color.white));
-            nameTextView.setTextColor(activity.getColor(R.color.white));
-            categoryTextView.setTextColor(activity.getColor(R.color.white));
-            votesTextView.setTextColor(activity.getColor(R.color.white));
-            clicksTextView.setTextColor(activity.getColor(R.color.white));
 
-        }
+    }
+    public void prepareSingleCard(Activity activity) {
+        baseView.setBackgroundColor(activity.getColor(R.color.primary));
+        titleTextView.setTextColor(activity.getColor(R.color.white));
+        descriptionTextView.setTextColor(activity.getColor(R.color.white));
+        nameTextView.setTextColor(activity.getColor(R.color.white));
+        categoryTextView.setTextColor(activity.getColor(R.color.white));
+        votesTextView.setTextColor(activity.getColor(R.color.white));
+        clicksTextView.setTextColor(activity.getColor(R.color.white));
+    }
 
+    public void bindTo(Activity activity, QAItem item, int position, boolean isSingleCard) {
+        bindTo(activity, item, position, isSingleCard, null);
     }
 
     private void conditionalSetTextView(TextView textView, String s) {

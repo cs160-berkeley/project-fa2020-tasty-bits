@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                                     NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, appBarConfiguration);
                                     NavigationUI.setupWithNavController(navView, navController);
 
-                                    navController.popBackStack();
-                                    navController.navigate(R.id.homescreen);
+                                    NavOptions navOptions = (new NavOptions.Builder()).setPopUpTo(R.id.loading, true).build();
+                                    navController.navigate(R.id.homescreen, null, navOptions);
                                 });
 
                             }
@@ -73,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onException(Exception e) {
 
+                            runOnUiThread(() -> {
+                                TextView loadingAppText = findViewById(R.id.startAppLoadingText);
+                                loadingAppText.setText("We've run into an issue loading essential information for our app, please try again later :(");
+                            });
+                            Log.i(TAG, "Could not load either user or categories. This is a fatal error for our app. Error: "  + e.getMessage());
                         }
                     };
 
