@@ -118,6 +118,8 @@
                 android:layout_height="160dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="12dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/clubs_and_decals_questionhub" />
 

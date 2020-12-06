@@ -33,52 +33,10 @@
 
 
     <fragment
-        android:id="@+id/info_class_planning"
-        android:name="com.example.tastybits.ui.informationhub.ClassPlanningFragment"
-        android:label="Info: Class Planning"
-        tools:layout="@layout/fragment_infohub_classplanning"/>
-
-    <fragment
         android:id="@+id/infohub_details"
         android:name="com.example.tastybits.ui.informationhub.InfoHubDetailsFragment"
         android:label="Article"
         tools:layout="@layout/fragment_infohub_details"/>
-
-    <fragment
-        android:id="@+id/info_enrollment"
-        android:name="com.example.tastybits.ui.informationhub.EnrollmentFragment"
-        android:label="Info: Enrollment"
-        tools:layout="@layout/fragment_infohub_enrollment"/>
-    <fragment
-        android:id="@+id/info_transfer"
-        android:name="com.example.tastybits.ui.informationhub.TransferFragment"
-        android:label="Info: Transfer Student"
-        tools:layout="@layout/fragment_infohub_transfer"/>
-
-
-    <fragment
-        android:id="@+id/info_housing"
-        android:name="com.example.tastybits.ui.informationhub.HousingFragment"
-        android:label="Info: Housing"
-        tools:layout="@layout/fragment_infohub_housing"/>
-
-    <fragment
-        android:id="@+id/info_clubs"
-        android:name="com.example.tastybits.ui.informationhub.ClubsDecalsFragment"
-        android:label="Info: Clubs and Decals"
-        tools:layout="@layout/fragment_infohub_clubsdecals"/>
-
-    <fragment
-        android:id="@+id/info_international"
-        android:name="com.example.tastybits.ui.informationhub.InternationalFragment"
-        android:label="Info: International Student"
-        tools:layout="@layout/fragment_infohub_international"/>
-
-    <fragment
-        android:id="@+id/info_firstgen"
-        android:name="com.example.tastybits.ui.informationhub.FirstGenFragment"
-        android:label="Info: First Gen Student"
-        tools:layout="@layout/fragment_infohub_firstgen"/>
 
 
     <fragment

@@ -100,7 +100,7 @@ public class InfoHubDetailsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_infohub_details, container, false);
 
-        String categoryName = getArguments().getString(getString(R.string.infohub_category_name_key));
+        String categoryName = getArguments().getString(getString(R.string.category_name_key));
 
         String md = Constants.queryCategoryToMarkdownArticle.get(categoryName);
 

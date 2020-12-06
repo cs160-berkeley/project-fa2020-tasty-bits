@@ -178,7 +178,7 @@ public class HomeFragment extends Fragment {
                     editName();
                 }
             }
-            });
+        });
 
         suggestedQuestionsRecyclerView = baseView.findViewById(R.id.suggestedQuestionsRecyclerView);
         suggestedQuestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
