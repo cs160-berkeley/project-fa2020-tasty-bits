@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.EditUserMutation;
 import com.example.GetAnswerQuery;
 import com.example.GetQuestionsQuery;
 import com.example.GetSuggestedQuestionsQuery;
@@ -56,6 +60,8 @@ public class HomeFragment extends Fragment {
     private TextView yourQuestionsButton;
     private TextView yourAnswersButton;
     private TextView explanationText;
+
+    private EditText nameEditText;
 
     private boolean noSuggestedQuestions = false;
     private boolean noYourQuestions = false;
@@ -120,10 +126,59 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    public void editName() {
+        String name = nameEditText.getText().toString();
+        if (name.equals("")) {
+            nameEditText.setText("Your Name");
+            Toast.makeText(getActivity(), "Please fill out the name field.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        NetworkRequest.getInstance().mutationEditUser(name, new AsyncCallback() {
+            @Override
+            public void onCompleted(Object result) {
+                getActivity().runOnUiThread(() -> {
+                    EditUserMutation.EditUser user = (EditUserMutation.EditUser) result;
+                    nameEditText.setText(user.name() == null ? "Name Unset": user.name());
+                });
+            }
+
+            @Override
+            public void onException(Exception e) {
+
+            }
+        });
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View baseView = inflater.inflate(R.layout.fragment_home, container, false);
 
+
+        nameEditText = baseView.findViewById(R.id.nameText);
+
+        nameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId){
+                    case EditorInfo.IME_ACTION_DONE:
+                    case EditorInfo.IME_ACTION_NEXT:
+                    case EditorInfo.IME_ACTION_PREVIOUS:
+                        editName();
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        nameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    editName();
+                }
+            }
+            });
 
         suggestedQuestionsRecyclerView = baseView.findViewById(R.id.suggestedQuestionsRecyclerView);
         suggestedQuestionsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -179,9 +234,7 @@ public class HomeFragment extends Fragment {
                     TextView coinsValue = baseView.findViewById(R.id.coinsValue);
                     coinsValue.setText(String.valueOf(user.answerScore() + user.answerVoteScore() + user.questionVoteScore() + user.questionScore()));
 
-                    TextView name = baseView.findViewById(R.id.nameText);
-
-                    name.setText(user.name() == null ? "Name Unset": user.name());
+                    nameEditText.setText(user.name() == null ? "Your Name": user.name());
 
                     TextView studentType = baseView.findViewById(R.id.studentTypeText);
 
@@ -274,7 +327,4 @@ public class HomeFragment extends Fragment {
 
         return baseView;
     }
-
-
-
 }

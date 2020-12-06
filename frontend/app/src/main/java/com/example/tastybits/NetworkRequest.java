@@ -8,6 +8,7 @@ import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.example.CreateAnswerMutation;
 import com.example.CreateQuestionMutation;
+import com.example.EditUserMutation;
 import com.example.GetAnswerQuery;
 import com.example.GetCategoriesQuery;
 import com.example.GetQuestionsQuery;
@@ -119,6 +120,21 @@ public class NetworkRequest {
         });
     }
 
+    public void mutationEditUser(String name, AsyncCallback callback) {
+        apolloClient.mutate(new EditUserMutation(name)).enqueue(new ApolloCall.Callback<EditUserMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<EditUserMutation.Data> response) {
+                EditUserMutation.EditUser user = response.getData().editUser();
+                callback.onCompleted(user);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+                callback.onException(e);
+            }
+        });
+    }
 
     public void querySentiment(String text, AsyncCallback callback) {
         apolloClient.query(new GetSentimentQuery(text)).enqueue(new ApolloCall.Callback<GetSentimentQuery.Data>() {

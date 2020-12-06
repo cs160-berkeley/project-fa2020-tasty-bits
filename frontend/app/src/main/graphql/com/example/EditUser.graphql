@@ -1,0 +1,5 @@
+mutation EditUser($name:String!) {
+    editUser(name:$name) {
+        name
+    }
+}

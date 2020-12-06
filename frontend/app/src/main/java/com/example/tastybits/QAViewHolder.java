@@ -42,12 +42,12 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
 
     public void bindTo(Activity activity, QAItem item, int position, boolean isSingleCard, AsyncCallback callback) {
 
-      
+        // just make the click number invisible for now
+        clicksTextView.setVisibility(View.INVISIBLE);
 
         if (item.getQaType() == QAItem.QAType.QUESTION) {
 
             clicksTextView.setText(String.valueOf(item.getClickScore()));
-
             clicksToggleButton.setChecked(item.isUserDidClick());
 
             if (!isSingleCard) {
