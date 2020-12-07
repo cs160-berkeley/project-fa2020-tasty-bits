@@ -69,15 +69,20 @@ public class HomeFragment extends Fragment {
 
     private EditText nameEditText;
 
-    private boolean noSuggestedQuestions = false;
-    private boolean noYourQuestions = false;
-    private boolean noYourAnswers = false;
+    private boolean noSuggestedQuestions = true;
+    private boolean noYourQuestions = true;
+    private boolean noYourAnswers = true;
 
 
+    private ViewState state;
     private enum ViewState {
         SUGGESTED,
         YOUR_ANSWERS,
         YOUR_QUESTIONS,
+    }
+
+    private ViewState getState() {
+        return state;
     }
 
     private void toggleViewOn(RecyclerView view, TextView label) {
@@ -97,6 +102,7 @@ public class HomeFragment extends Fragment {
 
     private void setState(ViewState state) {
 
+        this.state = state;
 
         switch (state) {
             case SUGGESTED:
@@ -294,14 +300,18 @@ public class HomeFragment extends Fragment {
 
                             //set id option filters here
                             // if (question.id() is one of ['id1', 'id2'...]
-                            
+
                             QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
                             getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
                         }
                     }
 
-                    if (!questionPresent) {
-                        noSuggestedQuestions = true;
+                    getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.sortByCreatedAt());
+
+
+                    if (questionPresent) {
+                        noSuggestedQuestions = false;
+                        getActivity().runOnUiThread(() -> setState(getState()));
                     }
                 }
 
@@ -335,8 +345,13 @@ public class HomeFragment extends Fragment {
                         QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
                         getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
                     }
-                    if (qList.size() == 0) {
-                        noSuggestedQuestions = true;
+
+                    getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.sortByCreatedAt());
+
+
+                    if (qList.size() > 0) {
+                        noSuggestedQuestions = false;
+                        getActivity().runOnUiThread(() -> setState(getState()));
                     }
                 }
 
@@ -371,8 +386,12 @@ public class HomeFragment extends Fragment {
                     QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(),createdAt, updatedAt);
                     getActivity().runOnUiThread(() -> yourQuestionsAdapter.addItem(qaItem));
                 }
-                if (qList.size() == 0) {
-                    noYourQuestions = true;
+
+                getActivity().runOnUiThread(() -> yourQuestionsAdapter.sortByCreatedAt());
+
+                if (qList.size() > 0) {
+                    noYourQuestions = false;
+                    getActivity().runOnUiThread(() -> setState(getState()));
                 }
             }
 
@@ -405,8 +424,12 @@ public class HomeFragment extends Fragment {
                     QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, answer.id(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false, createdAt, updatedAt);
                     getActivity().runOnUiThread(() -> yourAnswersAdapter.addItem(qaItem));
                 }
-                if (aList.size() == 0) {
-                    noYourAnswers = true;
+
+                getActivity().runOnUiThread(() -> yourAnswersAdapter.sortByCreatedAt());
+
+                if (aList.size() > 0) {
+                    noYourAnswers = false;
+                    getActivity().runOnUiThread(() -> setState(getState()));
                 }
             }
 
