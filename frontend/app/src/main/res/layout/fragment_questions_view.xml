@@ -17,7 +17,7 @@
         android:backgroundTint="@color/orange"
         android:drawableLeft="@drawable/ic_create_outline"
         android:padding="20dp"
-        android:text="Add your &#10;own question"
+        android:text="Add&#10;question"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
