@@ -119,7 +119,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                             }
                         });
             });
-            if (item.isUserOwns()) {
+            if (item.isUserOwns() && isSingleCard) {
 
             titleTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
@@ -169,7 +169,12 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                 }
             });
 
-        }
+        } else {
+                titleTextView.setCompoundDrawables(null, null, null, null);
+                titleTextView.setKeyListener(null);
+                descriptionTextView.setCompoundDrawables(null, null, null, null);
+                descriptionTextView.setKeyListener(null);
+            }
         } else {
 
             clicksTextView.setVisibility(View.GONE);
@@ -227,15 +232,16 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                     }
                 }
             });
-        }
+
+            } else {
+                titleTextView.setCompoundDrawables(null, null, null, null);
+                titleTextView.setKeyListener(null);
+                descriptionTextView.setCompoundDrawables(null, null, null, null);
+                descriptionTextView.setKeyListener(null);
+            }
         }
 
-        if (!item.isUserOwns()) {
-            titleTextView.setCompoundDrawables(null, null, null, null);
-            titleTextView.setKeyListener(null);
-            descriptionTextView.setCompoundDrawables(null, null, null, null);
-            descriptionTextView.setKeyListener(null);
-        }
+
 
 
 
