@@ -63,36 +63,38 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
             clicksTextView.setText(String.valueOf(item.getClickScore()));
             clicksToggleButton.setChecked(item.isUserDidClick());
 
+            View.OnClickListener baseCardClick = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NetworkRequest.getInstance().mutationUpsertQuestionClick(item.getId(),
+                            new AsyncCallback() {
+                                @Override
+                                public void onCompleted(Object result) {
+                                    UpsertQuestionClickMutation.UpsertQuestionClick upsertQuestionClick = (UpsertQuestionClickMutation.UpsertQuestionClick) result;
+                                    item.setClickScore(upsertQuestionClick.question().clickScore());
+                                    item.setUserDidClick(upsertQuestionClick.question().userDidClick());
+
+                                    activity.runOnUiThread(() -> {
+                                        clicksTextView.setText(String.valueOf(upsertQuestionClick.question().clickScore()));
+                                        clicksToggleButton.setChecked(upsertQuestionClick.question().userDidClick());
+                                    });
+                                }
+
+                                @Override
+                                public void onException(Exception e) {
+
+                                }
+                            });
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString(activity.getString(R.string.question_id_key), item.getId());
+                    bundle.putString(activity.getString(R.string.question_category_name_key), Constants.displayToQueryCategoryNameMap.get(item.getCategoryName()));
+                    Navigation.createNavigateOnClickListener(R.id.answerview_fragment, bundle).onClick(v);
+                }
+            };
+
             if (!isSingleCard) {
-                baseView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        NetworkRequest.getInstance().mutationUpsertQuestionClick(item.getId(),
-                                new AsyncCallback() {
-                                    @Override
-                                    public void onCompleted(Object result) {
-                                        UpsertQuestionClickMutation.UpsertQuestionClick upsertQuestionClick = (UpsertQuestionClickMutation.UpsertQuestionClick) result;
-                                        item.setClickScore(upsertQuestionClick.question().clickScore());
-                                        item.setUserDidClick(upsertQuestionClick.question().userDidClick());
-
-                                        activity.runOnUiThread(() -> {
-                                            clicksTextView.setText(String.valueOf(upsertQuestionClick.question().clickScore()));
-                                            clicksToggleButton.setChecked(upsertQuestionClick.question().userDidClick());
-                                        });
-                                    }
-
-                                    @Override
-                                    public void onException(Exception e) {
-
-                                    }
-                                });
-
-                        Bundle bundle = new Bundle();
-                        bundle.putString(activity.getString(R.string.question_id_key), item.getId());
-                        bundle.putString(activity.getString(R.string.question_category_name_key), Constants.displayToQueryCategoryNameMap.get(item.getCategoryName()));
-                        Navigation.createNavigateOnClickListener(R.id.answerview_fragment, bundle).onClick(v);
-                    }
-                });
+                baseView.setOnClickListener(baseCardClick);
             }
 
             votesTextView.setText(String.valueOf(item.getVoteScore()));
@@ -171,9 +173,11 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
 
         } else {
                 titleTextView.setCompoundDrawables(null, null, null, null);
-                titleTextView.setKeyListener(null);
+                titleTextView.setOnClickListener((v) -> baseCardClick.onClick(titleTextView));
+                titleTextView.setFocusable(false);
                 descriptionTextView.setCompoundDrawables(null, null, null, null);
-                descriptionTextView.setKeyListener(null);
+                descriptionTextView.setOnClickListener((v) -> baseCardClick.onClick(titleTextView));
+                descriptionTextView.setFocusable(false);
             }
         } else {
 
@@ -235,9 +239,9 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
 
             } else {
                 titleTextView.setCompoundDrawables(null, null, null, null);
-                titleTextView.setKeyListener(null);
+                titleTextView.setFocusable(false);
                 descriptionTextView.setCompoundDrawables(null, null, null, null);
-                descriptionTextView.setKeyListener(null);
+                descriptionTextView.setFocusable(false);
             }
         }
 
