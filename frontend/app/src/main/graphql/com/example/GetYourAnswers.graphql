@@ -5,6 +5,8 @@ query GetYourAnswers {
         voteScore
         userDidVote
         questionId
+        createdAt
+        updatedAt
         question {
             title
             description

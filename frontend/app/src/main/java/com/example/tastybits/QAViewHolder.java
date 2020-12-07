@@ -68,6 +68,8 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                                     public void onCompleted(Object result) {
                                         UpsertQuestionClickMutation.UpsertQuestionClick upsertQuestionClick = (UpsertQuestionClickMutation.UpsertQuestionClick) result;
                                         item.setClickScore(upsertQuestionClick.question().clickScore());
+                                        item.setUserDidClick(upsertQuestionClick.question().userDidClick());
+
                                         activity.runOnUiThread(()->{
                                             clicksTextView.setText(String.valueOf(upsertQuestionClick.question().clickScore()));
                                             clicksToggleButton.setChecked(upsertQuestionClick.question().userDidClick());
@@ -88,63 +90,68 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                 });
             }
 
-            voteToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                    NetworkRequest.getInstance().mutationUpsertQuestionVote(item.getId(),
-                            isChecked, new AsyncCallback() {
-                                @Override
-                                public void onCompleted(Object result) {
-                                    UpsertQuestionVoteMutation.UpsertQuestionVote upsertQuestionVote = (UpsertQuestionVoteMutation.UpsertQuestionVote) result;
-                                    item.setVoteScore(upsertQuestionVote.question().voteScore());
-                                    activity.runOnUiThread(()->{
-                                        votesTextView.setText(String.valueOf(upsertQuestionVote.question().voteScore()));
+            votesTextView.setText(String.valueOf(item.getVoteScore()));
+            voteToggleButton.setChecked(item.isUserDidVote());
 
-                                    });
-                                }
+            voteToggleButton.setOnClickListener((v) -> {
+                NetworkRequest.getInstance().mutationUpsertQuestionVote(item.getId(),
+                        voteToggleButton.isChecked(), new AsyncCallback() {
+                            @Override
+                            public void onCompleted(Object result) {
+                                UpsertQuestionVoteMutation.UpsertQuestionVote upsertQuestionVote = (UpsertQuestionVoteMutation.UpsertQuestionVote) result;
+                                item.setVoteScore(upsertQuestionVote.question().voteScore());
+                                item.setUserDidVote(upsertQuestionVote.question().userDidVote());
 
-                                @Override
-                                public void onException(Exception e) {
+                                activity.runOnUiThread(()->{
+                                    votesTextView.setText(String.valueOf(upsertQuestionVote.question().voteScore()));
+                                    voteToggleButton.setChecked(upsertQuestionVote.question().userDidVote());
+                                });
+                            }
 
-                                }
-                            });
+                            @Override
+                            public void onException(Exception e) {
 
-                }
+                            }
+                        });
             });
+
 
         } else {
 
             clicksTextView.setVisibility(View.GONE);
             clicksToggleButton.setVisibility(View.GONE);
 
-            voteToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                    NetworkRequest.getInstance().mutationUpsertAnswerVote(item.getId(),
-                            isChecked, new AsyncCallback() {
-                                @Override
-                                public void onCompleted(Object result) {
-                                    UpsertAnswerVoteMutation.UpsertAnswerVote upsertAnswerVote = (UpsertAnswerVoteMutation.UpsertAnswerVote) result;
-                                    item.setVoteScore(upsertAnswerVote.answer().voteScore());
-                                    activity.runOnUiThread(()->{
-                                        votesTextView.setText(String.valueOf(upsertAnswerVote.answer().voteScore()));
 
-                                    });
-                                }
+            votesTextView.setText(String.valueOf(item.getVoteScore()));
+            voteToggleButton.setChecked(item.isUserDidVote());
 
-                                @Override
-                                public void onException(Exception e) {
+            voteToggleButton.setOnClickListener((v) -> {
+                NetworkRequest.getInstance().mutationUpsertAnswerVote(item.getId(),
+                        voteToggleButton.isChecked(), new AsyncCallback() {
+                            @Override
+                            public void onCompleted(Object result) {
+                                UpsertAnswerVoteMutation.UpsertAnswerVote upsertAnswerVote = (UpsertAnswerVoteMutation.UpsertAnswerVote) result;
+                                item.setVoteScore(upsertAnswerVote.answer().voteScore());
+                                item.setUserDidVote(upsertAnswerVote.answer().userDidVote());
 
-                                }
-                            });
+                                activity.runOnUiThread(()->{
+                                    votesTextView.setText(String.valueOf(upsertAnswerVote.answer().voteScore()));
+                                    voteToggleButton.setChecked(upsertAnswerVote.answer().userDidVote());
+                                });
+                            }
 
-                }
+                            @Override
+                            public void onException(Exception e) {
+
+                            }
+                        });
+
             });
+
+
         }
 
 
-        votesTextView.setText(String.valueOf(item.getVoteScore()));
-        voteToggleButton.setChecked(item.isUserDidVote());
 
         Integer categoryLeftInt = Constants.queryCategoryToIconInteger.get(Constants.displayToQueryCategoryNameMap.get(item.getCategoryName()));
         Drawable categoryIconDrawable = ResourcesCompat.getDrawable(activity.getResources(), categoryLeftInt, null);
@@ -176,7 +183,9 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
 
         if (s != null && !s.trim().equals("")) {
             textView.setText(s);
+            textView.setVisibility(View.VISIBLE);
             if (img != null && imageView != null) {
+                imageView.setVisibility(View.VISIBLE);
                 imageView.setImageDrawable(img);
             }
         } else {

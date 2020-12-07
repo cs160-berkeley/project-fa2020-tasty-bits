@@ -1,6 +1,8 @@
 package com.example.tastybits.ui.questionview;
 
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import com.example.tastybits.QAItem;
 import com.example.tastybits.QARecyclerViewAdapter;
 import com.example.tastybits.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,45 @@ public class QuestionViewFragment extends Fragment{
     private static final String TAG = "QuestionsViewFragment";
     private QARecyclerViewAdapter qrv_adapter;
 
+    private TextView newText;
+    private TextView popularText;
+    private SortState state;
+
+    private void toggleViewOn(TextView label) {
+        label.setTextColor(getResources().getColor(R.color.blue_text, null));
+        String labelText = label.getText().toString();
+        SpannableString content = new SpannableString(labelText);
+        content.setSpan(new UnderlineSpan(), 0, labelText.length(), 0);
+        label.setText(content);
+    }
+
+    private void toggleViewOff(TextView label) {
+        label.setTextColor(getResources().getColor(R.color.tab_indicator_text, null));
+        label.setText(label.getText().toString());
+    }
+
+    private enum SortState {
+        NEW,
+        POPULAR
+    }
+
+    public SortState getState() {
+        return state;
+    }
+
+    public void setState(SortState sortState) {
+        if (sortState == SortState.NEW) {
+            state = SortState.NEW;
+            toggleViewOn(newText);
+            toggleViewOff(popularText);
+            qrv_adapter.sortByCreatedAt();
+        } else {
+            state = SortState.POPULAR;
+            toggleViewOn(popularText);
+            toggleViewOff(newText);
+            qrv_adapter.sortByUpvote();
+        }
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -45,6 +87,17 @@ public class QuestionViewFragment extends Fragment{
         categoryTitle.setText(Constants.queryCategoryToDisplayNameMap.get(categoryName));
 
 
+        newText = baseView.findViewById(R.id.questionsNewText);
+        newText.setOnClickListener((v) -> {
+            setState(SortState.NEW);
+        });
+        popularText = baseView.findViewById(R.id.questionsPopularText);
+        popularText.setOnClickListener((v) -> {
+            setState(SortState.POPULAR);
+        });
+
+        setState(SortState.NEW);
+
         Button addQuestion = baseView.findViewById(R.id.addQuestionButtonWithinCategory);
         Bundle args = new Bundle();
         args.putString(getString(R.string.category_name_key), categoryName);
@@ -58,9 +111,26 @@ public class QuestionViewFragment extends Fragment{
 
                 for (GetQuestionsQuery.GetQuestion question : qList) {
                     String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
-                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick());
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+                    long updatedAt = 0;
+                    long createdAt = 0;
+
+                    try {
+                        createdAt = sdf.parse((String) question.createdAt()).getTime();
+                        updatedAt = sdf.parse((String) question.updatedAt()).getTime();
+                    } catch (Exception e) {
+
+                    }
+
+
+                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
+
                     getActivity().runOnUiThread(() -> qrv_adapter.addItem(qaItem));
                 }
+
+                getActivity().runOnUiThread(() -> setState(getState()));
 
                 if (qList.size() == 0) {
                     getActivity().runOnUiThread(() -> baseView.findViewById(R.id.noQuestionsTextView).setVisibility(View.VISIBLE));

@@ -38,14 +38,22 @@ public class QARecyclerViewAdapter extends RecyclerView.Adapter<QAViewHolder> {
      */
     public void addItem(QAItem qaItem) {
         qaList.add(0, qaItem);
-        sortByUpvote();
-        notifyDataSetChanged();
+        notifyItemInserted(0);
     }
 
     public void sortByUpvote() {
+        //
         Collections.sort(qaList, (a1, a2) -> a2.getVoteScore() - a1.getVoteScore());
         notifyDataSetChanged();
     }
+
+    public void sortByCreatedAt() {
+        //
+        Collections.sort(qaList, (a1, a2) -> (a2.getCreatedAt() - a1.getCreatedAt()) > 0 ? 1: -1);
+        notifyDataSetChanged();
+    }
+
+
     @NonNull
     @Override
     public QAViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

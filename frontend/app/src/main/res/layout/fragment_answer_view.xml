@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/respondToQuestionCardView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/respondToQuestionCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
         android:id="@+id/noAnswersTextView"
@@ -59,6 +59,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/respondToQuestionCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/respondToQuestionCardView">
+
+        <TextView
+            android:id="@+id/answersNewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="right|clip_vertical"
+            android:padding="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="New"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/answersPopularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:layout_marginStart="16dp"
+
+            android:gravity="left|clip_vertical"
+            android:padding="8dp"
+            android:text="Popular"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

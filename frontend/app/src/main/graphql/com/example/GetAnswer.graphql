@@ -2,11 +2,11 @@ query GetAnswer($qID:ID!) {
   getAnswers(questionId:$qID) {
   	id
     content
-    createdAt
-    updatedAt
   	questionId
   	voteScore
   	userDidVote
+  	createdAt
+    updatedAt
   	question {
   	    title
         description

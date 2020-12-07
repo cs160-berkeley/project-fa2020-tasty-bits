@@ -2,6 +2,8 @@ package com.example.tastybits.ui.answerview;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,9 +30,11 @@ import com.example.tastybits.QAItem;
 import com.example.tastybits.QARecyclerViewAdapter;
 import com.example.tastybits.QAViewHolder;
 import com.example.tastybits.R;
+import com.example.tastybits.ui.questionview.QuestionViewFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +42,45 @@ public class AnswerViewFragment extends Fragment {
     private static final String TAG = "AnswerViewFragment";
     private QARecyclerViewAdapter ans_adapter;
 
+
+    private TextView newText;
+    private TextView popularText;
+    private AnswerViewFragment.SortState state;
+    private enum SortState {
+        NEW,
+        POPULAR
+    }
+
+    public AnswerViewFragment.SortState getState() {
+        return state;
+    }
+
+    private void toggleViewOn(TextView label) {
+        label.setTextColor(getResources().getColor(R.color.blue_text, null));
+        String labelText = label.getText().toString();
+        SpannableString content = new SpannableString(labelText);
+        content.setSpan(new UnderlineSpan(), 0, labelText.length(), 0);
+        label.setText(content);
+    }
+
+    private void toggleViewOff(TextView label) {
+        label.setTextColor(getResources().getColor(R.color.tab_indicator_text, null));
+        label.setText(label.getText().toString());
+    }
+
+    public void setState(AnswerViewFragment.SortState sortState) {
+        if (sortState == AnswerViewFragment.SortState.NEW) {
+            state = AnswerViewFragment.SortState.NEW;
+            toggleViewOn(newText);
+            toggleViewOff(popularText);
+            ans_adapter.sortByCreatedAt();
+        } else {
+            state = AnswerViewFragment.SortState.POPULAR;
+            toggleViewOn(popularText);
+            toggleViewOff(newText);
+            ans_adapter.sortByUpvote();
+        }
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -52,6 +95,17 @@ public class AnswerViewFragment extends Fragment {
 
 
 
+        newText = baseView.findViewById(R.id.answersNewText);
+        newText.setOnClickListener((v) -> {
+            setState(AnswerViewFragment.SortState.NEW);
+        });
+        popularText = baseView.findViewById(R.id.answersPopularText);
+        popularText.setOnClickListener((v) -> {
+            setState(AnswerViewFragment.SortState.POPULAR);
+        });
+
+        setState(AnswerViewFragment.SortState.NEW);
+
 
         QAViewHolder vh = new QAViewHolder(baseView.findViewById(R.id.respondToQuestionCardView));
         vh.prepareSingleCard(getActivity());
@@ -62,9 +116,22 @@ public class AnswerViewFragment extends Fragment {
                 List<GetQuestionsQuery.GetQuestion> qList = (List<GetQuestionsQuery.GetQuestion>) result;
                 for (GetQuestionsQuery.GetQuestion question: qList) {
                     if (question.id().equals(questionId)) {
+                        String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+                        long updatedAt = 0;
+                        long createdAt = 0;
+
+                        try {
+                            createdAt = sdf.parse((String) question.createdAt()).getTime();
+                            updatedAt = sdf.parse((String) question.updatedAt()).getTime();
+                        } catch (Exception e) {
+
+                        }
+
+                        QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
                         getActivity().runOnUiThread(() -> {
-                            String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
-                            QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick());
                             vh.bindTo(getActivity(), qaItem, 0, true);
                         });
                     }
@@ -84,11 +151,25 @@ public class AnswerViewFragment extends Fragment {
                 List<GetAnswerQuery.GetAnswer> aList = (List<GetAnswerQuery.GetAnswer>) result;
                 for (GetAnswerQuery.GetAnswer answer: aList) {
                     String categoryName = answer.question().categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(answer.question().categories().get(0).name()): "";
-                    QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, answer.id(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false);
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+                    long updatedAt = 0;
+                    long createdAt = 0;
+
+                    try {
+                        createdAt = sdf.parse((String) answer.createdAt()).getTime();
+                        updatedAt = sdf.parse((String) answer.updatedAt()).getTime();
+                    } catch (Exception e) {
+
+                    }
+
+                    QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, answer.id(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false, createdAt, updatedAt);
+
                     getActivity().runOnUiThread(() -> ans_adapter.addItem(qaItem));
-
-
                 }
+
+                getActivity().runOnUiThread(() -> setState(getState()));
 
                 if (aList.size() == 0) {
                     getActivity().runOnUiThread(() -> baseView.findViewById(R.id.noAnswersTextView).setVisibility(View.VISIBLE));

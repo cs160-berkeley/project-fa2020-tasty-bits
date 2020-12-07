@@ -17,8 +17,10 @@ public class QAItem {
     private int clickScore = 0;
     private boolean userDidVote = false;
     private boolean userDidClick = false;
+    private long createdAt = 0;
+    private long updatedAt = 0;
 
-    public QAItem(QAType qaType, String id, String categoryName, String titleText, String descriptionText, String nameText, int voteScore, int clickScore, boolean userDidVote, boolean userDidClick) {
+    public QAItem(QAType qaType, String id, String categoryName, String titleText, String descriptionText, String nameText, int voteScore, int clickScore, boolean userDidVote, boolean userDidClick, long createdAt, long updatedAt) {
         this.qaType = qaType;
         this.id = id;
         this.categoryName = categoryName;
@@ -29,6 +31,8 @@ public class QAItem {
         this.clickScore = clickScore;
         this.userDidVote = userDidVote;
         this.userDidClick = userDidClick;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public QAType getQaType() {
@@ -109,5 +113,21 @@ public class QAItem {
 
     public void setUserDidClick(boolean userDidClick) {
         this.userDidClick = userDidClick;
+    }
+
+    public long getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public long getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(long updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
