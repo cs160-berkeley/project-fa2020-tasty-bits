@@ -4,6 +4,9 @@ import java.util.Map;
 
 public class Constants {
 
+    public static final String TAG_APP_ID = "com.example.tastybits";
+
+
     public static final Map<String, String> displayToQueryCategoryNameMap;
     public static final Map<String, String> queryCategoryToDisplayNameMap;
     public static final Map<String, String> queryCategoryToMarkdownArticle;

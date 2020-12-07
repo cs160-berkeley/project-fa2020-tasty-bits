@@ -14,6 +14,7 @@
         android:background="@drawable/rounded_corners"
         android:backgroundTint="@color/orange"
         android:drawableLeft="@drawable/ic_create_outline"
+        android:drawablePadding="10dp"
         android:padding="20dp"
         android:text="Add&#10;answer"
         android:textColor="@color/white"

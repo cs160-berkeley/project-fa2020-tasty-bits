@@ -41,6 +41,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/logoutText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:drawableRight="@drawable/ic_exit_outline"
+                android:drawablePadding="10dp"
+                android:text="Logout"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <EditText
                 android:id="@+id/nameText"
                 android:layout_width="wrap_content"
@@ -50,7 +63,7 @@
                 android:maxLines="1"
                 android:background="@null"
                 android:textColor="@color/white"
-                android:drawablePadding="8dip"
+                android:drawablePadding="10dp"
                 android:drawableRight="@drawable/ic_pencil"
                 android:textSize="28sp"
                 android:inputType="text"
@@ -87,14 +100,13 @@
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/logoutText">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingVertical="8dp"
                     android:paddingHorizontal="14dp"
-                    >
+                    android:paddingVertical="8dp">
 
                     <TextView
                         android:id="@+id/coinsLabel2"

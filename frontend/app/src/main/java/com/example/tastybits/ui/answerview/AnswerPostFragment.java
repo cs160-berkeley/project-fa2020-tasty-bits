@@ -43,7 +43,7 @@ public class AnswerPostFragment extends Fragment{
                 @Override
                 public void onCompleted(Object result) {
                     String sentimentText = (String) result;
-                    if (sentimentText.equals("VERY_ANGRY")) {
+                    if (sentimentText.equals("VERY_ANGRY") || sentimentText.equals("ANGRY") ) {
                         getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "Please make your answer more positive to help keep the community safe and happy for everyone.", Toast.LENGTH_LONG).show());
                     } else {
                         NetworkRequest.getInstance().mutationCreateAnswer(questionId, contentText.getText().toString(), new AsyncCallback() {

@@ -13,6 +13,12 @@
 
 
     <fragment
+        android:id="@+id/onboarding"
+        android:name="com.example.tastybits.ui.onboarding.OnboardingFragment"
+        android:label="Register/Login"
+        tools:layout="@layout/fragment_onboarding" />
+
+    <fragment
         android:id="@+id/infohub"
         android:name="com.example.tastybits.ui.informationhub.InfoHubFragment"
         android:label="Information Hub"

@@ -22,6 +22,9 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,6 +71,8 @@ public class HomeFragment extends Fragment {
     private TextView explanationText;
 
     private EditText nameEditText;
+
+    private View baseView;
 
     private boolean noSuggestedQuestions = true;
     private boolean noYourQuestions = true;
@@ -161,13 +166,34 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    public void logout() {
+        LoginManager.getInstance().logout(new LoginManager.LogoutCallback() {
+            @Override
+            public void onCompleted() {
+                NavController navController = Navigation.findNavController(baseView);
+                NavOptions navOptions = (new NavOptions.Builder()).setPopUpTo(R.id.homescreen, true).build();
+                navController.navigate(R.id.loading, null, navOptions);
+            }
+
+            @Override
+            public void onException(Exception e) {
+
+            }
+        });
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View baseView = inflater.inflate(R.layout.fragment_home, container, false);
+        baseView = inflater.inflate(R.layout.fragment_home, container, false);
 
+
+
+        TextView logoutText = baseView.findViewById(R.id.logoutText);
+        logoutText.setOnClickListener((v) -> {
+            logout();
+        });
 
         nameEditText = baseView.findViewById(R.id.nameText);
-
         nameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

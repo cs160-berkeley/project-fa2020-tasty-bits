@@ -22,7 +22,6 @@ import java.util.Date;
 
 public class LoginManager {
 
-    public static final String TAG_APP_ID = "com.example.tastybits";
 
     public static final String TAG_ACCESS_TOKEN = "ACCESS_TOKEN";
     public static final String TAG_EXPIRES_AT = "EXPIRES_AT";
@@ -66,7 +65,7 @@ public class LoginManager {
     }
 
     public String getAccessToken() {
-        SharedPreferences preferences = activity.getSharedPreferences(TAG_APP_ID, Context.MODE_PRIVATE);
+        SharedPreferences preferences = activity.getSharedPreferences(Constants.TAG_APP_ID, Context.MODE_PRIVATE);
         String accessToken = preferences.getString(TAG_ACCESS_TOKEN, null);
         String expiresAt = preferences.getString(TAG_EXPIRES_AT, null);
 
@@ -107,7 +106,7 @@ public class LoginManager {
                         String token = credentials.getAccessToken();
 
                         long expires = credentials.getExpiresAt().getTime();
-                        SharedPreferences preferences = activity.getSharedPreferences(TAG_APP_ID, Context.MODE_PRIVATE);
+                        SharedPreferences preferences = activity.getSharedPreferences(Constants.TAG_APP_ID, Context.MODE_PRIVATE);
                         preferences.edit().putString(TAG_ACCESS_TOKEN, token).apply();
                         preferences.edit().putString(TAG_EXPIRES_AT, Long.toString(expires)).apply();
 
@@ -124,6 +123,10 @@ public class LoginManager {
                 .start(activity, new VoidCallback() {
                     @Override
                     public void onSuccess(Void payload) {
+                        SharedPreferences preferences = activity.getSharedPreferences(Constants.TAG_APP_ID, Context.MODE_PRIVATE);
+                        preferences.edit().putString(TAG_ACCESS_TOKEN, null).apply();
+                        preferences.edit().putString(TAG_EXPIRES_AT, null).apply();
+
                         logoutCallback.onCompleted();
                     }
 
