@@ -7,6 +7,7 @@ query GetYourQuestions {
         clickScore
         userDidVote
         userDidClick
+        userOwns
         createdAt
         updatedAt
         categories {

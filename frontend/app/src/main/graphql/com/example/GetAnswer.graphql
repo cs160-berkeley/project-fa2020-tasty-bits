@@ -5,6 +5,7 @@ query GetAnswer($qID:ID!) {
   	questionId
   	voteScore
   	userDidVote
+  	userOwns
   	createdAt
     updatedAt
   	question {

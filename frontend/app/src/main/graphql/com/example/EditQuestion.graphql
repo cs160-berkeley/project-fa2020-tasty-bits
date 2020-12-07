@@ -1,0 +1,6 @@
+mutation EditQuestion($id:ID!, $title:String!, $description:String!) {
+    editQuestion(id:$id, title:$title, description:$description) {
+        title
+        description
+    }
+}

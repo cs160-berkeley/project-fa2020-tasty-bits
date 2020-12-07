@@ -125,7 +125,7 @@ public class QuestionViewFragment extends Fragment{
                     }
 
 
-                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
+                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), createdAt, updatedAt);
 
                     getActivity().runOnUiThread(() -> qrv_adapter.addItem(qaItem));
                 }

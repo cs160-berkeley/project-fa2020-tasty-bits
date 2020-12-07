@@ -130,7 +130,7 @@ public class AnswerViewFragment extends Fragment {
 
                         }
 
-                        QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
+                        QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), createdAt, updatedAt);
                         getActivity().runOnUiThread(() -> {
                             vh.bindTo(getActivity(), qaItem, 0, true);
                         });
@@ -164,7 +164,7 @@ public class AnswerViewFragment extends Fragment {
 
                     }
 
-                    QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, answer.id(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false, createdAt, updatedAt);
+                    QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, answer.id(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false, answer.userOwns(), createdAt, updatedAt);
 
                     getActivity().runOnUiThread(() -> ans_adapter.addItem(qaItem));
                 }

@@ -150,6 +150,14 @@ export const Question = objectType({
       },
     });
 
+    t.boolean('userOwns', {
+      resolve: async (parent, args, ctx) => {
+        const userId = getUserId(ctx)!;
+
+        return parent.userId == userId;
+      },
+    });
+
     t.int('clickScore', {
       resolve: async (parent, args, ctx) => {
         const clicks = await ctx.prisma.question
@@ -239,6 +247,14 @@ export const Answer = objectType({
           })
           .votes();
         return votes.reduce((prev, curr) => prev + +curr.upDown, 0);
+      },
+    });
+
+    t.boolean('userOwns', {
+      resolve: async (parent, args, ctx) => {
+        const userId = getUserId(ctx)!;
+
+        return parent.userId == userId;
       },
     });
 

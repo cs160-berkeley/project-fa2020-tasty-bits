@@ -7,6 +7,7 @@ query GetQuestions($cID:ID!) {
         clickScore
         userDidVote
         userDidClick
+        userOwns
         createdAt
         updatedAt
         categories {

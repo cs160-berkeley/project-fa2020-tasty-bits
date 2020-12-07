@@ -8,6 +8,8 @@ import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.example.CreateAnswerMutation;
 import com.example.CreateQuestionMutation;
+import com.example.EditAnswerMutation;
+import com.example.EditQuestionMutation;
 import com.example.EditUserMutation;
 import com.example.GetAllCategoryQuestionsQuery;
 import com.example.GetAnswerQuery;
@@ -310,6 +312,42 @@ public class NetworkRequest {
                 UpsertQuestionVoteMutation.UpsertQuestionVote upsertQuestionVote =
                         response.getData().upsertQuestionVote();
                 callback.onCompleted(upsertQuestionVote);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+
+            }
+        });
+    }
+
+    public void mutationEditQuestion(String questionId, String title, String description, AsyncCallback callback) {
+        EditQuestionMutation editQuestionMutation =
+                new EditQuestionMutation(questionId, title, description);
+        apolloClient.mutate(editQuestionMutation).enqueue(new ApolloCall.Callback<EditQuestionMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<EditQuestionMutation.Data> response) {
+                EditQuestionMutation.EditQuestion editQuestion =
+                        response.getData().editQuestion();
+                callback.onCompleted(editQuestion);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+
+            }
+        });
+    }
+
+    public void mutationEditAnswer(String questionId, String content, AsyncCallback callback) {
+        EditAnswerMutation editAnswerMutation =
+                new EditAnswerMutation(questionId, content);
+        apolloClient.mutate(editAnswerMutation).enqueue(new ApolloCall.Callback<EditAnswerMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<EditAnswerMutation.Data> response) {
+                EditAnswerMutation.EditAnswer editAnswer =
+                        response.getData().editAnswer();
+                callback.onCompleted(editAnswer);
             }
 
             @Override

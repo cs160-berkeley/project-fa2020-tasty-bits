@@ -3,8 +3,11 @@ package com.example.tastybits;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -15,13 +18,15 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.EditAnswerMutation;
+import com.example.EditQuestionMutation;
 import com.example.UpsertAnswerVoteMutation;
 import com.example.UpsertQuestionClickMutation;
 import com.example.UpsertQuestionVoteMutation;
 
 public class QAViewHolder extends RecyclerView.ViewHolder {
-    private final TextView titleTextView;
-    private final TextView descriptionTextView;
+    private final EditText titleTextView;
+    private final EditText descriptionTextView;
     private final TextView categoryTextView;
     private final TextView nameTextView;
     private final TextView votesTextView;
@@ -70,7 +75,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                                         item.setClickScore(upsertQuestionClick.question().clickScore());
                                         item.setUserDidClick(upsertQuestionClick.question().userDidClick());
 
-                                        activity.runOnUiThread(()->{
+                                        activity.runOnUiThread(() -> {
                                             clicksTextView.setText(String.valueOf(upsertQuestionClick.question().clickScore()));
                                             clicksToggleButton.setChecked(upsertQuestionClick.question().userDidClick());
                                         });
@@ -102,7 +107,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                                 item.setVoteScore(upsertQuestionVote.question().voteScore());
                                 item.setUserDidVote(upsertQuestionVote.question().userDidVote());
 
-                                activity.runOnUiThread(()->{
+                                activity.runOnUiThread(() -> {
                                     votesTextView.setText(String.valueOf(upsertQuestionVote.question().voteScore()));
                                     voteToggleButton.setChecked(upsertQuestionVote.question().userDidVote());
                                 });
@@ -114,8 +119,57 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                             }
                         });
             });
+            if (item.isUserOwns()) {
 
+            titleTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    switch (actionId) {
+                        case EditorInfo.IME_ACTION_DONE:
+                        case EditorInfo.IME_ACTION_NEXT:
+                        case EditorInfo.IME_ACTION_PREVIOUS:
+                            editQuestion(activity, item);
+                            return true;
+                    }
+                    return false;
+                }
+            });
 
+            titleTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        editQuestion(activity, item);
+                    }
+                }
+            });
+
+            descriptionTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    switch (actionId) {
+                        case EditorInfo.IME_ACTION_DONE:
+                        case EditorInfo.IME_ACTION_NEXT:
+                        case EditorInfo.IME_ACTION_PREVIOUS:
+                            editQuestion(activity, item);
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+            descriptionTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        editQuestion(activity, item);
+                    }
+                }
+            });
+
+        }
         } else {
 
             clicksTextView.setVisibility(View.GONE);
@@ -134,7 +188,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                                 item.setVoteScore(upsertAnswerVote.answer().voteScore());
                                 item.setUserDidVote(upsertAnswerVote.answer().userDidVote());
 
-                                activity.runOnUiThread(()->{
+                                activity.runOnUiThread(() -> {
                                     votesTextView.setText(String.valueOf(upsertAnswerVote.answer().voteScore()));
                                     voteToggleButton.setChecked(upsertAnswerVote.answer().userDidVote());
                                 });
@@ -148,8 +202,41 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
 
             });
 
+            if (item.isUserOwns()) {
 
+            titleTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    switch (actionId) {
+                        case EditorInfo.IME_ACTION_DONE:
+                        case EditorInfo.IME_ACTION_NEXT:
+                        case EditorInfo.IME_ACTION_PREVIOUS:
+                            editAnswer(activity, item);
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+            titleTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        editAnswer(activity, item);
+                    }
+                }
+            });
         }
+        }
+
+        if (!item.isUserOwns()) {
+            titleTextView.setCompoundDrawables(null, null, null, null);
+            titleTextView.setKeyListener(null);
+            descriptionTextView.setCompoundDrawables(null, null, null, null);
+            descriptionTextView.setKeyListener(null);
+        }
+
 
 
 
@@ -178,9 +265,49 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
         bindTo(activity, item, position, isSingleCard, null);
     }
 
+    public void editQuestion(Activity activity, QAItem item) {
+        NetworkRequest.getInstance().mutationEditQuestion(item.getId(),
+                titleTextView.getText().toString(), descriptionTextView.getText().toString(), new AsyncCallback() {
+                    @Override
+                    public void onCompleted(Object result) {
+                        EditQuestionMutation.EditQuestion editQuestion = (EditQuestionMutation.EditQuestion) result;
+                        item.setTitleText(editQuestion.title());
+                        item.setDescriptionText(editQuestion.description());
+
+                        activity.runOnUiThread(() -> {
+                            titleTextView.setText(editQuestion.title());
+                            descriptionTextView.setText(editQuestion.description());
+                        });
+                    }
+
+                    @Override
+                    public void onException(Exception e) {
+
+                    }
+                });
+    }
+
+    public void editAnswer(Activity activity, QAItem item) {
+        NetworkRequest.getInstance().mutationEditAnswer(item.getId(),
+                titleTextView.getText().toString(), new AsyncCallback() {
+                    @Override
+                    public void onCompleted(Object result) {
+                        EditAnswerMutation.EditAnswer editAnswer = (EditAnswerMutation.EditAnswer) result;
+                        item.setTitleText(editAnswer.content());
+
+                        activity.runOnUiThread(() -> {
+                            titleTextView.setText(editAnswer.content());
+                        });
+                    }
+
+                    @Override
+                    public void onException(Exception e) {
+
+                    }
+                });
+    }
+
     private void conditionalSetTextView(TextView textView, String s, ImageView imageView, Drawable img) {
-
-
         if (s != null && !s.trim().equals("")) {
             textView.setText(s);
             textView.setVisibility(View.VISIBLE);

@@ -4,6 +4,7 @@ query GetYourAnswers {
         content
         voteScore
         userDidVote
+        userOwns
         questionId
         createdAt
         updatedAt

@@ -1,0 +1,5 @@
+mutation EditAnswer($id:ID!, $content:String!) {
+    editAnswer(id:$id, content:$content) {
+        content
+    }
+}

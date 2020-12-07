@@ -10,6 +10,7 @@ query GetAllCategoryQuestions {
             clickScore
             userDidVote
             userDidClick
+            userOwns
             createdAt
             updatedAt
             user {

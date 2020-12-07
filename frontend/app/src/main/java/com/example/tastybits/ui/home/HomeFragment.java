@@ -327,7 +327,7 @@ public class HomeFragment extends Fragment {
                             //set id option filters here
                             // if (question.id() is one of ['id1', 'id2'...]
 
-                            QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
+                            QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), createdAt, updatedAt);
                             getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
                         }
                     }
@@ -368,7 +368,7 @@ public class HomeFragment extends Fragment {
                         }
 
 
-                        QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
+                        QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), createdAt, updatedAt);
                         getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
                     }
 
@@ -409,7 +409,7 @@ public class HomeFragment extends Fragment {
 
                     }
 
-                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(),createdAt, updatedAt);
+                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), createdAt, updatedAt);
                     getActivity().runOnUiThread(() -> yourQuestionsAdapter.addItem(qaItem));
                 }
 
@@ -447,7 +447,7 @@ public class HomeFragment extends Fragment {
                     } catch (Exception e) {
 
                     }
-                    QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, answer.id(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false, createdAt, updatedAt);
+                    QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, answer.id(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false, answer.userOwns(), createdAt, updatedAt);
                     getActivity().runOnUiThread(() -> yourAnswersAdapter.addItem(qaItem));
                 }
 
