@@ -9,6 +9,7 @@ import com.apollographql.apollo.exception.ApolloException;
 import com.example.CreateAnswerMutation;
 import com.example.CreateQuestionMutation;
 import com.example.EditUserMutation;
+import com.example.GetAllCategoryQuestionsQuery;
 import com.example.GetAnswerQuery;
 import com.example.GetCategoriesQuery;
 import com.example.GetQuestionsQuery;
@@ -209,6 +210,22 @@ public class NetworkRequest {
             public void onResponse(@NotNull Response<GetSuggestedQuestionsQuery.Data> response) {
                 List<GetSuggestedQuestionsQuery.GetSuggestedQuestion> questions = response.getData().getSuggestedQuestions();
                 callback.onCompleted(questions);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e(TAG, e.toString());
+                callback.onException(e);
+            }
+        });
+    }
+
+    public void queryAllCategoryQuestions(AsyncCallback callback) {
+        apolloClient.query(new GetAllCategoryQuestionsQuery()).enqueue(new ApolloCall.Callback<GetAllCategoryQuestionsQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<GetAllCategoryQuestionsQuery.Data> response) {
+                List<GetAllCategoryQuestionsQuery.GetCategory> categories = response.getData().getCategories();
+                callback.onCompleted(categories);
             }
 
             @Override

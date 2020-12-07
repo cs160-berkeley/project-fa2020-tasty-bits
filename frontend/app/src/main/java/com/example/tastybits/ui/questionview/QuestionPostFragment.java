@@ -95,7 +95,7 @@ public class QuestionPostFragment extends Fragment {
                 public void onCompleted(Object result) {
                     String sentimentText = (String) result;
                     if (sentimentText.equals("VERY_ANGRY")) {
-                        Toast.makeText(getActivity(), "Please make your question more positive to help keep the community safe and happy for everyone.", Toast.LENGTH_LONG).show();
+                        getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "Please make your question more positive to help keep the community safe and happy for everyone.", Toast.LENGTH_LONG).show());
                     } else {
                         NetworkRequest.getInstance().mutationCreateQuestion(
                                 categoryNames,

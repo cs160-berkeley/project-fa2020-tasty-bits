@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.EditUserMutation;
+import com.example.GetAllCategoryQuestionsQuery;
 import com.example.GetAnswerQuery;
 import com.example.GetQuestionsQuery;
 import com.example.GetSuggestedQuestionsQuery;
@@ -49,6 +50,9 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
+    public static final boolean PULL_ALL_QUESTIONS_FOR_SUGGESTED = true;
+
+
     private QARecyclerViewAdapter suggestedQuestionsAdapter;
     private QARecyclerViewAdapter yourQuestionsAdapter;
     private QARecyclerViewAdapter yourAnswersAdapter;
@@ -262,39 +266,85 @@ public class HomeFragment extends Fragment {
         });
 
 
-        NetworkRequest.getInstance().querySuggestedQuestions(new AsyncCallback() {
-            @Override
-            public void onCompleted(Object result) {
-                List<GetSuggestedQuestionsQuery.GetSuggestedQuestion> qList = (List<GetSuggestedQuestionsQuery.GetSuggestedQuestion>) result;
+        if (PULL_ALL_QUESTIONS_FOR_SUGGESTED) {
+            NetworkRequest.getInstance().querySuggestedQuestions(new AsyncCallback() {
+                @Override
+                public void onCompleted(Object result) {
+                    List<GetSuggestedQuestionsQuery.GetSuggestedQuestion> qList = (List<GetSuggestedQuestionsQuery.GetSuggestedQuestion>) result;
 
-                for (GetSuggestedQuestionsQuery.GetSuggestedQuestion question : qList) {
-                    String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
+                    for (GetSuggestedQuestionsQuery.GetSuggestedQuestion question : qList) {
+                        String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
-                    long updatedAt = 0;
-                    long createdAt = 0;
+                        long updatedAt = 0;
+                        long createdAt = 0;
 
-                    try {
-                        createdAt = sdf.parse((String) question.createdAt()).getTime();
-                        updatedAt = sdf.parse((String) question.updatedAt()).getTime();
-                    } catch (Exception e) {
+                        try {
+                            createdAt = sdf.parse((String) question.createdAt()).getTime();
+                            updatedAt = sdf.parse((String) question.updatedAt()).getTime();
+                        } catch (Exception e) {
 
+                        }
+
+                        //set id option filters here
+                        // if (question.id() is one of ['id1', 'id2'...]
+                        QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
+                        getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
+                    }
+                    if (qList.size() == 0) {
+                        noSuggestedQuestions = true;
+                    }
+                }
+
+                @Override
+                public void onException(Exception e) {
+
+                }
+            });
+        } else {
+            NetworkRequest.getInstance().queryAllCategoryQuestions(new AsyncCallback() {
+                @Override
+                public void onCompleted(Object result) {
+                    List<GetAllCategoryQuestionsQuery.GetCategory> cList = (List<GetAllCategoryQuestionsQuery.GetCategory>) result;
+
+                    boolean questionPresent = false;
+                    for (GetAllCategoryQuestionsQuery.GetCategory category: cList) {
+                        List<GetAllCategoryQuestionsQuery.Question> qList = category.questions();
+                        for (GetAllCategoryQuestionsQuery.Question question : qList) {
+                            questionPresent = true;
+
+                            String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+                            long updatedAt = 0;
+                            long createdAt = 0;
+
+                            try {
+                                createdAt = sdf.parse((String) question.createdAt()).getTime();
+                                updatedAt = sdf.parse((String) question.updatedAt()).getTime();
+                            } catch (Exception e) {
+
+                            }
+
+                            QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
+                            getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
+                        }
                     }
 
-                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
-                    getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
+                    if (!questionPresent) {
+                        noSuggestedQuestions = true;
+                    }
                 }
-                if (qList.size() == 0) {
-                    noSuggestedQuestions = true;
+
+                @Override
+                public void onException(Exception e) {
+
                 }
-            }
+            });
+        }
 
-            @Override
-            public void onException(Exception e) {
-
-            }
-        });
 
         NetworkRequest.getInstance().queryYourQuestions(new AsyncCallback() {
             @Override

@@ -1,0 +1,23 @@
+query GetAllCategoryQuestions {
+    getCategories {
+        id
+        name
+        questions {
+            id
+            title
+            description
+            voteScore
+            clickScore
+            userDidVote
+            userDidClick
+            createdAt
+            updatedAt
+            user {
+                name
+            }
+             categories {
+                name
+            }
+        }
+    }
+}
