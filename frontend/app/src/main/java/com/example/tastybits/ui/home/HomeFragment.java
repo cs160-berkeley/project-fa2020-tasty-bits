@@ -292,6 +292,9 @@ public class HomeFragment extends Fragment {
 
                             }
 
+                            //set id option filters here
+                            // if (question.id() is one of ['id1', 'id2'...]
+                            
                             QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
                             getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
                         }
@@ -328,8 +331,7 @@ public class HomeFragment extends Fragment {
 
                         }
 
-                        //set id option filters here
-                        // if (question.id() is one of ['id1', 'id2'...]
+
                         QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), createdAt, updatedAt);
                         getActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
                     }
