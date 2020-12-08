@@ -28,7 +28,7 @@
                 android:backgroundTint="@color/gray_background"
                 android:gravity="start|top"
                 android:hint="Your answer ..."
-                android:inputType="textMultiLine"
+                android:inputType="textMultiLine|textNoSuggestions"
                 android:minHeight="160dp"
                 android:paddingLeft="20dp"
                 android:paddingTop="20dp"
