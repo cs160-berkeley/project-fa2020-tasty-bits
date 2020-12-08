@@ -13,6 +13,7 @@ query GetAllCategoryQuestions {
             userOwns
             createdAt
             updatedAt
+            deletedAt
             user {
                 name
             }

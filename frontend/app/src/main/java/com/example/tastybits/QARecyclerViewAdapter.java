@@ -37,8 +37,10 @@ public class QARecyclerViewAdapter extends RecyclerView.Adapter<QAViewHolder> {
      * @param qaItem
      */
     public void addItem(QAItem qaItem) {
-        qaList.add(0, qaItem);
-        notifyItemInserted(0);
+        if (qaItem.getTitleText() != null && !qaItem.getTitleText().trim().equals("") && qaItem.getDeletedAt() == 0) {
+            qaList.add(0, qaItem);
+            notifyItemInserted(0);
+        }
     }
 
     public void sortByUpvote() {
@@ -64,7 +66,7 @@ public class QARecyclerViewAdapter extends RecyclerView.Adapter<QAViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull QAViewHolder holder, int position) {
         QAItem qaItem = qaList.get(position);
-        holder.bindTo(activity, qaItem, position, false, new AsyncCallback() {
+        holder.bindTo(activity, qaItem, position, new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
                 String command = (String) result;

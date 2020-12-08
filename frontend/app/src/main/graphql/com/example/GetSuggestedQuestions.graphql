@@ -10,6 +10,7 @@ query GetSuggestedQuestions {
         userOwns
         createdAt
         updatedAt
+        deletedAt
         categories {
             name
         }

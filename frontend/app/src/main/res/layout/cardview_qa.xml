@@ -95,31 +95,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
 
-        <TextView
-            android:id="@+id/clickScoreValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+        <ImageView
+            android:id="@+id/trashImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="8dp"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textSize="32sp"
+            android:src="@drawable/ic_trash_outline"
             app:layout_constraintEnd_toStartOf="@+id/clickImageView"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <ToggleButton
             android:id="@+id/clickImageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:layout_constraintBottom_toBottomOf="@+id/clickScoreValue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/clickScoreValue"
             android:background="@drawable/ic_eye_toggle"
-            android:textOff=""
-            android:textOn=""
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            />
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/categoryIcon"

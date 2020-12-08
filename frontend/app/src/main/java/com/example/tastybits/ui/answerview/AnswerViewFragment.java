@@ -118,21 +118,9 @@ public class AnswerViewFragment extends Fragment {
                     if (question.id().equals(questionId)) {
                         String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
 
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-
-                        long updatedAt = 0;
-                        long createdAt = 0;
-
-                        try {
-                            createdAt = sdf.parse((String) question.createdAt()).getTime();
-                            updatedAt = sdf.parse((String) question.updatedAt()).getTime();
-                        } catch (Exception e) {
-
-                        }
-
-                        QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), createdAt, updatedAt);
+                        QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, true, question.id(), null, categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), question.createdAt(), question.updatedAt(), question.deletedAt());
                         getActivity().runOnUiThread(() -> {
-                            vh.bindTo(getActivity(), qaItem, 0, true);
+                            vh.bindTo(getActivity(), qaItem, 0);
                         });
                     }
 
@@ -152,19 +140,7 @@ public class AnswerViewFragment extends Fragment {
                 for (GetAnswerQuery.GetAnswer answer: aList) {
                     String categoryName = answer.question().categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(answer.question().categories().get(0).name()): "";
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-
-                    long updatedAt = 0;
-                    long createdAt = 0;
-
-                    try {
-                        createdAt = sdf.parse((String) answer.createdAt()).getTime();
-                        updatedAt = sdf.parse((String) answer.updatedAt()).getTime();
-                    } catch (Exception e) {
-
-                    }
-
-                    QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, answer.id(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false, answer.userOwns(), createdAt, updatedAt);
+                    QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, true, answer.id(), answer.questionId(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false, answer.userOwns(), answer.createdAt(), answer.updatedAt(), answer.deletedAt());
 
                     getActivity().runOnUiThread(() -> ans_adapter.addItem(qaItem));
                 }

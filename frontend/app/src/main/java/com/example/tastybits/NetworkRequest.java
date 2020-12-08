@@ -8,6 +8,7 @@ import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.example.CreateAnswerMutation;
 import com.example.CreateQuestionMutation;
+import com.example.DeleteAnswerMutation;
 import com.example.EditAnswerMutation;
 import com.example.EditQuestionMutation;
 import com.example.EditUserMutation;
@@ -339,15 +340,52 @@ public class NetworkRequest {
         });
     }
 
-    public void mutationEditAnswer(String questionId, String content, AsyncCallback callback) {
+    public void mutationEditAnswer(String answerId, String content, AsyncCallback callback) {
         EditAnswerMutation editAnswerMutation =
-                new EditAnswerMutation(questionId, content);
+                new EditAnswerMutation(answerId, content);
         apolloClient.mutate(editAnswerMutation).enqueue(new ApolloCall.Callback<EditAnswerMutation.Data>() {
             @Override
             public void onResponse(@NotNull Response<EditAnswerMutation.Data> response) {
                 EditAnswerMutation.EditAnswer editAnswer =
                         response.getData().editAnswer();
                 callback.onCompleted(editAnswer);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+
+            }
+        });
+    }
+
+
+    public void mutationDeleteQuestion(String questionId, AsyncCallback callback) {
+        DeleteAnswerMutation deleteAnswerMutation =
+                new DeleteAnswerMutation(questionId, true);
+        apolloClient.mutate(deleteAnswerMutation).enqueue(new ApolloCall.Callback<DeleteAnswerMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<DeleteAnswerMutation.Data> response) {
+                DeleteAnswerMutation.EditAnswer deleteAnswer =
+                        response.getData().editAnswer();
+                callback.onCompleted(deleteAnswer);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+
+            }
+        });
+    }
+
+    public void mutationDeleteAnswer(String answerId, AsyncCallback callback) {
+        DeleteAnswerMutation deleteAnswerMutation =
+                new DeleteAnswerMutation(answerId, true);
+        apolloClient.mutate(deleteAnswerMutation).enqueue(new ApolloCall.Callback<DeleteAnswerMutation.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<DeleteAnswerMutation.Data> response) {
+                DeleteAnswerMutation.EditAnswer deleteAnswer =
+                        response.getData().editAnswer();
+                callback.onCompleted(deleteAnswer);
             }
 
             @Override

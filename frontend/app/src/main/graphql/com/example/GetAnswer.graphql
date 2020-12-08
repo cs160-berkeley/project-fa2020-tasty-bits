@@ -8,7 +8,9 @@ query GetAnswer($qID:ID!) {
   	userOwns
   	createdAt
     updatedAt
+    deletedAt
   	question {
+  	    id
   	    title
         description
         categories {

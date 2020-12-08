@@ -1,5 +1,7 @@
 package com.example.tastybits;
 
+import java.text.SimpleDateFormat;
+
 public class QAItem {
 
     public enum QAType {
@@ -8,7 +10,9 @@ public class QAItem {
     }
 
     private QAType qaType;
+    private boolean isDetailsItem;
     private String id;
+    private String otherId;
     private String categoryName = "";
     private String titleText = "";
     private String descriptionText = "";
@@ -20,10 +24,13 @@ public class QAItem {
     private boolean userOwns = false;
     private long createdAt = 0;
     private long updatedAt = 0;
+    private long deletedAt = 0;
 
-    public QAItem(QAType qaType, String id, String categoryName, String titleText, String descriptionText, String nameText, int voteScore, int clickScore, boolean userDidVote, boolean userDidClick, boolean userOwns, long createdAt, long updatedAt) {
+    public QAItem(QAType qaType, boolean isDetailsItem, String id, String otherId, String categoryName, String titleText, String descriptionText, String nameText, int voteScore, int clickScore, boolean userDidVote, boolean userDidClick, boolean userOwns, Object createdAt, Object updatedAt, Object deletedAt) {
         this.qaType = qaType;
+        this.isDetailsItem = isDetailsItem;
         this.id = id;
+        this.otherId = otherId;
         this.categoryName = categoryName;
         this.titleText = titleText;
         this.descriptionText = descriptionText;
@@ -33,8 +40,26 @@ public class QAItem {
         this.userDidVote = userDidVote;
         this.userDidClick = userDidClick;
         this.userOwns = userOwns;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+        long longUpdatedAt = 0;
+        long longCreatedAt = 0;
+        long longDeletedAt = 0;
+
+        try {
+            longUpdatedAt = sdf.parse((String) updatedAt).getTime();
+            longCreatedAt = sdf.parse((String) createdAt).getTime();
+            if (deletedAt != null) {
+                longDeletedAt = sdf.parse((String) deletedAt).getTime();
+            }
+        } catch (Exception e) {
+
+        }
+
+        this.createdAt = longCreatedAt;
+        this.updatedAt = longUpdatedAt;
+        this.deletedAt = longDeletedAt;
     }
 
     public QAType getQaType() {
@@ -45,12 +70,29 @@ public class QAItem {
         this.qaType = qaType;
     }
 
+    public boolean getIsDetailsItem() {
+        return isDetailsItem;
+    }
+
+    public void setIsDetailsItem(boolean isDetailsItem) {
+        this.isDetailsItem = isDetailsItem;
+    }
+
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getOtherId() {
+        return otherId;
+    }
+
+    public void setOtherId(String otherId) {
+        this.otherId = otherId;
     }
 
     public String getCategoryName() {
@@ -139,5 +181,25 @@ public class QAItem {
 
     public void setUpdatedAt(long updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public long getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(Object deletedAt) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+        long longDeletedAt = 0;
+
+        try {
+            longDeletedAt = sdf.parse((String) deletedAt).getTime();
+            if (deletedAt != null) {
+                longDeletedAt = sdf.parse((String) deletedAt).getTime();
+            }
+        } catch (Exception e) {
+
+        }
+        this.deletedAt = longDeletedAt;
     }
 }

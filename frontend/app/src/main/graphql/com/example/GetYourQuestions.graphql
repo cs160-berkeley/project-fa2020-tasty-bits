@@ -10,6 +10,7 @@ query GetYourQuestions {
         userOwns
         createdAt
         updatedAt
+        deletedAt
         categories {
             name
         }

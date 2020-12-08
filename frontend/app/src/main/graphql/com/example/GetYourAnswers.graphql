@@ -8,7 +8,9 @@ query GetYourAnswers {
         questionId
         createdAt
         updatedAt
+        deletedAt
         question {
+            id
             title
             description
             categories {

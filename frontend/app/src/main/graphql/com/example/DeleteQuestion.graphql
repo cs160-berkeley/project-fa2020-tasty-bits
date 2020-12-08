@@ -1,0 +1,5 @@
+mutation DeleteQuestion($id:ID!, $delete:Boolean!) {
+    editQuestion(id:$id, delete:$delete) {
+        deletedAt
+    }
+}

@@ -112,20 +112,8 @@ public class QuestionViewFragment extends Fragment{
                 for (GetQuestionsQuery.GetQuestion question : qList) {
                     String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
-                    long updatedAt = 0;
-                    long createdAt = 0;
-
-                    try {
-                        createdAt = sdf.parse((String) question.createdAt()).getTime();
-                        updatedAt = sdf.parse((String) question.updatedAt()).getTime();
-                    } catch (Exception e) {
-
-                    }
-
-
-                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, question.id(), categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), createdAt, updatedAt);
+                    QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, false, question.id(), null, categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), question.createdAt(), question.updatedAt(), question.deletedAt());
 
                     getActivity().runOnUiThread(() -> qrv_adapter.addItem(qaItem));
                 }

@@ -18,6 +18,8 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.DeleteAnswerMutation;
+import com.example.DeleteQuestionMutation;
 import com.example.EditAnswerMutation;
 import com.example.EditQuestionMutation;
 import com.example.UpsertAnswerVoteMutation;
@@ -31,11 +33,12 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
     private final TextView nameTextView;
     private final TextView votesTextView;
     private final ToggleButton voteToggleButton;
-    private final TextView clicksTextView;
     private final ToggleButton clicksToggleButton;
     private final ConstraintLayout baseView;
     private final ImageView nameIcon;
     private final ImageView categoryIcon;
+    private final ImageView trashIcon;
+
 
     public QAViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -45,7 +48,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
         nameTextView = itemView.findViewById(R.id.nameText);
         votesTextView = itemView.findViewById(R.id.voteScoreValue);
         voteToggleButton = itemView.findViewById(R.id.voteToggleButton);
-        clicksTextView = itemView.findViewById(R.id.clickScoreValue);
+        trashIcon = itemView.findViewById(R.id.trashImageView);
         clicksToggleButton = itemView.findViewById(R.id.clickImageView);
         nameIcon = itemView.findViewById(R.id.nameIcon);
         categoryIcon = itemView.findViewById(R.id.categoryIcon);
@@ -53,14 +56,13 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
         baseView = itemView.findViewById(R.id.baseView);
     }
 
-    public void bindTo(Activity activity, QAItem item, int position, boolean isSingleCard, AsyncCallback callback) {
+    public void bindTo(Activity activity, QAItem item, int position, AsyncCallback callback) {
 
-        // just make the click number invisible for now
-        clicksTextView.setVisibility(View.INVISIBLE);
+
+        boolean isDetailsItem = item.getIsDetailsItem();
 
         if (item.getQaType() == QAItem.QAType.QUESTION) {
 
-            clicksTextView.setText(String.valueOf(item.getClickScore()));
             clicksToggleButton.setChecked(item.isUserDidClick());
 
             View.OnClickListener baseCardClick = new View.OnClickListener() {
@@ -75,7 +77,6 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                                     item.setUserDidClick(upsertQuestionClick.question().userDidClick());
 
                                     activity.runOnUiThread(() -> {
-                                        clicksTextView.setText(String.valueOf(upsertQuestionClick.question().clickScore()));
                                         clicksToggleButton.setChecked(upsertQuestionClick.question().userDidClick());
                                     });
                                 }
@@ -93,7 +94,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                 }
             };
 
-            if (!isSingleCard) {
+            if (!isDetailsItem) {
                 baseView.setOnClickListener(baseCardClick);
             }
 
@@ -121,72 +122,91 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                             }
                         });
             });
-            if (item.isUserOwns() && isSingleCard) {
+            if (item.isUserOwns() && isDetailsItem) {
 
-            titleTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    switch (actionId) {
-                        case EditorInfo.IME_ACTION_DONE:
-                        case EditorInfo.IME_ACTION_NEXT:
-                        case EditorInfo.IME_ACTION_PREVIOUS:
+                titleTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        switch (actionId) {
+                            case EditorInfo.IME_ACTION_DONE:
+                            case EditorInfo.IME_ACTION_NEXT:
+                            case EditorInfo.IME_ACTION_PREVIOUS:
+                                editQuestion(activity, item);
+                                return true;
+                        }
+                        return false;
+                    }
+                });
+
+                titleTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (!hasFocus) {
                             editQuestion(activity, item);
-                            return true;
+                        }
                     }
-                    return false;
-                }
-            });
+                });
 
-            titleTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (!hasFocus) {
-                        editQuestion(activity, item);
+                descriptionTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        switch (actionId) {
+                            case EditorInfo.IME_ACTION_DONE:
+                            case EditorInfo.IME_ACTION_NEXT:
+                            case EditorInfo.IME_ACTION_PREVIOUS:
+                                editQuestion(activity, item);
+                                return true;
+                        }
+                        return false;
                     }
-                }
-            });
+                });
 
-            descriptionTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    switch (actionId) {
-                        case EditorInfo.IME_ACTION_DONE:
-                        case EditorInfo.IME_ACTION_NEXT:
-                        case EditorInfo.IME_ACTION_PREVIOUS:
+                descriptionTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (!hasFocus) {
                             editQuestion(activity, item);
-                            return true;
+                        }
                     }
-                    return false;
-                }
-            });
+                });
 
-            descriptionTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                trashIcon.setOnClickListener((v) -> {
+                    deleteQuestion(activity, item);
+                });
 
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (!hasFocus) {
-                        editQuestion(activity, item);
-                    }
-                }
-            });
-
-        } else {
+            } else {
                 titleTextView.setCompoundDrawables(null, null, null, null);
-                if (!isSingleCard) {
+                if (!isDetailsItem) {
                     titleTextView.setOnClickListener((v) -> baseCardClick.onClick(titleTextView));
                 }
                 titleTextView.setFocusable(false);
                 descriptionTextView.setCompoundDrawables(null, null, null, null);
-                if (!isSingleCard) {
+                if (!isDetailsItem) {
                     descriptionTextView.setOnClickListener((v) -> baseCardClick.onClick(titleTextView));
                 }
                 descriptionTextView.setFocusable(false);
+                trashIcon.setVisibility(View.GONE);
             }
         } else {
 
-            clicksTextView.setVisibility(View.GONE);
             clicksToggleButton.setVisibility(View.GONE);
+            descriptionTextView.setVisibility(View.INVISIBLE);
+
+            View.OnClickListener baseCardClick = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(activity.getString(R.string.question_id_key), item.getOtherId());
+                    bundle.putString(activity.getString(R.string.question_category_name_key), Constants.displayToQueryCategoryNameMap.get(item.getCategoryName()));
+                    Navigation.createNavigateOnClickListener(R.id.answerview_fragment, bundle).onClick(v);
+                }
+            };
+
+            if (!isDetailsItem) {
+                baseView.setOnClickListener(baseCardClick);
+            }
 
 
             votesTextView.setText(String.valueOf(item.getVoteScore()));
@@ -215,37 +235,48 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
 
             });
 
-            if (item.isUserOwns()) {
+            if (item.isUserOwns() && isDetailsItem) {
 
-            titleTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    switch (actionId) {
-                        case EditorInfo.IME_ACTION_DONE:
-                        case EditorInfo.IME_ACTION_NEXT:
-                        case EditorInfo.IME_ACTION_PREVIOUS:
+                titleTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        switch (actionId) {
+                            case EditorInfo.IME_ACTION_DONE:
+                            case EditorInfo.IME_ACTION_NEXT:
+                            case EditorInfo.IME_ACTION_PREVIOUS:
+                                editAnswer(activity, item);
+                                return true;
+                        }
+                        return false;
+                    }
+                });
+
+                titleTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (!hasFocus) {
                             editAnswer(activity, item);
-                            return true;
+                        }
                     }
-                    return false;
-                }
-            });
+                });
 
-            titleTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (!hasFocus) {
-                        editAnswer(activity, item);
-                    }
-                }
-            });
+                trashIcon.setOnClickListener((v) -> {
+                    deleteAnswer(activity, item);
+                });
 
             } else {
                 titleTextView.setCompoundDrawables(null, null, null, null);
+                if (!isDetailsItem) {
+                    titleTextView.setOnClickListener((v) -> baseCardClick.onClick(titleTextView));
+                }
                 titleTextView.setFocusable(false);
                 descriptionTextView.setCompoundDrawables(null, null, null, null);
+                if (!isDetailsItem) {
+                    descriptionTextView.setOnClickListener((v) -> baseCardClick.onClick(descriptionTextView));
+                }
                 descriptionTextView.setFocusable(false);
+                trashIcon.setVisibility(View.GONE);
             }
         }
 
@@ -260,6 +291,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
         conditionalSetTextView(nameTextView, item.getNameText(), nameIcon, profileIconDrawable);
         conditionalSetTextView(categoryTextView, item.getCategoryName(), categoryIcon, categoryIconDrawable);
     }
+
     public void prepareSingleCard(Activity activity) {
         baseView.setBackgroundColor(activity.getColor(R.color.primary));
         titleTextView.setTextColor(activity.getColor(R.color.white));
@@ -267,25 +299,40 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
         nameTextView.setTextColor(activity.getColor(R.color.white));
         categoryTextView.setTextColor(activity.getColor(R.color.white));
         votesTextView.setTextColor(activity.getColor(R.color.white));
-        clicksTextView.setTextColor(activity.getColor(R.color.white));
     }
 
-    public void bindTo(Activity activity, QAItem item, int position, boolean isSingleCard) {
-        bindTo(activity, item, position, isSingleCard, null);
+    public void bindTo(Activity activity, QAItem item, int position) {
+        bindTo(activity, item, position, null);
     }
 
-    public void editQuestion(Activity activity, QAItem item) {
-        NetworkRequest.getInstance().mutationEditQuestion(item.getId(),
-                titleTextView.getText().toString(), descriptionTextView.getText().toString(), new AsyncCallback() {
+    public void deleteAnswer(Activity activity, QAItem item) {
+        NetworkRequest.getInstance().mutationDeleteAnswer(item.getId(), new AsyncCallback() {
+            @Override
+            public void onCompleted(Object result) {
+                DeleteAnswerMutation.EditAnswer deleteAnswer = (DeleteAnswerMutation.EditAnswer) result;
+                item.setDeletedAt(deleteAnswer.deletedAt());
+
+                activity.runOnUiThread(() -> {
+                    Navigation.findNavController(baseView).navigateUp();
+                });
+            }
+
+            @Override
+            public void onException(Exception e) {
+
+            }
+        });
+    }
+
+    public void deleteQuestion(Activity activity, QAItem item) {
+        NetworkRequest.getInstance().mutationDeleteQuestion(item.getId(), new AsyncCallback() {
                     @Override
                     public void onCompleted(Object result) {
-                        EditQuestionMutation.EditQuestion editQuestion = (EditQuestionMutation.EditQuestion) result;
-                        item.setTitleText(editQuestion.title());
-                        item.setDescriptionText(editQuestion.description());
+                        DeleteQuestionMutation.EditQuestion deleteQuestion = (DeleteQuestionMutation.EditQuestion) result;
+                        item.setDeletedAt(deleteQuestion.deletedAt());
 
                         activity.runOnUiThread(() -> {
-                            titleTextView.setText(editQuestion.title());
-                            descriptionTextView.setText(editQuestion.description());
+                            Navigation.findNavController(baseView).navigateUp();
                         });
                     }
 
@@ -294,26 +341,52 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
 
                     }
                 });
+    }
+    public void editQuestion(Activity activity, QAItem item) {
+        if (!titleTextView.getText().toString().trim().equals("")) {
+            NetworkRequest.getInstance().mutationEditQuestion(item.getId(),
+                    titleTextView.getText().toString(), descriptionTextView.getText().toString(), new AsyncCallback() {
+                        @Override
+                        public void onCompleted(Object result) {
+                            EditQuestionMutation.EditQuestion editQuestion = (EditQuestionMutation.EditQuestion) result;
+                            item.setTitleText(editQuestion.title());
+                            item.setDescriptionText(editQuestion.description());
+
+                            activity.runOnUiThread(() -> {
+                                titleTextView.setText(editQuestion.title());
+                                descriptionTextView.setText(editQuestion.description());
+                            });
+                        }
+
+                        @Override
+                        public void onException(Exception e) {
+
+                        }
+                    });
+        }
     }
 
     public void editAnswer(Activity activity, QAItem item) {
-        NetworkRequest.getInstance().mutationEditAnswer(item.getId(),
-                titleTextView.getText().toString(), new AsyncCallback() {
-                    @Override
-                    public void onCompleted(Object result) {
-                        EditAnswerMutation.EditAnswer editAnswer = (EditAnswerMutation.EditAnswer) result;
-                        item.setTitleText(editAnswer.content());
+        if (!titleTextView.getText().toString().trim().equals("")) {
 
-                        activity.runOnUiThread(() -> {
-                            titleTextView.setText(editAnswer.content());
-                        });
-                    }
+            NetworkRequest.getInstance().mutationEditAnswer(item.getId(),
+                    titleTextView.getText().toString(), new AsyncCallback() {
+                        @Override
+                        public void onCompleted(Object result) {
+                            EditAnswerMutation.EditAnswer editAnswer = (EditAnswerMutation.EditAnswer) result;
+                            item.setTitleText(editAnswer.content());
 
-                    @Override
-                    public void onException(Exception e) {
+                            activity.runOnUiThread(() -> {
+                                titleTextView.setText(editAnswer.content());
+                            });
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onException(Exception e) {
+
+                        }
+                    });
+        }
     }
 
     private void conditionalSetTextView(TextView textView, String s, ImageView imageView, Drawable img) {
