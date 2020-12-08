@@ -173,10 +173,14 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
 
         } else {
                 titleTextView.setCompoundDrawables(null, null, null, null);
-                titleTextView.setOnClickListener((v) -> baseCardClick.onClick(titleTextView));
+                if (!isSingleCard) {
+                    titleTextView.setOnClickListener((v) -> baseCardClick.onClick(titleTextView));
+                }
                 titleTextView.setFocusable(false);
                 descriptionTextView.setCompoundDrawables(null, null, null, null);
-                descriptionTextView.setOnClickListener((v) -> baseCardClick.onClick(titleTextView));
+                if (!isSingleCard) {
+                    descriptionTextView.setOnClickListener((v) -> baseCardClick.onClick(titleTextView));
+                }
                 descriptionTextView.setFocusable(false);
             }
         } else {
@@ -244,11 +248,6 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                 descriptionTextView.setFocusable(false);
             }
         }
-
-
-
-
-
 
         Integer categoryLeftInt = Constants.queryCategoryToIconInteger.get(Constants.displayToQueryCategoryNameMap.get(item.getCategoryName()));
         Drawable categoryIconDrawable = ResourcesCompat.getDrawable(activity.getResources(), categoryLeftInt, null);
