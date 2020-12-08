@@ -44,6 +44,7 @@ import com.example.tastybits.NetworkRequest;
 import com.example.tastybits.QAItem;
 import com.example.tastybits.QARecyclerViewAdapter;
 import com.example.tastybits.R;
+import com.example.tastybits.Utilities;
 
 
 import java.text.SimpleDateFormat;
@@ -147,13 +148,13 @@ public class HomeFragment extends Fragment {
         String name = nameEditText.getText().toString();
         if (name.trim().equals("")) {
             nameEditText.setText("Your Name");
-            Toast.makeText(Constants.getMainActivity(), "Please fill out the name field.", Toast.LENGTH_LONG).show();
+            Toast.makeText(Utilities.getMainActivity(), "Please fill out the name field.", Toast.LENGTH_LONG).show();
             return;
         }
         NetworkRequest.getInstance().mutationEditUser(name, new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
-                Constants.getMainActivity().runOnUiThread(() -> {
+                Utilities.getMainActivity().runOnUiThread(() -> {
                     EditUserMutation.EditUser user = (EditUserMutation.EditUser) result;
                     nameEditText.setText(user.name() == null ? "Name Unset": user.name());
                 });
@@ -213,26 +214,27 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
+
                     editName();
                 }
             }
         });
 
         suggestedQuestionsRecyclerView = baseView.findViewById(R.id.suggestedQuestionsRecyclerView);
-        suggestedQuestionsRecyclerView.setLayoutManager(new LinearLayoutManager(Constants.getMainActivity()));
-        suggestedQuestionsAdapter = new QARecyclerViewAdapter(Constants.getMainActivity(), new ArrayList<QAItem>());
+        suggestedQuestionsRecyclerView.setLayoutManager(new LinearLayoutManager(Utilities.getMainActivity()));
+        suggestedQuestionsAdapter = new QARecyclerViewAdapter(Utilities.getMainActivity(), new ArrayList<QAItem>());
         suggestedQuestionsRecyclerView.setAdapter(suggestedQuestionsAdapter);
 
 
         yourQuestionsRecyclerView = baseView.findViewById(R.id.yourQuestionsRecyclerView);
-        yourQuestionsRecyclerView.setLayoutManager(new LinearLayoutManager(Constants.getMainActivity()));
-        yourQuestionsAdapter = new QARecyclerViewAdapter(Constants.getMainActivity(), new ArrayList<QAItem>());
+        yourQuestionsRecyclerView.setLayoutManager(new LinearLayoutManager(Utilities.getMainActivity()));
+        yourQuestionsAdapter = new QARecyclerViewAdapter(Utilities.getMainActivity(), new ArrayList<QAItem>());
         yourQuestionsRecyclerView.setAdapter(yourQuestionsAdapter);
 
 
         yourAnswersRecyclerView = baseView.findViewById(R.id.yourAnswersRecyclerView);
-        yourAnswersRecyclerView.setLayoutManager(new LinearLayoutManager(Constants.getMainActivity()));
-        yourAnswersAdapter = new QARecyclerViewAdapter(Constants.getMainActivity(), new ArrayList<QAItem>());
+        yourAnswersRecyclerView.setLayoutManager(new LinearLayoutManager(Utilities.getMainActivity()));
+        yourAnswersAdapter = new QARecyclerViewAdapter(Utilities.getMainActivity(), new ArrayList<QAItem>());
         yourAnswersRecyclerView.setAdapter(yourAnswersAdapter);
 
         explanationText = baseView.findViewById(R.id.explanationText);
@@ -266,7 +268,7 @@ public class HomeFragment extends Fragment {
         NetworkRequest.getInstance().queryGetUser(new AsyncCallback() {
             @Override
             public void onCompleted(Object result) {
-                Constants.getMainActivity().runOnUiThread(() -> {
+                Utilities.getMainActivity().runOnUiThread(() -> {
                     GetUserQuery.GetUser user = (GetUserQuery.GetUser) result;
 
                     TextView coinsValue = baseView.findViewById(R.id.coinsValue);
@@ -316,16 +318,16 @@ public class HomeFragment extends Fragment {
                             // if (question.id() is one of ['id1', 'id2'...]
 
                             QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, false, question.id(), null, categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), question.createdAt(), question.updatedAt(), question.deletedAt());
-                            Constants.getMainActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
+                            Utilities.getMainActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
                         }
                     }
 
-                    Constants.getMainActivity().runOnUiThread(() -> suggestedQuestionsAdapter.sortByCreatedAt());
+                    Utilities.getMainActivity().runOnUiThread(() -> suggestedQuestionsAdapter.sortByCreatedAt());
 
 
                     if (questionPresent) {
                         noSuggestedQuestions = false;
-                        Constants.getMainActivity().runOnUiThread(() -> setState(getState()));
+                        Utilities.getMainActivity().runOnUiThread(() -> setState(getState()));
                     }
                 }
 
@@ -344,15 +346,15 @@ public class HomeFragment extends Fragment {
                         String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
 
                         QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, false, question.id(), null, categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), question.createdAt(), question.updatedAt(), question.deletedAt());
-                        Constants.getMainActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
+                        Utilities.getMainActivity().runOnUiThread(() -> suggestedQuestionsAdapter.addItem(qaItem));
                     }
 
-                    Constants.getMainActivity().runOnUiThread(() -> suggestedQuestionsAdapter.sortByCreatedAt());
+                    Utilities.getMainActivity().runOnUiThread(() -> suggestedQuestionsAdapter.sortByCreatedAt());
 
 
                     if (qList.size() > 0) {
                         noSuggestedQuestions = false;
-                        Constants.getMainActivity().runOnUiThread(() -> setState(getState()));
+                        Utilities.getMainActivity().runOnUiThread(() -> setState(getState()));
                     }
                 }
 
@@ -373,14 +375,14 @@ public class HomeFragment extends Fragment {
                     String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
 
                     QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, false, question.id(), null, categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), question.createdAt(), question.updatedAt(), question.deletedAt());
-                    Constants.getMainActivity().runOnUiThread(() -> yourQuestionsAdapter.addItem(qaItem));
+                    Utilities.getMainActivity().runOnUiThread(() -> yourQuestionsAdapter.addItem(qaItem));
                 }
 
-                Constants.getMainActivity().runOnUiThread(() -> yourQuestionsAdapter.sortByCreatedAt());
+                Utilities.getMainActivity().runOnUiThread(() -> yourQuestionsAdapter.sortByCreatedAt());
 
                 if (qList.size() > 0) {
                     noYourQuestions = false;
-                    Constants.getMainActivity().runOnUiThread(() -> setState(getState()));
+                    Utilities.getMainActivity().runOnUiThread(() -> setState(getState()));
                 }
             }
 
@@ -401,14 +403,14 @@ public class HomeFragment extends Fragment {
                     String categoryName = answer.question().categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(answer.question().categories().get(0).name()): "";
 
                     QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, false, answer.id(), answer.questionId(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false, answer.userOwns(), answer.createdAt(), answer.updatedAt(), answer.deletedAt());
-                    Constants.getMainActivity().runOnUiThread(() -> yourAnswersAdapter.addItem(qaItem));
+                    Utilities.getMainActivity().runOnUiThread(() -> yourAnswersAdapter.addItem(qaItem));
                 }
 
-                Constants.getMainActivity().runOnUiThread(() -> yourAnswersAdapter.sortByCreatedAt());
+                Utilities.getMainActivity().runOnUiThread(() -> yourAnswersAdapter.sortByCreatedAt());
 
                 if (aList.size() > 0) {
                     noYourAnswers = false;
-                    Constants.getMainActivity().runOnUiThread(() -> setState(getState()));
+                    Utilities.getMainActivity().runOnUiThread(() -> setState(getState()));
                 }
             }
 

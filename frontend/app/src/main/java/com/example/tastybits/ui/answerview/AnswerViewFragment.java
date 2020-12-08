@@ -30,6 +30,7 @@ import com.example.tastybits.QAItem;
 import com.example.tastybits.QARecyclerViewAdapter;
 import com.example.tastybits.QAViewHolder;
 import com.example.tastybits.R;
+import com.example.tastybits.Utilities;
 import com.example.tastybits.ui.questionview.QuestionViewFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -87,8 +88,8 @@ public class AnswerViewFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View baseView = inflater.inflate(R.layout.fragment_answer_view, container, false);
         RecyclerView recyclerView = baseView.findViewById(R.id.AnswersRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(Constants.getMainActivity()));
-        ans_adapter = new QARecyclerViewAdapter(Constants.getMainActivity(), new ArrayList<QAItem>());
+        recyclerView.setLayoutManager(new LinearLayoutManager(Utilities.getMainActivity()));
+        ans_adapter = new QARecyclerViewAdapter(Utilities.getMainActivity(), new ArrayList<QAItem>());
         recyclerView.setAdapter(ans_adapter);
         String questionId = getArguments().getString(getString(R.string.question_id_key));
         String categoryName = getArguments().getString(getString(R.string.question_category_name_key));
@@ -108,7 +109,7 @@ public class AnswerViewFragment extends Fragment {
 
 
         QAViewHolder vh = new QAViewHolder(baseView.findViewById(R.id.respondToQuestionCardView));
-        vh.prepareSingleCard(Constants.getMainActivity());
+        vh.prepareSingleCard(Utilities.getMainActivity());
 
         NetworkRequest.getInstance().queryQuestions(categoryName, new AsyncCallback() {
             @Override
@@ -119,8 +120,8 @@ public class AnswerViewFragment extends Fragment {
                         String categoryName = question.categories().get(0) != null ?  Constants.queryCategoryToDisplayNameMap.get(question.categories().get(0).name()): "";
 
                         QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, true, question.id(), null, categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), question.createdAt(), question.updatedAt(), question.deletedAt());
-                        Constants.getMainActivity().runOnUiThread(() -> {
-                            vh.bindTo(Constants.getMainActivity(), qaItem, 0);
+                        Utilities.getMainActivity().runOnUiThread(() -> {
+                            vh.bindTo(Utilities.getMainActivity(), qaItem, 0);
                         });
                     }
 
@@ -142,13 +143,13 @@ public class AnswerViewFragment extends Fragment {
 
                     QAItem qaItem = new QAItem(QAItem.QAType.ANSWER, true, answer.id(), answer.questionId(), categoryName, answer.content(), "", answer.user().name(), answer.voteScore(), -1, answer.userDidVote(), false, answer.userOwns(), answer.createdAt(), answer.updatedAt(), answer.deletedAt());
 
-                    Constants.getMainActivity().runOnUiThread(() -> ans_adapter.addItem(qaItem));
+                    Utilities.getMainActivity().runOnUiThread(() -> ans_adapter.addItem(qaItem));
                 }
 
-                Constants.getMainActivity().runOnUiThread(() -> setState(getState()));
+                Utilities.getMainActivity().runOnUiThread(() -> setState(getState()));
 
                 if (aList.size() == 0) {
-                    Constants.getMainActivity().runOnUiThread(() -> baseView.findViewById(R.id.noAnswersTextView).setVisibility(View.VISIBLE));
+                    Utilities.getMainActivity().runOnUiThread(() -> baseView.findViewById(R.id.noAnswersTextView).setVisibility(View.VISIBLE));
                 }
             }
 

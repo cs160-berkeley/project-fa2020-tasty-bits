@@ -8,22 +8,36 @@ public class Constants {
 
     public static final String TAG_APP_ID = "com.example.tastybits";
 
-    private static Activity activity;
-
-    public static Activity getMainActivity() {
-        return activity;
-    }
-
-    public static void init(Activity mActivity) {
-        activity = mActivity;
-    }
-
     public static final Map<String, String> displayToQueryCategoryNameMap;
     public static final Map<String, String> queryCategoryToDisplayNameMap;
     public static final Map<String, String> queryCategoryToMarkdownArticle;
     public static final Map<String, Integer> queryCategoryToIconInteger;
+    public static final Map<String, String> querySentimentToDisplaySentiment;
+    public static final Map<String, String> displaySentimentToQuerySentiment;
 
     static {
+        querySentimentToDisplaySentiment = Map.of(
+                "","",
+                "VERY_ANGRY", "🤬 Your post is currently very angry. Please make it more positive.",
+                "ANGRY", "😠 Your post is currently somewhat angry. Please make it more positive.",
+                "FRUSTRATED", "👍 Your post seems good to go!",
+                "NO_OPINION", "👍 Your post is good to go!",
+                "SATISFIED", "👍 Your post is definitely good to go!",
+                "HAPPY", "😊 We appreciate your positive vibes a lot!",
+                "VERY_HAPPY", "🤗 We really do appreciate the insane positivity! Much love."
+        );
+
+        displaySentimentToQuerySentiment = Map.of(
+                "","",
+                "🤬 Your post is currently very angry. Please make it more positive.","VERY_ANGRY",
+                "😠 Your post is currently somewhat angry. Please make it more positive.","ANGRY",
+                 "👍 Your post seems good to go!","FRUSTRATED",
+                "👍 Your post is good to go!","NO_OPINION",
+                 "👍 Your post is definitely good to go!","SATISFIED",
+                "😊 We appreciate your positive vibes a lot!","HAPPY",
+                "🤗 We really do appreciate the insane positivity! Much love.","VERY_HAPPY"
+                );
+
         displayToQueryCategoryNameMap = Map.of(
                 "Job Hunting", "jobHunting",
                 "Housing", "housing",

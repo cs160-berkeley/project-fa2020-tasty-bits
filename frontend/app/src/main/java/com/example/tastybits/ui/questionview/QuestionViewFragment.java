@@ -23,6 +23,7 @@ import com.example.tastybits.NetworkRequest;
 import com.example.tastybits.QAItem;
 import com.example.tastybits.QARecyclerViewAdapter;
 import com.example.tastybits.R;
+import com.example.tastybits.Utilities;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -77,8 +78,8 @@ public class QuestionViewFragment extends Fragment{
                              @Nullable Bundle savedInstanceState) {
         View baseView = inflater.inflate(R.layout.fragment_questions_view, container, false);
         RecyclerView recyclerView = baseView.findViewById(R.id.QuestionsRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(Constants.getMainActivity()));
-        qrv_adapter =  new QARecyclerViewAdapter(Constants.getMainActivity(), new ArrayList<QAItem>());
+        recyclerView.setLayoutManager(new LinearLayoutManager(Utilities.getMainActivity()));
+        qrv_adapter =  new QARecyclerViewAdapter(Utilities.getMainActivity(), new ArrayList<QAItem>());
         recyclerView.setAdapter(qrv_adapter);
 
         String categoryName = getArguments().getString(getString(R.string.category_name_key));
@@ -115,13 +116,13 @@ public class QuestionViewFragment extends Fragment{
 
                     QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, false, question.id(), null, categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), question.createdAt(), question.updatedAt(), question.deletedAt());
 
-                    Constants.getMainActivity().runOnUiThread(() -> qrv_adapter.addItem(qaItem));
+                    Utilities.getMainActivity().runOnUiThread(() -> qrv_adapter.addItem(qaItem));
                 }
 
-                Constants.getMainActivity().runOnUiThread(() -> setState(getState()));
+                Utilities.getMainActivity().runOnUiThread(() -> setState(getState()));
 
                 if (qList.size() == 0) {
-                    Constants.getMainActivity().runOnUiThread(() -> baseView.findViewById(R.id.noQuestionsTextView).setVisibility(View.VISIBLE));
+                    Utilities.getMainActivity().runOnUiThread(() -> baseView.findViewById(R.id.noQuestionsTextView).setVisibility(View.VISIBLE));
                 }
             }
 

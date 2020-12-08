@@ -32,6 +32,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tastybits.Constants;
 import com.example.tastybits.R;
+import com.example.tastybits.Utilities;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -114,7 +115,7 @@ public class InfoHubDetailsFragment extends Fragment {
         LinearLayout contentLinearLayout = root.findViewById(R.id.contentLinearLayout);
 
 
-        final Markwon markwon = Markwon.builder(Constants.getMainActivity())
+        final Markwon markwon = Markwon.builder(Utilities.getMainActivity())
                 .usePlugin(new AbstractMarkwonPlugin() {
                     @Override
                     public void configureTheme(@NonNull MarkwonTheme.Builder builder) {
@@ -146,7 +147,7 @@ public class InfoHubDetailsFragment extends Fragment {
 
         for (int i = 0; i < splits.size(); i++) {
             String split = splits.get(i);
-            TextView tv = new TextView(Constants.getMainActivity());
+            TextView tv = new TextView(Utilities.getMainActivity());
             contentLinearLayout.addView(tv);
             tv.setTextSize(20);
             if(i == 0 && (splits.size() == titles.size() + 1)) {

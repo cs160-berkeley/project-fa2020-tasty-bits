@@ -16,6 +16,7 @@ import androidx.navigation.Navigation;
 
 import com.example.tastybits.Constants;
 import com.example.tastybits.R;
+import com.example.tastybits.Utilities;
 import com.google.android.material.navigation.NavigationView;
 
 public class InfoHubFragment extends Fragment {
@@ -27,9 +28,9 @@ public class InfoHubFragment extends Fragment {
         ImageView categoryNameImage = (ImageView) v.findViewById(R.id.rectangleCategoryCardIcon);
 
 
-        v.setCardBackgroundColor(Constants.getMainActivity().getColor(lightBrown ? R.color.light_brown: R.color.light_brown_shade));
+        v.setCardBackgroundColor(Utilities.getMainActivity().getColor(lightBrown ? R.color.light_brown: R.color.light_brown_shade));
         categoryNameText.setText(Constants.queryCategoryToDisplayNameMap.get(categoryName));
-        categoryNameImage.setImageDrawable(ContextCompat.getDrawable(Constants.getMainActivity(), Constants.queryCategoryToIconInteger.get(categoryName)));
+        categoryNameImage.setImageDrawable(ContextCompat.getDrawable(Utilities.getMainActivity(), Constants.queryCategoryToIconInteger.get(categoryName)));
     }
     
     @Override

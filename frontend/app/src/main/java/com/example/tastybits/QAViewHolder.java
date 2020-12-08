@@ -143,6 +143,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
                         if (!hasFocus) {
+
                             editQuestion(activity, item);
                         }
                     }
@@ -167,6 +168,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
                         if (!hasFocus) {
+
                             editQuestion(activity, item);
                         }
                     }
@@ -256,6 +258,7 @@ public class QAViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
                         if (!hasFocus) {
+
                             editAnswer(activity, item);
                         }
                     }
