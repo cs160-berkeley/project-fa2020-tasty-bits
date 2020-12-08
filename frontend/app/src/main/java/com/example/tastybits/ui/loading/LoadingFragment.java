@@ -49,12 +49,12 @@ public class LoadingFragment extends Fragment {
         baseView = inflater.inflate(R.layout.fragment_loading, container, false);
 
 
-        BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);
+        BottomNavigationView navView = Constants.getMainActivity().findViewById(R.id.nav_view);
         navView.getMenu().findItem(R.id.homescreen).setEnabled(false);
         navView.getMenu().findItem(R.id.infohub).setEnabled(false);
         navView.getMenu().findItem(R.id.questionhub).setEnabled(false);
 
-        LoginManager.init(new LoginManager(getActivity()));
+        LoginManager.init(new LoginManager(Constants.getMainActivity()));
 
         boolean forceLogin = false;
         if (getArguments() != null) {
@@ -64,7 +64,7 @@ public class LoadingFragment extends Fragment {
         if (LoginManager.getInstance().getAccessToken() == null && !forceLogin)  {
 
             NavOptions navOptions = (new NavOptions.Builder()).setPopUpTo(R.id.loading, true).build();
-            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.onboarding, null, navOptions);
+            Navigation.findNavController(Constants.getMainActivity(), R.id.nav_host_fragment).navigate(R.id.onboarding, null, navOptions);
         } else {
             login();
         }
@@ -90,8 +90,8 @@ public class LoadingFragment extends Fragment {
 
                         if (completedCategoryQuery[0] == true && completedUserMutation[0] == true) {
 
-                            getActivity().runOnUiThread(() -> {
-                                BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);
+                            Constants.getMainActivity().runOnUiThread(() -> {
+                                BottomNavigationView navView = Constants.getMainActivity().findViewById(R.id.nav_view);
                                 navView.getMenu().findItem(R.id.homescreen).setEnabled(true);
                                 navView.getMenu().findItem(R.id.infohub).setEnabled(true);
                                 navView.getMenu().findItem(R.id.questionhub).setEnabled(true);
@@ -106,7 +106,7 @@ public class LoadingFragment extends Fragment {
                     @Override
                     public void onException(Exception e) {
 
-                        getActivity().runOnUiThread(() -> {
+                        Constants.getMainActivity().runOnUiThread(() -> {
                             TextView loadingAppText = baseView.findViewById(R.id.startAppLoadingText);
                             loadingAppText.setText("We've run into an issue loading essential information for our app, please try again later :(");
                         });
@@ -145,14 +145,14 @@ public class LoadingFragment extends Fragment {
 
             @Override
             public void onDialogException(Dialog dialog) {
-                getActivity().runOnUiThread(() -> {
+                Constants.getMainActivity().runOnUiThread(() -> {
                     dialog.show();
                 });
             }
 
             @Override
             public void onException(Exception e) {
-                Activity activity = getActivity();
+                Activity activity = Constants.getMainActivity();
                 activity.runOnUiThread(() -> {
                     Toast.makeText(activity, "Login Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });

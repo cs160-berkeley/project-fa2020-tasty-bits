@@ -39,7 +39,7 @@ public class QARecyclerViewAdapter extends RecyclerView.Adapter<QAViewHolder> {
     public void addItem(QAItem qaItem) {
         if (qaItem.getTitleText() != null && !qaItem.getTitleText().trim().equals("") && qaItem.getDeletedAt() == 0) {
             qaList.add(0, qaItem);
-            notifyItemInserted(0);
+//            notifyItemInserted(0);
         }
     }
 

@@ -54,7 +54,7 @@ public class QuestionPostFragment extends Fragment {
 
 
         Spinner categoryTagsSpinner = view.findViewById(R.id.categoryTagsSpinner);
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(Constants.getMainActivity(),
                 R.array.category_display_names, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoryTagsSpinner.setAdapter(spinnerAdapter);
@@ -86,7 +86,7 @@ public class QuestionPostFragment extends Fragment {
             assert(categoryNames.size() == 1);
 
             if (titleText.getText().toString().trim().equals("")) {
-                Toast.makeText(getActivity(), "Please fill out the title for your question.", Toast.LENGTH_LONG).show();
+                Toast.makeText(Constants.getMainActivity(), "Please fill out the title for your question.", Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -95,14 +95,14 @@ public class QuestionPostFragment extends Fragment {
                 public void onCompleted(Object result) {
                     String sentimentText = (String) result;
                     if (sentimentText.equals("VERY_ANGRY") || sentimentText.equals("ANGRY")) {
-                        getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "Please make your question more positive to help keep the community safe and happy for everyone.", Toast.LENGTH_LONG).show());
+                        Constants.getMainActivity().runOnUiThread(() -> Toast.makeText(Constants.getMainActivity(), "Please make your question more positive to help keep the community safe and happy for everyone.", Toast.LENGTH_LONG).show());
                     } else {
                         NetworkRequest.getInstance().mutationCreateQuestion(
                                 categoryNames,
                                 titleText.getText().toString(), descriptionText.getText().toString(), new AsyncCallback() {
                                     @Override
                                     public void onCompleted(Object result) {
-                                        getActivity().runOnUiThread(() -> {
+                                        Constants.getMainActivity().runOnUiThread(() -> {
                                             if (cameFromSpecificCategory) {
                                                 Navigation.findNavController(view).navigateUp();
                                             } else {

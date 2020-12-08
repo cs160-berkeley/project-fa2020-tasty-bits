@@ -114,7 +114,7 @@ public class InfoHubDetailsFragment extends Fragment {
         LinearLayout contentLinearLayout = root.findViewById(R.id.contentLinearLayout);
 
 
-        final Markwon markwon = Markwon.builder(getActivity())
+        final Markwon markwon = Markwon.builder(Constants.getMainActivity())
                 .usePlugin(new AbstractMarkwonPlugin() {
                     @Override
                     public void configureTheme(@NonNull MarkwonTheme.Builder builder) {
@@ -146,7 +146,7 @@ public class InfoHubDetailsFragment extends Fragment {
 
         for (int i = 0; i < splits.size(); i++) {
             String split = splits.get(i);
-            TextView tv = new TextView(getActivity());
+            TextView tv = new TextView(Constants.getMainActivity());
             contentLinearLayout.addView(tv);
             tv.setTextSize(20);
             if(i == 0 && (splits.size() == titles.size() + 1)) {

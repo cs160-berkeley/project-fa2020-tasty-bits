@@ -34,7 +34,7 @@ public class AnswerPostFragment extends Fragment{
         Button postAnswerButton = baseView.findViewById(R.id.answerConfirmPostButton);
         postAnswerButton.setOnClickListener((view) -> {
             if (contentText.getText().toString().trim().equals("")) {
-                Toast.makeText(getActivity(), "Please fill out the answer field.", Toast.LENGTH_LONG).show();
+                Toast.makeText(Constants.getMainActivity(), "Please fill out the answer field.", Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -44,14 +44,14 @@ public class AnswerPostFragment extends Fragment{
                 public void onCompleted(Object result) {
                     String sentimentText = (String) result;
                     if (sentimentText.equals("VERY_ANGRY") || sentimentText.equals("ANGRY") ) {
-                        getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "Please make your answer more positive to help keep the community safe and happy for everyone.", Toast.LENGTH_LONG).show());
+                        Constants.getMainActivity().runOnUiThread(() -> Toast.makeText(Constants.getMainActivity(), "Please make your answer more positive to help keep the community safe and happy for everyone.", Toast.LENGTH_LONG).show());
                     } else {
                         NetworkRequest.getInstance().mutationCreateAnswer(questionId, contentText.getText().toString(), new AsyncCallback() {
                             @Override
                             public void onCompleted(Object result) {
                                 CreateAnswerMutation.CreateAnswer answer = (CreateAnswerMutation.CreateAnswer) result;
 
-                                Activity activity = getActivity();
+                                Activity activity = Constants.getMainActivity();
                                 activity.runOnUiThread(() -> {
                                     Navigation.findNavController(view).navigateUp();
                                 });

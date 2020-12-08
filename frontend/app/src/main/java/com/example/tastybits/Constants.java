@@ -1,11 +1,22 @@
 package com.example.tastybits;
 
+import android.app.Activity;
+
 import java.util.Map;
 
 public class Constants {
 
     public static final String TAG_APP_ID = "com.example.tastybits";
 
+    private static Activity activity;
+
+    public static Activity getMainActivity() {
+        return activity;
+    }
+
+    public static void init(Activity mActivity) {
+        activity = mActivity;
+    }
 
     public static final Map<String, String> displayToQueryCategoryNameMap;
     public static final Map<String, String> queryCategoryToDisplayNameMap;

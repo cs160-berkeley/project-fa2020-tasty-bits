@@ -27,9 +27,9 @@ public class InfoHubFragment extends Fragment {
         ImageView categoryNameImage = (ImageView) v.findViewById(R.id.rectangleCategoryCardIcon);
 
 
-        v.setCardBackgroundColor(getActivity().getColor(lightBrown ? R.color.light_brown: R.color.light_brown_shade));
+        v.setCardBackgroundColor(Constants.getMainActivity().getColor(lightBrown ? R.color.light_brown: R.color.light_brown_shade));
         categoryNameText.setText(Constants.queryCategoryToDisplayNameMap.get(categoryName));
-        categoryNameImage.setImageDrawable(ContextCompat.getDrawable(getActivity(), Constants.queryCategoryToIconInteger.get(categoryName)));
+        categoryNameImage.setImageDrawable(ContextCompat.getDrawable(Constants.getMainActivity(), Constants.queryCategoryToIconInteger.get(categoryName)));
     }
     
     @Override

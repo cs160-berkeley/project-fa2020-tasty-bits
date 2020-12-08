@@ -77,8 +77,8 @@ public class QuestionViewFragment extends Fragment{
                              @Nullable Bundle savedInstanceState) {
         View baseView = inflater.inflate(R.layout.fragment_questions_view, container, false);
         RecyclerView recyclerView = baseView.findViewById(R.id.QuestionsRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        qrv_adapter =  new QARecyclerViewAdapter(getActivity(), new ArrayList<QAItem>());
+        recyclerView.setLayoutManager(new LinearLayoutManager(Constants.getMainActivity()));
+        qrv_adapter =  new QARecyclerViewAdapter(Constants.getMainActivity(), new ArrayList<QAItem>());
         recyclerView.setAdapter(qrv_adapter);
 
         String categoryName = getArguments().getString(getString(R.string.category_name_key));
@@ -115,13 +115,13 @@ public class QuestionViewFragment extends Fragment{
 
                     QAItem qaItem = new QAItem(QAItem.QAType.QUESTION, false, question.id(), null, categoryName, question.title(), question.description(),question.user().name(), question.voteScore(), question.clickScore(), question.userDidVote(), question.userDidClick(), question.userOwns(), question.createdAt(), question.updatedAt(), question.deletedAt());
 
-                    getActivity().runOnUiThread(() -> qrv_adapter.addItem(qaItem));
+                    Constants.getMainActivity().runOnUiThread(() -> qrv_adapter.addItem(qaItem));
                 }
 
-                getActivity().runOnUiThread(() -> setState(getState()));
+                Constants.getMainActivity().runOnUiThread(() -> setState(getState()));
 
                 if (qList.size() == 0) {
-                    getActivity().runOnUiThread(() -> baseView.findViewById(R.id.noQuestionsTextView).setVisibility(View.VISIBLE));
+                    Constants.getMainActivity().runOnUiThread(() -> baseView.findViewById(R.id.noQuestionsTextView).setVisibility(View.VISIBLE));
                 }
             }
 
