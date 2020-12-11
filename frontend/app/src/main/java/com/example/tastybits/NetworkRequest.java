@@ -9,6 +9,7 @@ import com.apollographql.apollo.exception.ApolloException;
 import com.example.CreateAnswerMutation;
 import com.example.CreateQuestionMutation;
 import com.example.DeleteAnswerMutation;
+import com.example.DeleteQuestionMutation;
 import com.example.EditAnswerMutation;
 import com.example.EditQuestionMutation;
 import com.example.EditUserMutation;
@@ -360,14 +361,14 @@ public class NetworkRequest {
 
 
     public void mutationDeleteQuestion(String questionId, AsyncCallback callback) {
-        DeleteAnswerMutation deleteAnswerMutation =
-                new DeleteAnswerMutation(questionId, true);
-        apolloClient.mutate(deleteAnswerMutation).enqueue(new ApolloCall.Callback<DeleteAnswerMutation.Data>() {
+        DeleteQuestionMutation deleteQuestionMutation =
+                new DeleteQuestionMutation(questionId, true);
+        apolloClient.mutate(deleteQuestionMutation).enqueue(new ApolloCall.Callback<DeleteQuestionMutation.Data>() {
             @Override
-            public void onResponse(@NotNull Response<DeleteAnswerMutation.Data> response) {
-                DeleteAnswerMutation.EditAnswer deleteAnswer =
-                        response.getData().editAnswer();
-                callback.onCompleted(deleteAnswer);
+            public void onResponse(@NotNull Response<DeleteQuestionMutation.Data> response) {
+                DeleteQuestionMutation.EditQuestion deleteQuestion =
+                        response.getData().editQuestion();
+                callback.onCompleted(deleteQuestion);
             }
 
             @Override
