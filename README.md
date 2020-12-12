@@ -8,7 +8,7 @@ Students entering Berkeley feel a lot of anxiety and confusion around various co
 
 ## Group Members
 
-Merhawit Temesgen | Steven Wang Songwen Su | Newman Hu | Karim Abedrabbo
+Merhawit Temesgen | Steven Wang | Songwen Su | Newman Hu | Karim Abedrabbo
 
 ## Final Video
 
