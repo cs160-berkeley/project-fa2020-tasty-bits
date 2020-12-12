@@ -46,18 +46,36 @@ It will be difficult to get a job or internship through strong grades alone. US 
 
 This excerpt from the Career Center Job & Internship Guide (JIG) includes job search strategies, advice about US resumes and interviewing, permits and visas, the long distance job search, and more
 
-## Handshake
+## Writing Your Resume
+
+Section under construction
+
+## Preparing for interviews
+
+Section under construction
+
+- **Online resources for interview preperation**
+
+## Professional Networking and Job Hosting Sites
+
+Section under construction
+
+- **[Handshake](https://www.joinhandshake.com/)**
 
 Handshake is the college career network of the future, built to transform the recruiting experience for college students, career centers and employers.
 
-## LinkedIn
+- **[LinkedIn](https://www.linkedin.com/)**
 
 LinkedIn is the world's largest professional network on the internet. You can use LinkedIn to find the right job or internship, connect and strengthen professional relationships, and learn the skills you need to succeed in your career.
 
-## Indeed
+- **[Indeed](https://www.indeed.com/)**
 
 Indeed is the #1 job site in the world1 with over 250 million unique visitors2 every month. Indeed strives to put job seekers first, giving them free access to search for jobs, post resumes, and research companies. Every day, we connect millions of people to new opportunities.
 
-## Glassdoor
+- **[Glassdoor](https://www.glassdoor.com/index.htm)**
 
 Glassdoor is a website where current and former employees anonymously review companies. Glassdoor also allows users to anonymously submit and view salaries as well as search and apply for jobs on its platform.
+
+- **[AngelList](https://angel.co/)**
+
+AngelList is a website that primarily hosts internships and job opportunities at startups or small companies. This is a great place to start with no formal experience.

@@ -57,7 +57,7 @@ public class InfoHubFragment extends Fragment {
         setupCard(international, "internationalResources", true);
         Bundle internationalBundle = new Bundle();
         internationalBundle.putString(getString(R.string.category_name_key), "internationalResources");
-//        international.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, internationalBundle));
+        international.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, internationalBundle));
 
 
         CardView classplan = view.findViewById(R.id.class_planning_informationhub);
@@ -70,27 +70,27 @@ public class InfoHubFragment extends Fragment {
         setupCard(enrollment, "enrollment", true);
         Bundle enrollmentBundle = new Bundle();
         enrollmentBundle.putString(getString(R.string.category_name_key), "enrollment");
-//        enrollment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, enrollmentBundle));
+        enrollment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, enrollmentBundle));
 
         CardView financialAid = view.findViewById(R.id.financial_aid_informationhub);
         setupCard(financialAid, "financialAid", false);
         Bundle financialBundle = new Bundle();
         financialBundle.putString(getString(R.string.category_name_key), "financialAid");
-//        financialAid.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, financialBundle));
+        financialAid.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, financialBundle));
 
 
         CardView clubsAndDecals = view.findViewById(R.id.clubs_and_decals_informationhub);
         setupCard(clubsAndDecals, "clubsAndDecals", true);
         Bundle clubsBundle = new Bundle();
         clubsBundle.putString(getString(R.string.category_name_key), "clubsAndDecals");
-//        clubsAndDecals.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, clubsBundle));
+        clubsAndDecals.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, clubsBundle));
 
 
         CardView housing = view.findViewById(R.id.housing_informationhub);
         setupCard(housing, "housing", false);
         Bundle housingBundle = new Bundle();
         housingBundle.putString(getString(R.string.category_name_key), "housing");
-//        housing.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, housingBundle));
+        housing.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.infohub_details, housingBundle));
 
 
         CardView jobs = view.findViewById(R.id.job_hunting_informationhub);

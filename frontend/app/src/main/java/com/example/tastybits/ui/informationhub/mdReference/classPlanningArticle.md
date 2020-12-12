@@ -2,6 +2,29 @@
 
 # Class Planning
 
+## Overview
+
+Class planning requires a cumulative view of what classes you need to take in order to fufill the requirements for your major or minor. Typically a google search for your "UC Berkeley [your major] [your department] worksheet" will land you on a helpful worksheet that you can use to plan out what your major requirements are.
+
+Furthermore, helpful requirement fufillment information and planning tools are available on the "Degree Requirements" of the [Academics page of CalCentral](https://calcentral.berkeley.edu/academics). You can use the "Resources" section in this guide to help you plan your classes after you have checked
+
+## Resources
+
+- [BerkeleyTime](https://berkeleytime.com/catalog)
+
+  - Has all the classes offered at Cal with filters and sorting, grade distributions of past semesters for given classes, and up to date enrollment percentage information.
+
+- [Berkeley Academic Guide](https://classes.berkeley.edu/)
+
+  - The official UC Berkeley site for searching for classes to take.
+
+- [CalCentral Academics Page](https://calcentral.berkeley.edu/academics)
+
+  - Go to place for actually enrolling in classes, viewing your enrollment timeslot, planning out classes to fufill graduation requirements under "Degree Requirements", planning your schedule of classes under "Schedule Planner", viewing an overview of your enrolled classes and their timeslots for finals week.
+
+- [Rate My Professor](https://www.ratemyprofessors.com/)
+  - Take a quick glance between professor ratings if the class you are planning to take is offered during different semesters under different professors.
+
 ## Transfer Student Tips
 
 - **Degree Requirements**
